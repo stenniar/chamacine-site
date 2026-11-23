@@ -111,7 +111,83 @@
 
       const s = document.createElement('script');
       s.async = true;
-      s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA4_MEASUREMENT_ID)}`; document.head.appendChild(s);  window.dataLayer = window.dataLayer \vert{}\vert{} []; function gtag(){window.dataLayer.push(arguments);} window.gtag = gtag; gtag('js', new Date()); gtag('config', GA4_MEASUREMENT_ID, { send_page_view: true, utm_source: UTMS_ATUAIS.utm_source \vert{}\vert{} undefined, utm_medium: UTMS_ATUAIS.utm_medium \vert{}\vert{} undefined, utm_campaign: UTMS_ATUAIS.utm_campaign \vert{}\vert{} undefined }); ga4Iniciado = true; }  function ativarMetaPixelSeAutorizado() { const consent = obterConsentimentoCookies(); if (!consent \vert{}\vert{} !consent.marketing \vert{}\vert{} !META_PIXEL_ID \vert{}\vert{} metaPixelIniciado) return;  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n; n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', META_PIXEL_ID); fbq('track', 'PageView'); metaPixelIniciado = true; }  function rastrearEvento(nomeEvento, parametros = {}) { const consent = obterConsentimentoCookies(); const payload = { ...parametros, ...UTMS_ATUAIS };  if (consent && consent.analytics && typeof window.gtag === 'function') { window.gtag('event', nomeEvento, payload); } if (consent && consent.marketing && typeof window.fbq === 'function') { if (nomeEvento === 'generate_lead') { window.fbq('track', 'Lead', payload); } else { window.fbq('trackCustom', nomeEvento, payload); } } }  function trackLead(origem, extras = {}) { rastrearEvento('generate_lead', { content_name: origem, ...extras }); }  function registrarLeadNoWebhook(dadosLead) { if (!LEAD_WEBHOOK_URL) return; const corpo = JSON.stringify({ ...dadosLead, utms: UTMS_ATUAIS, pagina: window.location.href, dataHora: new Date().toISOString() }); try { if (navigator.sendBeacon) { const blob = new Blob([corpo], { type: 'application/json' }); navigator.sendBeacon(LEAD_WEBHOOK_URL, blob); } else { fetch(LEAD_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: corpo, keepalive: true }).catch(() => {}); } } catch (_) {} }  function montarUrlWhatsApp(mensagemBase) { const utmResumo = Object.entries(UTMS_ATUAIS).map(([k, v]) => `${k}=${v}`).join(' \vert{} '); const textoFinal = utmResumo ? `${mensagemBase}\n[Origem: ${utmResumo}]` : mensagemBase; return `https://wa.me/5584996305371?text=${encodeURIComponent(textoFinal)}`;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA4_MEASUREMENT_ID)}`;
+      document.head.appendChild(s);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', GA4_MEASUREMENT_ID, {
+        send_page_view: true,
+        utm_source: UTMS_ATUAIS.utm_source || undefined,
+        utm_medium: UTMS_ATUAIS.utm_medium || undefined,
+        utm_campaign: UTMS_ATUAIS.utm_campaign || undefined
+      });
+      ga4Iniciado = true;
+    }
+
+    function ativarMetaPixelSeAutorizado() {
+      const consent = obterConsentimentoCookies();
+      if (!consent || !consent.marketing || !META_PIXEL_ID || metaPixelIniciado) return;
+
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', META_PIXEL_ID);
+      fbq('track', 'PageView');
+      metaPixelIniciado = true;
+    }
+
+    function rastrearEvento(nomeEvento, parametros = {}) {
+      const consent = obterConsentimentoCookies();
+      const payload = { ...parametros, ...UTMS_ATUAIS };
+
+      if (consent && consent.analytics && typeof window.gtag === 'function') {
+        window.gtag('event', nomeEvento, payload);
+      }
+      if (consent && consent.marketing && typeof window.fbq === 'function') {
+        if (nomeEvento === 'generate_lead') {
+          window.fbq('track', 'Lead', payload);
+        } else {
+          window.fbq('trackCustom', nomeEvento, payload);
+        }
+      }
+    }
+
+    function trackLead(origem, extras = {}) {
+      rastrearEvento('generate_lead', { content_name: origem, ...extras });
+    }
+
+    function registrarLeadNoWebhook(dadosLead) {
+      if (!LEAD_WEBHOOK_URL) return;
+      const corpo = JSON.stringify({
+        ...dadosLead,
+        utms: UTMS_ATUAIS,
+        pagina: window.location.href,
+        dataHora: new Date().toISOString()
+      });
+      try {
+        if (navigator.sendBeacon) {
+          const blob = new Blob([corpo], { type: 'application/json' });
+          navigator.sendBeacon(LEAD_WEBHOOK_URL, blob);
+        } else {
+          fetch(LEAD_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: corpo,
+            keepalive: true
+          }).catch(() => {});
+        }
+      } catch (_) {}
+    }
+
+    function montarUrlWhatsApp(mensagemBase) {
+      const utmResumo = Object.entries(UTMS_ATUAIS).map(([k, v]) => `${k}=${v}`).join(' | ');
+      const textoFinal = utmResumo ? `${mensagemBase}\n[Origem: ${utmResumo}]` : mensagemBase;
+      return `https://wa.me/5584996305371?text=${encodeURIComponent(textoFinal)}`;
     }
   </script>
 
@@ -606,7 +682,7 @@
       background-color: rgba(17, 16, 16, 0.78);
     }
 
-    /* Operação Real (Fundo branco de alto contraste) */
+    /* Operação Real */
     .section-light {
       position: relative;
       overflow: hidden;
@@ -1088,11 +1164,11 @@
         </div>
       </div>
 
-      <!-- QUIZ DIAGNÓSTICO LEVE -->
+      <!-- QUIZ DIAGNÓSTICO REFINADO (1ª DOBRA) -->
       <div class="hero-right">
         <div class="quiz-card">
           <div class="quiz-meta font-label">
-            <span id="quiz-step-label">Passo 1 de 2 · Diagnóstico rápido</span>
+            <span id="quiz-step-label">Passo 1 de 2 · Diagnóstico em 30s</span>
             <span id="quiz-progress-text" class="quiz-pct font-accent">50%</span>
           </div>
 
@@ -1102,41 +1178,41 @@
 
           <div id="quiz-step-1">
             <h2 class="font-label" style="margin: 0; font-size: 1.35rem; color: #fff;">
-              Qual é o momento do seu negócio?
+              Qual é o principal gargalo hoje?
             </h2>
             <p style="margin-top: 0.35rem; font-size: 0.875rem; color: rgba(255,255,255,0.75);">
-              Escolha a opção que melhor representa o seu cenário:
+              Escolha onde sua operação mais trava para receber o direcionamento certo:
             </p>
 
             <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.65rem;">
-              <button type="button" onclick="selecionarEstagio('Começar do zero (estruturar marca e canais)')" class="quiz-option">
+              <button type="button" onclick="selecionarEstagio('Poucos leads ou clientes novos (tráfego pago, filmes ou Reels)')" class="quiz-option">
                 <div>
-                  <span class="font-label" style="display: block; font-size: 0.875rem;">Começar do zero</span>
-                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Ainda não tenho estrutura comercial ou digital</span>
+                  <span class="font-label" style="display: block; font-size: 0.875rem;">Poucos leads ou clientes novos</span>
+                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Preciso de tráfego pago, filmes/Reels ou aquisição ativa</span>
                 </div>
                 <span class="text-red" style="font-weight: 700;">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Destravar vendas nas redes sociais')" class="quiz-option">
+              <button type="button" onclick="selecionarEstagio('Muita atenção, pouca venda (conversão, oferta, página ou redes)')" class="quiz-option">
                 <div>
-                  <span class="font-label" style="display: block; font-size: 0.875rem;">Destravar vendas nas redes</span>
-                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Já tenho empresa ativa, mas o perfil não converte</span>
+                  <span class="font-label" style="display: block; font-size: 0.875rem;">Muita atenção, pouca venda</span>
+                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Meu perfil, página, oferta ou atendimento não convertem</span>
                 </div>
                 <span class="text-red" style="font-weight: 700;">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Escalar anúncios, páginas e app com conversão')" class="quiz-option">
+              <button type="button" onclick="selecionarEstagio('Falta de sistema próprio de vendas (página, CRM, automação ou app nativo)')" class="quiz-option">
                 <div>
-                  <span class="font-label" style="display: block; font-size: 0.875rem;">Escalar tráfego, criativos e tecnologia</span>
-                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Quero anúncios, páginas, CRM ou app que gerem receita</span>
+                  <span class="font-label" style="display: block; font-size: 0.875rem;">Falta de sistema próprio de vendas</span>
+                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Quero página de conversão, CRM, automação ou app nativo</span>
                 </div>
                 <span class="text-red" style="font-weight: 700;">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Produzir filme institucional, documentário ou campanha')" class="quiz-option">
+              <button type="button" onclick="selecionarEstagio('Começar do zero com base sólida (marca, posicionamento e canais)')" class="quiz-option">
                 <div>
-                  <span class="font-label" style="display: block; font-size: 0.875rem;">Filme, documentário ou campanha</span>
-                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Produção audiovisual autoral de alto impacto</span>
+                  <span class="font-label" style="display: block; font-size: 0.875rem;">Começar do zero com base sólida</span>
+                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Vou estruturar marca, posicionamento e canais de venda</span>
                 </div>
                 <span class="text-red" style="font-weight: 700;">→</span>
               </button>
@@ -1145,18 +1221,18 @@
 
           <form id="quiz-step-2" class="hidden" style="display: flex; flex-direction: column; gap: 1rem;" onsubmit="enviarQuizWhatsApp(event)">
             <div>
-              <h2 class="font-label" style="margin: 0; font-size: 1.25rem; color: #fff;">Para onde enviamos seu plano?</h2>
-              <p style="margin-top: 0.25rem; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Preencha os dois campos abaixo para iniciar no WhatsApp.</p>
+              <h2 class="font-label" style="margin: 0; font-size: 1.25rem; color: #fff;">Onde enviamos seu direcionamento?</h2>
+              <p style="margin-top: 0.25rem; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Leva menos de 15 segundos e já abre a conversa com o time da Chama Cine.</p>
             </div>
             <p id="quiz-selected-badge" style="margin: 0; border-radius: 0.75rem; border: 1px solid rgba(230,35,20,0.35); background: rgba(230,35,20,0.12); padding: 0.5rem 0.85rem; font-size: 0.75rem; color: #f4f1ea;"></p>
             <input type="text" id="quiz-nome" required placeholder="Seu nome" class="input-dark" />
-            <input type="text" id="quiz-empresa" required placeholder="Nome da empresa ou @instagram" class="input-dark" />
+            <input type="text" id="quiz-empresa" required placeholder="Empresa ou @instagram" class="input-dark" />
             <div style="display: flex; gap: 0.75rem; padding-top: 0.25rem;">
               <button type="button" onclick="voltarQuiz()" class="btn-outline" style="padding: 0.75rem 1rem; font-size: 0.75rem;">
                 Voltar
               </button>
               <button type="submit" class="btn-red" style="flex: 1; padding: 0.75rem 1.25rem; font-size: 0.75rem;">
-                Receber no WhatsApp
+                Gerar plano no WhatsApp →
               </button>
             </div>
           </form>
@@ -1421,44 +1497,45 @@
         </div>
       </div>
 
-      <!-- Formulário Comercial -->
+      <!-- FORMULÁRIO DE DIAGNÓSTICO REFINADO (#diagnostico) -->
       <div class="contact-right" style="margin-top: 2rem;">
         <form onsubmit="enviarFormContato(event)" style="display: flex; flex-direction: column; gap: 1rem; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(17,16,16,0.88); padding: 1.75rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.65);">
-          <h3 class="font-display" style="margin: 0; font-size: 1.5rem; text-transform: uppercase; color: #fff;">Solicitar Diagnóstico Comercial</h3>
-          <p style="margin: 0; font-size: 0.875rem; color: rgba(255,255,255,0.75);">Preencha abaixo e enviaremos sua solicitação diretamente no WhatsApp da Chama Cine.</p>
+          <h3 class="font-display" style="margin: 0; font-size: 1.5rem; text-transform: uppercase; color: #fff;">Mapeie o gargalo e receba o plano de ação</h3>
+          <p style="margin: 0; font-size: 0.875rem; color: rgba(255,255,255,0.75);">Preencha os dados abaixo. Enviamos o resumo direto para o WhatsApp da Chama Cine e registramos seu atendimento.</p>
 
           <div>
-            <label for="form-nome" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Seu Nome</label>
-            <input type="text" id="form-nome" required placeholder="Ex.: João Silva" class="input-dark" />
+            <label for="form-nome" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Seu nome</label>
+            <input type="text" id="form-nome" required placeholder="Ex.: Marina Fernandes" class="input-dark" />
           </div>
 
           <div>
-            <label for="form-empresa" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Empresa ou Instagram</label>
-            <input type="text" id="form-empresa" required placeholder="Ex.: @suaempresa" class="input-dark" />
+            <label for="form-empresa" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Empresa ou @instagram</label>
+            <input type="text" id="form-empresa" required placeholder="Ex.: @suaempresa ou Nome da Marca" class="input-dark" />
           </div>
 
           <div>
-            <label for="form-estagio" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Momento do Negócio</label>
+            <label for="form-estagio" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Frente prioritária</label>
             <select id="form-estagio" required class="input-dark">
-              <option value="">Selecione uma opção...</option>
-              <option value="Começar do zero (ainda não tenho estrutura)">Começar do zero (ainda não tenho estrutura)</option>
-              <option value="Preciso de filmes publicitários / Reels">Preciso de filmes publicitários / Reels</option>
-              <option value="Quero tráfego pago + páginas / app / estrutura de vendas">Quero tráfego pago + páginas / app / estrutura de vendas</option>
-              <option value="Documentário, edital ou projeto especial">Documentário, edital ou projeto especial</option>
+              <option value="">Selecione a frente principal...</option>
+              <option value="Tráfego Pago, Páginas, CRM & Apps Nativos">Tráfego Pago, Páginas, CRM & Apps Nativos</option>
+              <option value="Lançamento & Estruturação do Zero">Lançamento & Estruturação do Zero</option>
+              <option value="Filmes Publicitários, Reels & Criativos de Performance">Filmes Publicitários, Reels & Criativos de Performance</option>
+              <option value="Autoridade para Profissionais & Gestão de Redes">Autoridade para Profissionais & Gestão de Redes</option>
+              <option value="Documentário, Identidade Visual ou Projeto Especial">Documentário, Identidade Visual ou Projeto Especial</option>
             </select>
           </div>
 
           <div>
-            <label for="form-objetivo" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Resumo do Objetivo</label>
-            <textarea id="form-objetivo" rows="3" placeholder="Conte em poucas linhas o que você quer estruturar ou vender..." class="input-dark"></textarea>
+            <label for="form-objetivo" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">O que está travando suas vendas hoje? (opcional)</label>
+            <textarea id="form-objetivo" rows="3" placeholder="Ex.: Rodamos anúncios, mas o lead esfria no WhatsApp; ou precisamos lançar página e app." class="input-dark"></textarea>
           </div>
 
           <p style="margin: 0; font-size: 0.7rem; color: rgba(255,255,255,0.65);">
-            Ao enviar, você concorda com o tratamento dos seus dados para retorno comercial conforme o <button type="button" onclick="abrirAvisoLgpd()" style="background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; cursor: pointer;">Aviso de Privacidade (LGPD)</button>.
+            Sem compromisso · Resposta direta pelo time comercial · Dados tratados conforme o <button type="button" onclick="abrirAvisoLgpd()" style="background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; cursor: pointer;">Aviso de Privacidade (LGPD)</button>.
           </p>
 
           <button type="submit" class="btn-red" style="width: 100%; padding: 1rem 1.5rem; font-size: 0.75rem;">
-            Enviar e Abrir WhatsApp
+            Solicitar diagnóstico no WhatsApp
           </button>
         </form>
       </div>
@@ -1795,7 +1872,11 @@
         <div>
           <div style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
             <img src="${f.icone}" alt="" style="height: 2.75rem; width: 2.75rem; object-fit: contain;" />
-            <span class="font-accent" style="border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.625rem; text-transform: uppercase; ${ f.destaque ? 'background: #e62314; color: #fff;' : 'border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.75);' }">${f.badge}</span>
+            <span class="font-accent" style="border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.625rem; text-transform: uppercase; ${
+              f.destaque
+                ? 'background: #e62314; color: #fff;'
+                : 'border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.75);'
+            }">${f.badge}</span>
           </div>
           <h3 class="font-display" style="margin: 0; font-size: 1.125rem; text-transform: uppercase; color: #fff;">${f.titulo}</h3>
           <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: rgba(255,255,255,0.8);">${f.resumoCurto}</p>
@@ -1813,7 +1894,7 @@
       rastrearEvento('frente_modal_open', { frente_numero: f.num, frente_titulo: f.titulo });
       document.getElementById('frente-icone').src = f.icone;
       document.getElementById('frente-numero-grande').textContent = f.num;
-      document.getElementById('frente-badge').textContent = `FRENTE ${f.num} ·${f.badge}`;
+      document.getElementById('frente-badge').textContent = `FRENTE ${f.num} · ${f.badge}`;
       document.getElementById('frente-titulo').textContent = f.titulo;
       document.getElementById('frente-resumo').textContent = f.resumoCurto;
       document.getElementById('frente-aplicacao').textContent = f.aplicacao;
@@ -1938,12 +2019,12 @@
 
     function selecionarEstagio(estagio) {
       estagioSelecionado = estagio;
-      rastrearEvento('quiz_step_1', { estagio });
+      rastrearEvento('quiz_step_1', { gargalo: estagio });
       document.getElementById('quiz-step-1').classList.add('hidden');
       const s2 = document.getElementById('quiz-step-2');
       s2.classList.remove('hidden');
-      document.getElementById('quiz-selected-badge').textContent = 'Cenário: ' + estagio;
-      document.getElementById('quiz-step-label').textContent = 'Passo 2 de 2 · Seus dados';
+      document.getElementById('quiz-selected-badge').textContent = 'Gargalo selecionado: ' + estagio;
+      document.getElementById('quiz-step-label').textContent = 'Passo 2 de 2 · Envio imediato';
       document.getElementById('quiz-progress-text').textContent = '100%';
       document.getElementById('quiz-bar').style.width = '100%';
     }
@@ -1951,7 +2032,7 @@
     function voltarQuiz() {
       document.getElementById('quiz-step-2').classList.add('hidden');
       document.getElementById('quiz-step-1').classList.remove('hidden');
-      document.getElementById('quiz-step-label').textContent = 'Passo 1 de 2 · Diagnóstico rápido';
+      document.getElementById('quiz-step-label').textContent = 'Passo 1 de 2 · Diagnóstico em 30s';
       document.getElementById('quiz-progress-text').textContent = '50%';
       document.getElementById('quiz-bar').style.width = '50%';
     }
@@ -1961,15 +2042,15 @@
       const nome = document.getElementById('quiz-nome').value.trim();
       const empresa = document.getElementById('quiz-empresa').value.trim();
       const dadosLead = {
-        origem: 'Quiz Hero',
+        origem: 'Quiz 1a Dobra',
         nome,
         empresa,
-        estagio: estagioSelecionado
+        gargalo: estagioSelecionado
       };
       registrarLeadNoWebhook(dadosLead);
-      trackLead('Quiz Hero', { estagio: estagioSelecionado });
+      trackLead('Quiz 1a Dobra', { gargalo: estagioSelecionado });
 
-      const msg = `Olá, Chama Cine! Meu nome é ${nome} (${empresa}). Meu momento é: "${estagioSelecionado}". Quero estruturar meu negócio para vender mais.`;
+      const msg = `Olá, Chama Cine! Sou ${nome} (${empresa}). O principal gargalo hoje é: "${estagioSelecionado}". Quero receber o direcionamento do time.`;
       window.open(montarUrlWhatsApp(msg), '_blank', 'noopener');
     }
 
@@ -1977,20 +2058,39 @@
       e.preventDefault();
       const nome = document.getElementById('form-nome').value.trim();
       const empresa = document.getElementById('form-empresa').value.trim();
-      const estagio = document.getElementById('form-estagio').value;
-      const objetivo = document.getElementById('form-objetivo').value.trim();
+      const frente = document.getElementById('form-estagio').value;
+      const gargaloDetalhe = document.getElementById('form-objetivo').value.trim();
 
       const dadosLead = {
         origem: 'Formulario Diagnostico',
         nome,
         empresa,
-        estagio,
-        objetivo: objetivo || 'Estruturar vendas'
+        frente_prioritaria: frente,
+        gargalo_detalhe: gargaloDetalhe || 'Não informado'
       };
       registrarLeadNoWebhook(dadosLead);
-      trackLead('Formulario Diagnostico', { estagio });
+      trackLead('Formulario Diagnostico', { frente_prioritaria: frente });
 
-      const msg = `Olá, Chama Cine! Solicito um diagnóstico comercial.\n• Nome: ${nome}\n• Empresa: ${empresa}\n• Momento: ${estagio}\n• Objetivo: ${objetivo \vert{}\vert{} 'Estruturar vendas'}`; window.open(montarUrlWhatsApp(msg), '_blank', 'noopener'); }  window.Chama = { mostrar(idx) { const lista = window.PROJETOS \vert{}\vert{} []; const p = lista[idx]; if (!p) return; document.getElementById('info-num').textContent = `${String(idx + 1).padStart(2, '0')} / ${String(lista.length).padStart(2, '0')}`; document.getElementById('info-tipo').textContent = `${p.genero} · ${p.formato}`; document.getElementById('info-titulo').textContent = p.titulo; document.getElementById('info-resumo').textContent = p.resumo; }, abrir(idx) { const lista = window.PROJETOS \vert{}\vert{} []; const p = lista[idx]; if (!p) return; rastrearEvento('acervo_ficha_open', { projeto_id: p.id, projeto_titulo: p.titulo }); document.getElementById('modal-poster').src = `img/posters/${p.id}.jpg`;
+      const msg = `Olá, Chama Cine! Quero mapear o gargalo comercial da minha operação.\n• Nome: ${nome}\n• Empresa / @: ${empresa}\n• Frente prioritária: ${frente}\n• O que trava as vendas hoje: ${gargaloDetalhe || 'Quero diagnóstico completo com o time'}`;
+      window.open(montarUrlWhatsApp(msg), '_blank', 'noopener');
+    }
+
+    window.Chama = {
+      mostrar(idx) {
+        const lista = window.PROJETOS || [];
+        const p = lista[idx];
+        if (!p) return;
+        document.getElementById('info-num').textContent = `${String(idx + 1).padStart(2, '0')} / ${String(lista.length).padStart(2, '0')}`;
+        document.getElementById('info-tipo').textContent = `${p.genero} · ${p.formato}`;
+        document.getElementById('info-titulo').textContent = p.titulo;
+        document.getElementById('info-resumo').textContent = p.resumo;
+      },
+      abrir(idx) {
+        const lista = window.PROJETOS || [];
+        const p = lista[idx];
+        if (!p) return;
+        rastrearEvento('acervo_ficha_open', { projeto_id: p.id, projeto_titulo: p.titulo });
+        document.getElementById('modal-poster').src = `img/posters/${p.id}.jpg`;
         document.getElementById('modal-poster').alt = p.titulo;
         document.getElementById('modal-genero').textContent = p.genero;
         document.getElementById('modal-titulo').textContent = p.titulo;
