@@ -4,18 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chama Cine | Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN</title>
-  <meta name="description" content="Núcleo de Comunicação e Tecnologia em Vendas em Natal/RN. Estruturamos o seu negócio para vender mais com audiovisual, posicionamento, tráfego pago e tecnologia." />
+  <meta name="description" content="Núcleo de Comunicação e Tecnologia em Vendas em Natal/RN. Estruturamos o seu negócio para vender mais com audiovisual, posicionamento, tráfego pago, páginas e apps nativos." />
   <link rel="icon" type="image/png" href="img/fogo.png" />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Chama Cine | Núcleo de Comunicação e Tecnologia em Vendas" />
-  <meta property="og:description" content="Estruturamos o seu negócio para vender mais. Cinema comercial, tráfego pago e tecnologia de conversão em Natal/RN." />
+  <meta property="og:description" content="Estruturamos o seu negócio para vender mais. Cinema comercial, tráfego pago, tecnologia e apps nativos em Natal/RN." />
   <meta property="og:url" content="https://chamacine.com.br/" />
   <meta property="og:type" content="website" />
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Three.js para a Roda 3D de Pôsteres -->
   <script type="importmap">
   {
     "imports": {
@@ -24,7 +22,7 @@
   }
   </script>
 
-  <!-- Meta Pixel (insira seu ID numérico quando ativar) -->
+  <!-- Meta Pixel -->
   <script>
     const META_PIXEL_ID = '';
     if (META_PIXEL_ID) {
@@ -83,6 +81,7 @@
       background-color: var(--bg-dark);
       color: var(--off-white);
       font-family: 'Stara', system-ui, -apple-system, sans-serif;
+      font-weight: 500;
       overflow-x: hidden;
     }
 
@@ -92,11 +91,15 @@
       letter-spacing: -0.02em;
     }
 
+    .font-label {
+      font-family: 'Stara', sans-serif;
+      font-weight: 600;
+    }
+
     .font-accent {
       font-family: 'StretchPro', 'Stara', sans-serif;
     }
 
-    /* Faixa letreiro */
     @keyframes marquee {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -107,7 +110,7 @@
       animation: marquee 32s linear infinite;
     }
 
-    /* Seção Roda 3D de Pôsteres enquadrada sem cortes */
+    /* Roda 3D de Pôsteres */
     .s.recentes {
       position: relative;
       width: 100%;
@@ -204,7 +207,7 @@
     .s.recentes .btn-ficha {
       background: var(--chama-red);
       color: #fff;
-      font-weight: 700;
+      font-weight: 900;
       font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -306,9 +309,9 @@
         <img src="img/logo-chama.svg" alt="Chama Cine" class="h-9 w-auto object-contain" />
       </a>
 
-      <nav class="hidden items-center gap-7 text-sm font-medium text-white/80 md:flex">
+      <nav class="hidden items-center gap-7 font-label text-sm text-white/80 md:flex">
         <a href="#servicos" class="transition hover:text-white">Soluções</a>
-        <a href="#cases" class="transition hover:text-white">Cases & Reels</a>
+        <a href="#cases" class="transition hover:text-white">Operação Real</a>
         <a href="#projetos" class="transition hover:text-white">Acervo</a>
         <a href="#sobre" class="transition hover:text-white">Quem Somos</a>
         <a href="#contato" class="transition hover:text-white">Diagnóstico</a>
@@ -319,7 +322,7 @@
         target="_blank"
         rel="noopener"
         onclick="trackLead('Header WhatsApp')"
-        class="inline-flex items-center gap-2 rounded-full bg-[#e62314] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]"
+        class="font-display inline-flex items-center gap-2 rounded-full bg-[#e62314] px-5 py-2.5 text-xs uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]"
       >
         Falar no WhatsApp
       </a>
@@ -336,7 +339,7 @@
 
     <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
       <div class="lg:col-span-7">
-        <div class="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/40 bg-[#e62314]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#f4f1ea]">
+        <div class="font-label mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/40 bg-[#e62314]/10 px-4 py-1.5 text-xs uppercase tracking-widest text-[#f4f1ea]">
           <span class="h-2 w-2 rounded-full bg-[#e62314]"></span>
           Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN
         </div>
@@ -346,19 +349,19 @@
         </h1>
 
         <p class="mt-5 max-w-2xl text-lg font-medium leading-relaxed text-[#f4f1ea]/90 sm:text-xl">
-          Estruturamos o seu negócio para vender mais — integrando audiovisual de cinema, posicionamento comercial, tráfego pago e tecnologia de conversão.
+          Estruturamos o seu negócio para vender mais — combinando direção audiovisual, posicionamento estratégico, tráfego pago e tecnologia aplicada a vendas.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
           <a
             href="#contato"
-            class="rounded-full bg-[#e62314] px-7 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-[#e62314]/25 transition hover:bg-[#ff3322]"
+            class="font-display rounded-full bg-[#e62314] px-7 py-4 text-sm uppercase tracking-wider text-white shadow-xl shadow-[#e62314]/25 transition hover:bg-[#ff3322]"
           >
             Agendar Diagnóstico Gratuito
           </a>
           <a
             href="#projetos"
-            class="rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:border-white/50 hover:bg-white/10"
+            class="font-display rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm uppercase tracking-wider text-white transition hover:border-white/50 hover:bg-white/10"
           >
             Ver Acervo & Cases
           </a>
@@ -366,21 +369,21 @@
 
         <!-- 3 Pilares em Destaque -->
         <div class="mt-10 grid gap-3.5 sm:grid-cols-3">
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/35 bg-[#111010]/90 p-4 shadow-lg transition hover:border-[#e62314] hover:bg-[#171212]">
-            <span class="mb-2 block h-1 w-8 rounded-full bg-[#e62314]"></span>
-            <strong class="block font-display text-sm uppercase tracking-wide text-white">360° Comercial</strong>
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#121010]/95 p-4 shadow-lg shadow-[#e62314]/10 transition hover:-translate-y-0.5 hover:border-[#e62314]">
+            <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
+            <strong class="font-display block text-sm uppercase tracking-wide text-white">360° Comercial</strong>
             <span class="mt-1 block text-xs leading-relaxed text-white/75">Da estratégia ao anúncio no ar.</span>
           </div>
 
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/35 bg-[#111010]/90 p-4 shadow-lg transition hover:border-[#e62314] hover:bg-[#171212]">
-            <span class="mb-2 block h-1 w-8 rounded-full bg-[#e62314]"></span>
-            <strong class="block font-display text-sm uppercase tracking-wide text-white">Padrão Cinema</strong>
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#121010]/95 p-4 shadow-lg shadow-[#e62314]/10 transition hover:-translate-y-0.5 hover:border-[#e62314]">
+            <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
+            <strong class="font-display block text-sm uppercase tracking-wide text-white">Padrão Cinema</strong>
             <span class="mt-1 block text-xs leading-relaxed text-white/75">Estética autoral para retenção.</span>
           </div>
 
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/35 bg-[#111010]/90 p-4 shadow-lg transition hover:border-[#e62314] hover:bg-[#171212]">
-            <span class="mb-2 block h-1 w-8 rounded-full bg-[#e62314]"></span>
-            <strong class="block font-display text-sm uppercase tracking-wide text-white">Do Zero à Escala</strong>
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#121010]/95 p-4 shadow-lg shadow-[#e62314]/10 transition hover:-translate-y-0.5 hover:border-[#e62314]">
+            <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
+            <strong class="font-display block text-sm uppercase tracking-wide text-white">Do Zero à Escala</strong>
             <span class="mt-1 block text-xs leading-relaxed text-white/75">Estrutura completa de vendas.</span>
           </div>
         </div>
@@ -389,28 +392,27 @@
       <!-- QUIZ DIAGNÓSTICO LEVE E ESCANEÁVEL -->
       <div class="lg:col-span-5">
         <div class="rounded-3xl border border-white/12 bg-gradient-to-b from-[#171616]/95 to-[#100f0f]/95 p-6 shadow-2xl backdrop-blur-md sm:p-8">
-          <div class="mb-3 flex items-center justify-between text-xs font-medium text-white/60">
+          <div class="mb-3 flex items-center justify-between font-label text-xs text-white/60">
             <span id="quiz-step-label">Passo 1 de 2 · Diagnóstico rápido</span>
-            <span id="quiz-progress-text" class="rounded-full bg-[#e62314]/15 px-2.5 py-0.5 font-semibold text-[#e62314]">50%</span>
+            <span id="quiz-progress-text" class="font-accent rounded-full bg-[#e62314]/15 px-2.5 py-0.5 text-[#e62314]">50%</span>
           </div>
 
           <div class="mb-6 h-1 w-full overflow-hidden rounded-full bg-white/10">
             <div id="quiz-bar" class="h-full w-1/2 rounded-full bg-[#e62314] transition-all duration-300"></div>
           </div>
 
-          <!-- Passo 1 -->
           <div id="quiz-step-1">
-            <h2 class="text-xl font-bold leading-snug text-white sm:text-2xl">
+            <h2 class="font-label text-xl leading-snug text-white sm:text-2xl">
               Qual é o momento do seu negócio?
             </h2>
             <p class="mt-1 text-sm text-white/65">
-              Escolha a opção que mais se aproxima do seu cenário:
+              Escolha a opção que melhor representa o seu cenário:
             </p>
 
             <div class="mt-5 space-y-2.5">
               <button type="button" onclick="selecionarEstagio('Começar do zero (estruturar marca e canais)')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
                 <div>
-                  <span class="block text-sm font-semibold text-white">Começar do zero</span>
+                  <span class="font-label block text-sm text-white">Começar do zero</span>
                   <span class="block text-xs text-white/60">Ainda não tenho estrutura comercial ou digital</span>
                 </div>
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
@@ -418,23 +420,23 @@
 
               <button type="button" onclick="selecionarEstagio('Destravar vendas nas redes sociais')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
                 <div>
-                  <span class="block text-sm font-semibold text-white">Destravar vendas nas redes</span>
+                  <span class="font-label block text-sm text-white">Destravar vendas nas redes</span>
                   <span class="block text-xs text-white/60">Já tenho empresa ativa, mas o perfil não converte</span>
                 </div>
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Escalar anúncios com vídeos de alta conversão')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+              <button type="button" onclick="selecionarEstagio('Escalar anúncios, páginas e app com conversão')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
                 <div>
-                  <span class="block text-sm font-semibold text-white">Escalar tráfego e criativos</span>
-                  <span class="block text-xs text-white/60">Já anuncio e preciso de vídeos e páginas que vendem</span>
+                  <span class="font-label block text-sm text-white">Escalar tráfego, criativos e tecnologia</span>
+                  <span class="block text-xs text-white/60">Quero anúncios, páginas, CRM ou app que gerem receita</span>
                 </div>
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
 
               <button type="button" onclick="selecionarEstagio('Produzir filme institucional, documentário ou campanha')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
                 <div>
-                  <span class="block text-sm font-semibold text-white">Filme, documentário ou campanha</span>
+                  <span class="font-label block text-sm text-white">Filme, documentário ou campanha</span>
                   <span class="block text-xs text-white/60">Produção audiovisual autoral de alto impacto</span>
                 </div>
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
@@ -442,20 +444,19 @@
             </div>
           </div>
 
-          <!-- Passo 2 -->
           <form id="quiz-step-2" class="hidden space-y-4" onsubmit="enviarQuizWhatsApp(event)">
             <div>
-              <h2 class="text-xl font-bold text-white">Para onde enviamos seu plano?</h2>
+              <h2 class="font-label text-xl text-white">Para onde enviamos seu plano?</h2>
               <p class="mt-1 text-xs text-white/60">Preencha os dois campos abaixo para iniciar no WhatsApp.</p>
             </div>
             <p id="quiz-selected-badge" class="rounded-xl border border-[#e62314]/30 bg-[#e62314]/10 px-3.5 py-2 text-xs font-medium text-white/90"></p>
             <input type="text" id="quiz-nome" required placeholder="Seu nome" class="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
             <input type="text" id="quiz-empresa" required placeholder="Nome da empresa ou @instagram" class="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
             <div class="flex gap-3 pt-1">
-              <button type="button" onclick="voltarQuiz()" class="rounded-xl border border-white/15 px-4 py-3 text-xs font-semibold text-white/75 transition hover:text-white">
+              <button type="button" onclick="voltarQuiz()" class="font-label rounded-xl border border-white/15 px-4 py-3 text-xs text-white/75 transition hover:text-white">
                 Voltar
               </button>
-              <button type="submit" class="flex-1 rounded-xl bg-[#e62314] px-5 py-3 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+              <button type="submit" class="font-display flex-1 rounded-xl bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
                 Receber no WhatsApp
               </button>
             </div>
@@ -466,14 +467,14 @@
   </section>
 
   <!-- FAIXA LETREIRO -->
-  <div class="overflow-hidden border-b border-white/10 bg-[#e62314] py-3 text-xs font-black uppercase tracking-widest text-white">
+  <div class="font-display overflow-hidden border-b border-white/10 bg-[#e62314] py-3 text-xs uppercase tracking-widest text-white">
     <div class="animate-marquee">
-      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO & PERFORMANCE ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
-      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO & PERFORMANCE ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
+      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO, PÁGINAS & APPS NATIVOS ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
+      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO, PÁGINAS & APPS NATIVOS ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
     </div>
   </div>
 
-  <!-- 02 · SOLUÇÕES -->
+  <!-- 02 · ARQUITETURA COMERCIAL & AUDIOVISUAL (8 FRENTES ESCANEÁVEIS + DESTAQUES + APP NATIVO + MODAL APROFUNDADO) -->
   <section id="servicos" class="relative border-b border-white/10 py-20">
     <div
       class="pointer-events-none absolute inset-0 opacity-20"
@@ -482,165 +483,89 @@
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606] via-[#070606]/85 to-[#070606]"></div>
 
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#e62314]">Arquitetura Comercial & Audiovisual</span>
-        <h2 class="font-display mt-2 text-3xl uppercase text-white sm:text-4xl">
-          8 frentes integradas para estruturar seu negócio e vender mais
-        </h2>
+      <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
+        <div class="max-w-3xl">
+          <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Arquitetura Comercial & Audiovisual</span>
+          <h2 class="font-display mt-2 text-3xl uppercase text-white sm:text-4xl">
+            8 frentes integradas para tirar sua marca da invisibilidade e gerar vendas recorrentes
+          </h2>
+        </div>
+        <p class="font-label text-xs uppercase tracking-wider text-white/60">
+          Clique em qualquer frente para ver o plano de retorno e cases reais →
+        </p>
       </div>
 
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="rounded-2xl border border-white/10 bg-[#111010]/90 p-6 backdrop-blur-sm transition hover:border-[#e62314]/50">
-          <img src="img/icone-01.png" alt="" class="mb-4 h-11 w-11 object-contain" />
-          <h3 class="font-display text-lg uppercase text-white">Filmes Publicitários & Reels</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">Produção audiovisual com direção cinematográfica, ritmo de retenção e gancho comercial para anúncios.</p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-[#111010]/90 p-6 backdrop-blur-sm transition hover:border-[#e62314]/50">
-          <img src="img/icone-02.png" alt="" class="mb-4 h-11 w-11 object-contain" />
-          <h3 class="font-display text-lg uppercase text-white">Conteúdo para Profissionais</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">Posicionamento de autoridade para médicos, advogados, empresários e especialistas de alto valor.</p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-[#111010]/90 p-6 backdrop-blur-sm transition hover:border-[#e62314]/50">
-          <img src="img/icone-03.png" alt="" class="mb-4 h-11 w-11 object-contain" />
-          <h3 class="font-display text-lg uppercase text-white">Gestão de Redes Sociais</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">Planejamento editorial, direção de arte e calendário orientado à geração de oportunidades comerciais.</p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-[#111010]/90 p-6 backdrop-blur-sm transition hover:border-[#e62314]/50">
-          <img src="img/icone-04.png" alt="" class="mb-4 h-11 w-11 object-contain" />
-          <h3 class="font-display text-lg uppercase text-white">Documentários & Autorais</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">Narrativas profundas com estética de cinema para marcas, instituições, editais e projetos culturais.</p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-[#111010]/90 p-6 backdrop-blur-sm transition hover:border-[#e62314]/50">
-          <img src="img/icone-05.png" alt="" class="mb-4 h-11 w-11 object-contain" />
-          <h3 class="font-display text-lg uppercase text-white">Lançamento do Zero</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">Estruturação completa: posicionamento, identidade visual, site/landing page e primeiros criativos.</p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-[#111010]/90 p-6 backdrop-blur-sm transition hover:border-[#e62314]/50">
-          <img src="img/icone-06.png" alt="" class="mb-4 h-11 w-11 object-contain" />
-          <h3 class="font-display text-lg uppercase text-white">Tráfego Pago & Tecnologia</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">Campanhas no Meta Ads e Google Ads com páginas de alta conversão, CRM e leitura real de métricas.</p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-[#111010]/90 p-6 backdrop-blur-sm transition hover:border-[#e62314]/50">
-          <img src="img/icone-07.png" alt="" class="mb-4 h-11 w-11 object-contain" />
-          <h3 class="font-display text-lg uppercase text-white">Identidade & Personagens</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">Sistemas visuais marcantes, mascotes 3D/ilustrados e desdobramentos para campanhas promocionais.</p>
-        </div>
-
-        <div class="rounded-2xl border border-white/10 bg-[#111010]/90 p-6 backdrop-blur-sm transition hover:border-[#e62314]/50">
-          <img src="img/icone-08.png" alt="" class="mb-4 h-11 w-11 object-contain" />
-          <h3 class="font-display text-lg uppercase text-white">Copywriting & Roteiros</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">Roteiros persuasivos, páginas de vendas e assessoria narrativa para fortalecer reputação e conversão.</p>
-        </div>
-      </div>
+      <div id="grid-frentes" class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"></div>
     </div>
   </section>
 
-  <!-- 03 · CASES & REELS -->
+  <!-- 03 · OPERAÇÃO REAL & BASTIDORES (CONCEITO INTEGRADOR ESTILO ACERVO) -->
   <section id="cases" class="border-b border-white/10 bg-[#0a0909] py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#e62314]">Operação Real & Bastidores</span>
+        <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Operação Real & Bastidores</span>
         <h2 class="font-display mt-2 text-3xl uppercase text-white sm:text-4xl">
           Criativos e marcas que já rodam com a assinatura Chama
         </h2>
         <p class="mt-3 text-base text-white/70">
-          Da concepção visual aos Reels promocionais de varejo e gastronomia em Natal/RN.
+          Selecione uma peça ao lado para inspecionar o formato real, a estratégia aplicada e o canal oficial do case.
         </p>
       </div>
 
-      <div class="mt-12 grid items-start gap-8 lg:grid-cols-12">
-        <!-- Coluna Esquerda: Vídeo formato Storie (9:16) -->
-        <div class="lg:col-span-4">
-          <div class="mx-auto max-w-[330px] rounded-3xl border border-white/15 bg-[#111010] p-4 shadow-2xl">
-            <div class="aspect-[9/16] w-full overflow-hidden rounded-2xl bg-black">
-              <video
-                class="h-full w-full object-cover"
-                controls
-                playsinline
-                preload="metadata"
-              >
-                <source src="video/bem-leve-black.mp4" type="video/mp4" />
-                Seu navegador não suporta vídeo HTML5.
-              </video>
+      <div class="mt-10 grid items-center gap-8 rounded-3xl border border-white/10 bg-[#111010] p-6 shadow-2xl lg:grid-cols-12 lg:p-8">
+        <!-- Seletor Integrador à Esquerda -->
+        <div class="space-y-3 lg:col-span-5" id="seletor-cases">
+          <button type="button" data-case="0" onclick="selecionarCase(0)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-[#e62314] bg-[#e62314]/15 p-4 text-left transition">
+            <div>
+              <span class="font-accent block text-[11px] uppercase tracking-widest text-[#e62314]">01 · REELS / STORY 9:16</span>
+              <strong class="font-display mt-0.5 block text-base uppercase text-white">Bem Leve · Campanha Black</strong>
+              <span class="text-xs text-white/65">Vídeo vertical de oferta direta & giro rápido</span>
             </div>
-            <div class="mt-4 flex items-center justify-between gap-2 text-xs">
-              <span class="font-semibold text-white">Campanha Black Bem Leve</span>
-              <a href="https://www.instagram.com/bemleve_docesfit/" target="_blank" rel="noopener" class="font-bold text-[#e62314] hover:underline">
-                @bemleve_docesfit ↗
-              </a>
+            <span class="text-sm font-bold text-[#e62314]">▶</span>
+          </button>
+
+          <button type="button" data-case="1" onclick="selecionarCase(1)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/40 p-4 text-left transition hover:border-white/30">
+            <div>
+              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/50">02 · BRANDING & 3D</span>
+              <strong class="font-display mt-0.5 block text-base uppercase text-white">Bem Leve Doces Fit</strong>
+              <span class="text-xs text-white/65">Universo visual, mascote 3D e campanha</span>
             </div>
-          </div>
+            <span class="text-sm text-white/50">→</span>
+          </button>
+
+          <button type="button" data-case="2" onclick="selecionarCase(2)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/40 p-4 text-left transition hover:border-white/30">
+            <div>
+              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/50">03 · GASTRONOMIA & EVENTO</span>
+              <strong class="font-display mt-0.5 block text-base uppercase text-white">Buji BBQ à Beira Mar</strong>
+              <span class="text-xs text-white/65">Identidade, direção de arte e cobertura</span>
+            </div>
+            <span class="text-sm text-white/50">→</span>
+          </button>
+
+          <button type="button" data-case="3" onclick="selecionarCase(3)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/40 p-4 text-left transition hover:border-white/30">
+            <div>
+              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/50">04 · DESIGN DE CONVERSÃO · VAREJO</span>
+              <strong class="font-display mt-0.5 block text-base uppercase text-white">Clube do Livro · Instituto Damasi</strong>
+              <span class="text-xs text-white/65">Hierarquia de oferta e prova de valor</span>
+            </div>
+            <span class="text-sm text-white/50">→</span>
+          </button>
         </div>
 
-        <!-- Coluna Direita: Cards dos Cases com enquadramento ajustado ao quadro -->
-        <div class="space-y-6 lg:col-span-8">
-          <!-- Case 1 -->
-          <div class="grid items-center gap-6 rounded-3xl border border-white/10 bg-[#111010] p-6 sm:grid-cols-12">
-            <div class="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/80 p-2 sm:col-span-5">
-              <img
-                src="img/cases/bem-leve-marca.jpeg"
-                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='img/cases/bem-leve-marca.jpg';}else if(this.dataset.t==1){this.dataset.t=2;this.src='img/cases/bem-leve-marca.png';}"
-                alt="Case Bem Leve Doces Fit"
-                class="h-full w-full rounded-xl object-contain transition duration-300 hover:scale-[1.03]"
-              />
-            </div>
-            <div class="sm:col-span-7">
-              <span class="text-xs font-bold uppercase tracking-widest text-[#e62314]">Branding · Personagem 3D · Campanha</span>
-              <h3 class="font-display mt-2 text-2xl uppercase text-white">Bem Leve Doces Fit</h3>
-              <p class="mt-2 text-sm leading-relaxed text-white/75">
-                Construção de universo visual, personagem proprietária, peças promocionais de Black Friday e vídeos curtos focados em giro rápido.
-              </p>
-              <a href="https://www.instagram.com/bemleve_docesfit/" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-[#e62314] hover:bg-[#e62314]">
-                Ver Case no Instagram ↗
-              </a>
-            </div>
+        <!-- Palco Integrado à Direita (sem sobra lateral no vídeo) -->
+        <div class="grid items-center gap-6 rounded-2xl border border-white/10 bg-[#080707] p-5 sm:grid-cols-12 lg:col-span-7">
+          <div id="case-midia-box" class="flex justify-center sm:col-span-5">
+            <!-- Preenchido via JS com proporção exata sem sobra -->
           </div>
 
-          <!-- Case 2 -->
-          <div class="grid items-center gap-6 rounded-3xl border border-white/10 bg-[#111010] p-6 sm:grid-cols-12">
-            <div class="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/80 p-2 sm:col-span-5">
-              <img
-                src="img/cases/buji-bbq.jpeg"
-                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='img/cases/buji-bbq.jpg';}else if(this.dataset.t==1){this.dataset.t=2;this.src='img/cases/buji-bbq.png';}"
-                alt="Case Buji Bar da Praia"
-                class="h-full w-full rounded-xl object-contain transition duration-300 hover:scale-[1.03]"
-              />
-            </div>
-            <div class="sm:col-span-7">
-              <span class="text-xs font-bold uppercase tracking-widest text-[#e62314]">Direção Criativa · Gastronomia & Experiência</span>
-              <h3 class="font-display mt-2 text-2xl uppercase text-white">Buji BBQ à Beira Mar</h3>
-              <p class="mt-2 text-sm leading-relaxed text-white/75">
-                Do conceito ao evento: identidade visual, cobertura audiovisual, direção de arte e posicionamento digital para experiência gastronômica.
-              </p>
-              <a href="https://www.instagram.com/bujibardapraia/" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-[#e62314] hover:bg-[#e62314]">
-                Ver Case no Instagram ↗
-              </a>
-            </div>
-          </div>
-
-          <!-- Case 3: Clube do Livro / Instituto Damasi -->
-          <div class="grid items-center gap-6 rounded-3xl border border-white/10 bg-[#111010] p-6 sm:grid-cols-12">
-            <div class="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/80 p-2 sm:col-span-5">
-              <img
-                src="img/cases/clubedolivro.jpg"
-                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='img/cases/clubedolivro.jpeg';}else if(this.dataset.t==1){this.dataset.t=2;this.src='img/cases/clubedolivro.png';}"
-                alt="Case Clube do Livro - Instituto Damasi"
-                class="h-full w-full rounded-xl object-contain transition duration-300 hover:scale-[1.03]"
-              />
-            </div>
-            <div class="sm:col-span-7">
-              <span class="text-xs font-bold uppercase tracking-widest text-[#e62314]">Design de Conversão · Varejo</span>
-              <h3 class="font-display mt-2 text-2xl uppercase text-white">Criativos de Alta Conversão</h3>
-              <p class="mt-2 text-sm leading-relaxed text-white/75">
-                Peças estáticas e animadas desenhadas com hierarquia de oferta, prova de valor e chamada direta para conversão.
-              </p>
-              <a href="https://www.instagram.com/institutodamasi/" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-[#e62314] hover:bg-[#e62314]">
+          <div class="sm:col-span-7">
+            <span id="case-tag" class="font-label text-xs uppercase tracking-widest text-[#e62314]">Motion & Oferta Direta · 9:16</span>
+            <h3 id="case-titulo" class="font-display mt-2 text-2xl uppercase text-white sm:text-3xl">Campanha Black Bem Leve</h3>
+            <p id="case-desc" class="mt-3 text-sm leading-relaxed text-white/80">
+              Peça audiovisual vertical construída para reter no feed e Storie, apresentar a oferta com clareza e acelerar pedidos diretos.
+            </p>
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <a id="case-link" href="https://www.instagram.com/bemleve_docesfit/" target="_blank" rel="noopener" class="font-display inline-flex items-center gap-2 rounded-full bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
                 Ver Case no Instagram ↗
               </a>
             </div>
@@ -650,12 +575,12 @@
     </div>
   </section>
 
-  <!-- ============ 04 · NOSSOS PROJETOS (roda de pôsteres 3D ajustada à seção) ============ -->
+  <!-- ============ 04 · NOSSOS PROJETOS (RODA 3D DE PÔSTERES) ============ -->
   <section class="s recentes border-b border-white/10" id="projetos" style="--h:1260" aria-labelledby="titulo-projetos">
     <div class="borda-topo" aria-hidden="true"></div>
 
     <div class="a info" id="info" aria-live="polite" style="--x:134;--y:470;--w:640">
-      <div class="mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#e62314]">
+      <div class="font-label mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#e62314]">
         <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
         Acervo Cinematográfico Chama Cine
       </div>
@@ -684,45 +609,53 @@
     <ul class="lista-oculta" id="lista"></ul>
   </section>
 
-  <!-- 05 · QUEM SOMOS -->
+  <!-- 05 · QUEM SOMOS (IMAGENS VISÍVEIS E NÍTIDAS) -->
   <section id="sobre" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
       class="pointer-events-none absolute inset-0 opacity-20"
       style="background-image: url('img/fundo-sobre.jpg'); background-size: cover; background-position: center;"
     ></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#070606] via-[#070606]/90 to-[#070606]/80"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#070606] via-[#070606]/90 to-[#070606]/85"></div>
 
     <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
       <div class="lg:col-span-6">
-        <span class="text-xs font-bold uppercase tracking-widest text-[#e62314]">Quem Somos</span>
+        <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Quem Somos</span>
         <h2 class="font-display mt-2 text-3xl uppercase text-white sm:text-4xl">
           Cinema como linguagem, tecnologia e venda como resultado
         </h2>
-        <p class="mt-5 text-base leading-relaxed text-white/80">
+        <p class="mt-5 text-base leading-relaxed text-white/85">
           Sediada em Natal/RN, a Chama Cine une realizadores audiovisuais e estrategistas comerciais em um único núcleo de comunicação e tecnologia em vendas.
         </p>
-        <p class="mt-4 text-base leading-relaxed text-white/80">
-          Diagnosticamos o gargalo da sua operação, estruturamos sua marca e colocamos filmes, páginas e campanhas para rodar com foco em receita previsível.
+        <p class="mt-4 text-base leading-relaxed text-white/85">
+          Diagnosticamos o gargalo da sua operação, estruturamos sua marca e colocamos filmes, páginas, apps e campanhas para rodar com foco em retorno real.
         </p>
 
-        <div class="mt-8 flex items-center gap-4">
-          <img src="img/dinossauro.png" alt="Selo criativo Chama Cine" class="h-14 w-14 rounded-2xl border border-white/15 bg-black/60 p-2 object-contain" />
-          <div class="text-xs text-white/70">
-            <strong class="block text-sm uppercase text-white">Direção Artística & Estratégia Comercial</strong>
-            Produções exibidas no Rio2C, TV, cinema e campanhas digitais de performance.
+        <div class="mt-8 flex items-center gap-4 rounded-2xl border border-white/15 bg-[#121010] p-4">
+          <img
+            src="img/dinossauro.png"
+            alt="Selo criativo Chama Cine"
+            class="h-16 w-16 shrink-0 rounded-xl border border-white/15 bg-[#f4f1ea] p-1.5 object-contain"
+          />
+          <div class="text-xs text-white/75">
+            <strong class="font-display block text-sm uppercase text-white">Direção Artística & Estratégia Comercial</strong>
+            Obras e campanhas com assinatura Chama Cine no Rio2C, TV, cinema e performance digital.
           </div>
         </div>
       </div>
 
       <div class="lg:col-span-6">
-        <div class="overflow-hidden rounded-3xl border border-white/15 bg-[#111010]/80 p-4 shadow-2xl">
-          <img src="img/silhuetas.png" alt="Equipe e criação Chama Cine" class="w-full rounded-2xl object-cover" />
+        <div class="overflow-hidden rounded-3xl border border-white/15 bg-[#141212] p-4 shadow-2xl">
+          <img
+            src="img/silhuetas.png"
+            alt="Equipe e criação Chama Cine"
+            class="w-full rounded-2xl bg-[#1a1818] object-contain"
+          />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 06 · CONTATO & DIAGNÓSTICO -->
+  <!-- 06 · FECHAMENTO & DIAGNÓSTICO COMERCIAL -->
   <section id="contato" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
       class="pointer-events-none absolute inset-0 opacity-20"
@@ -731,78 +664,84 @@
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606] via-[#070606]/90 to-[#070606]"></div>
 
     <div class="relative mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-      <div class="lg:col-span-6">
-        <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
-          <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
-          Chama Cine · Natal/RN
+      <div class="flex flex-col justify-between lg:col-span-6">
+        <div>
+          <div class="font-label inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs uppercase tracking-wider text-white">
+            <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
+            Chama Cine · Natal/RN
+          </div>
+          <h2 class="font-display mt-4 text-3xl uppercase text-white sm:text-5xl">
+            Pronto para estruturar seu negócio e vender mais?
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-white/75">
+            Fale direto com nosso núcleo comercial para mapear o gargalo atual, escolher as frentes certas e receber um plano prático de ação.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20estruturar%20meu%20neg%C3%B3cio%20para%20vender%20mais." target="_blank" rel="noopener" onclick="trackLead('Contato WhatsApp')" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/95 p-5 transition hover:border-[#e62314]">
+              <div>
+                <strong class="font-label block text-sm text-white">WhatsApp Comercial · (84) 99630-5371</strong>
+                <span class="text-xs text-white/65">Atendimento direto para diagnóstico, tráfego, apps e produção</span>
+              </div>
+              <span class="font-display text-xs uppercase text-[#e62314]">Abrir ↗</span>
+            </a>
+
+            <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/95 p-5 transition hover:border-[#e62314]">
+              <div>
+                <strong class="font-label block text-sm text-white">E-mail Oficial · adm@chamacine.com.br</strong>
+                <span class="text-xs text-white/65">Envie seu briefing, edital ou proposta corporativa</span>
+              </div>
+              <span class="font-display text-xs uppercase text-[#e62314]">Enviar ↗</span>
+            </a>
+
+            <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/95 p-5 transition hover:border-[#e62314]">
+              <div>
+                <strong class="font-label block text-sm text-white">Instagram · @chamacine</strong>
+                <span class="text-xs text-white/65">Bastidores, lançamentos e novos cases</span>
+              </div>
+              <span class="font-display text-xs uppercase text-[#e62314]">Seguir ↗</span>
+            </a>
+          </div>
         </div>
-        <h2 class="font-display mt-4 text-3xl uppercase text-white sm:text-5xl">
-          Vamos estruturar suas vendas juntos?
-        </h2>
-        <p class="mt-4 text-base text-white/75">
-          Escolha o canal mais rápido para falar com nosso time comercial ou envie seu briefing ao lado.
-        </p>
 
-        <div class="mt-8 space-y-4">
-          <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20estruturar%20meu%20neg%C3%B3cio%20para%20vender%20mais." target="_blank" rel="noopener" onclick="trackLead('Contato WhatsApp')" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/90 p-5 transition hover:border-[#e62314]">
-            <div>
-              <strong class="block text-sm font-bold text-white">WhatsApp Comercial · (84) 99630-5371</strong>
-              <span class="text-xs text-white/65">Atendimento direto para diagnóstico, tráfego e produção</span>
-            </div>
-            <span class="text-xs font-bold uppercase text-[#e62314]">Abrir ↗</span>
-          </a>
-
-          <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/90 p-5 transition hover:border-[#e62314]">
-            <div>
-              <strong class="block text-sm font-bold text-white">E-mail Oficial · adm@chamacine.com.br</strong>
-              <span class="text-xs text-white/65">Envie seu briefing, edital ou proposta corporativa</span>
-            </div>
-            <span class="text-xs font-bold uppercase text-[#e62314]">Enviar ↗</span>
-          </a>
-
-          <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/90 p-5 transition hover:border-[#e62314]">
-            <div>
-              <strong class="block text-sm font-bold text-white">Instagram · @chamacine</strong>
-              <span class="text-xs text-white/65">Bastidores, lançamentos e novos cases</span>
-            </div>
-            <span class="text-xs font-bold uppercase text-[#e62314]">Seguir ↗</span>
-          </a>
+        <div class="mt-8 rounded-2xl border border-[#e62314]/30 bg-[#e62314]/10 p-4 text-xs leading-relaxed text-white/85">
+          <strong class="font-display uppercase text-white">O que acontece após o envio:</strong> analisamos seu momento atual, indicamos a frente prioritária (estruturação, filmes, tráfego pago ou tecnologia/app) e alinhamos os próximos passos sem enrolação.
         </div>
       </div>
 
       <!-- Formulário Comercial -->
       <div class="lg:col-span-6">
-        <form onsubmit="enviarFormContato(event)" class="rounded-3xl border border-white/15 bg-[#111010]/95 p-6 shadow-2xl sm:p-8 space-y-4">
+        <form onsubmit="enviarFormContato(event)" class="space-y-4 rounded-3xl border border-white/15 bg-[#111010]/95 p-6 shadow-2xl sm:p-8">
           <h3 class="font-display text-2xl uppercase text-white">Solicitar Diagnóstico Comercial</h3>
           <p class="text-sm text-white/65">Preencha abaixo e enviaremos sua solicitação diretamente no WhatsApp da Chama Cine.</p>
 
           <div>
-            <label class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/70">Seu Nome</label>
+            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/70">Seu Nome</label>
             <input type="text" id="form-nome" required placeholder="Ex.: João Silva" class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
           </div>
 
           <div>
-            <label class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/70">Empresa ou Instagram</label>
+            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/70">Empresa ou Instagram</label>
             <input type="text" id="form-empresa" required placeholder="Ex.: @suaempresa" class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
           </div>
 
           <div>
-            <label class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/70">Momento do Negócio</label>
+            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/70">Momento do Negócio</label>
             <select id="form-estagio" required class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white focus:border-[#e62314] focus:outline-none">
               <option value="">Selecione uma opção...</option>
               <option value="Começar do zero (ainda não tenho estrutura)">Começar do zero (ainda não tenho estrutura)</option>
               <option value="Preciso de filmes publicitários / Reels">Preciso de filmes publicitários / Reels</option>
-              <option value="Quero tráfego pago + estrutura de vendas">Quero tráfego pago + estrutura de vendas</option>
+              <option value="Quero tráfego pago + páginas / app / estrutura de vendas">Quero tráfego pago + páginas / app / estrutura de vendas</option>
               <option value="Documentário, edital ou projeto especial">Documentário, edital ou projeto especial</option>
             </select>
           </div>
 
           <div>
-            <label class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/70">Resumo do Objetivo</label>
+            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/70">Resumo do Objetivo</label>
             <textarea id="form-objetivo" rows="3" placeholder="Conte em poucas linhas o que você quer estruturar ou vender..." class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none"></textarea>
           </div>
 
-          <button type="submit" class="w-full rounded-full bg-[#e62314] px-6 py-4 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]">
+          <button type="submit" class="font-display w-full rounded-full bg-[#e62314] px-6 py-4 text-xs uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]">
             Enviar e Abrir WhatsApp
           </button>
         </form>
@@ -819,9 +758,9 @@
     <div class="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
       <div class="flex items-center gap-4">
         <img src="img/logo-rodape.png" alt="Chama Cine" class="h-10 w-auto object-contain" />
-        <span>© 2026 Chama Cine · Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN.</span>
+        <span class="font-label">© 2026 Chama Cine · Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN.</span>
       </div>
-      <div class="flex flex-wrap items-center gap-5 font-semibold text-white/80">
+      <div class="font-label flex flex-wrap items-center gap-5 text-white/80">
         <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="hover:text-[#e62314]">@chamacine</a>
         <a href="mailto:adm@chamacine.com.br" class="hover:text-[#e62314]">adm@chamacine.com.br</a>
         <a href="https://wa.me/5584996305371" target="_blank" rel="noopener" class="hover:text-[#e62314]">(84) 99630-5371</a>
@@ -829,7 +768,44 @@
     </div>
   </footer>
 
-  <!-- MODAL FICHA DO PROJETO -->
+  <!-- MODAL APROFUNDADO DE CADA FRENTE (8 FRENTES) -->
+  <div id="modal-frente" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-sm" role="dialog" aria-modal="true">
+    <div class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-white/15 bg-[#111010] p-6 shadow-2xl sm:p-8">
+      <button type="button" onclick="fecharModalFrente()" aria-label="Fechar detalhes da frente" class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/60 text-lg text-white hover:border-[#e62314] hover:bg-[#e62314]">×</button>
+
+      <div class="flex items-center gap-3">
+        <img id="frente-icone" src="" alt="" class="h-10 w-10 rounded-xl border border-white/10 bg-black/60 p-1.5 object-contain" />
+        <span id="frente-badge" class="font-accent text-xs uppercase tracking-widest text-[#e62314]"></span>
+      </div>
+
+      <h3 id="frente-titulo" class="font-display mt-3 text-2xl uppercase text-white sm:text-3xl"></h3>
+      <p id="frente-resumo" class="mt-3 text-sm leading-relaxed text-white/80"></p>
+
+      <div class="mt-5 space-y-4">
+        <div class="rounded-2xl border border-white/10 bg-black/40 p-4">
+          <h4 class="font-display text-xs uppercase tracking-wider text-white">Como funciona na prática</h4>
+          <p id="frente-aplicacao" class="mt-1.5 text-sm leading-relaxed text-white/75"></p>
+        </div>
+
+        <div class="rounded-2xl border border-[#e62314]/35 bg-[#e62314]/10 p-4">
+          <h4 class="font-display text-xs uppercase tracking-wider text-[#e62314]">Exemplo real de retorno para o negócio</h4>
+          <p id="frente-retorno" class="mt-1.5 text-sm leading-relaxed text-white/90"></p>
+        </div>
+      </div>
+
+      <a
+        id="frente-whats"
+        href="https://wa.me/5584996305371"
+        target="_blank"
+        rel="noopener"
+        class="font-display mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#e62314] px-5 py-3.5 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]"
+      >
+        Quero aplicar essa frente no meu negócio ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- MODAL FICHA DO PROJETO (RODA 3D) -->
   <div id="modal-ficha" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-sm" role="dialog" aria-modal="true">
     <div class="relative grid max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-white/15 bg-[#111010] p-6 shadow-2xl sm:grid-cols-12 sm:gap-6 sm:p-8">
       <button type="button" onclick="fecharModal()" aria-label="Fechar ficha" class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/60 text-lg text-white hover:border-[#e62314] hover:bg-[#e62314]">×</button>
@@ -840,26 +816,26 @@
 
       <div class="mt-5 flex flex-col justify-between sm:col-span-7 sm:mt-0">
         <div>
-          <span id="modal-genero" class="text-xs font-bold uppercase tracking-widest text-[#e62314]"></span>
+          <span id="modal-genero" class="font-label text-xs uppercase tracking-widest text-[#e62314]"></span>
           <h3 id="modal-titulo" class="font-display mt-1 text-2xl uppercase text-white sm:text-3xl"></h3>
           <p id="modal-resumo" class="mt-4 text-sm leading-relaxed text-white/80"></p>
 
           <dl class="mt-5 grid grid-cols-2 gap-3 border-t border-white/10 pt-4 text-xs">
             <div>
               <dt class="uppercase text-white/50">Formato</dt>
-              <dd id="modal-formato" class="mt-0.5 font-semibold text-white"></dd>
+              <dd id="modal-formato" class="font-label mt-0.5 text-white"></dd>
             </div>
             <div>
               <dt class="uppercase text-white/50">Classificação</dt>
-              <dd id="modal-classificacao" class="mt-0.5 font-semibold text-white"></dd>
+              <dd id="modal-classificacao" class="font-label mt-0.5 text-white"></dd>
             </div>
             <div class="col-span-2">
               <dt class="uppercase text-white/50">Direção</dt>
-              <dd id="modal-direcao" class="mt-0.5 font-semibold text-white"></dd>
+              <dd id="modal-direcao" class="font-label mt-0.5 text-white"></dd>
             </div>
             <div class="col-span-2">
               <dt class="uppercase text-white/50">Locação</dt>
-              <dd id="modal-local" class="mt-0.5 font-semibold text-white"></dd>
+              <dd id="modal-local" class="font-label mt-0.5 text-white"></dd>
             </div>
           </dl>
         </div>
@@ -869,7 +845,7 @@
           href="https://wa.me/5584996305371"
           target="_blank"
           rel="noopener"
-          class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#e62314] px-5 py-3 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[#ff3322]"
+          class="font-display mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]"
         >
           Solicitar projeto com esse padrão ↗
         </a>
@@ -877,8 +853,247 @@
     </div>
   </div>
 
-  <!-- SCRIPTS DO QUIZ E PONTE PARA A RODA 3D -->
+  <!-- SCRIPTS: FRENTES, CASES INTEGRADORES, QUIZ E RODA 3D -->
   <script>
+    const FRENTES = [
+      {
+        num: '01',
+        icone: 'img/icone-01.png',
+        titulo: 'Filmes Publicitários & Reels',
+        resumoCurto: 'Produção audiovisual com ritmo de retenção e gancho comercial para anúncios.',
+        destaque: false,
+        badge: 'ALTA RETENÇÃO',
+        aplicacao: 'Roteiro direto ao ponto, captação cinematográfica e edição pensada para segurar a atenção nos primeiros 3 segundos em Reels, Stories e YouTube.',
+        retorno: 'Em operações de varejo e alimentação em Natal, criativos curtos com gancho de oferta e prova visual aumentam o clique para o WhatsApp e reduzem o custo por mensagem qualificada.'
+      },
+      {
+        num: '02',
+        icone: 'img/icone-02.png',
+        titulo: 'Conteúdo para Profissionais',
+        resumoCurto: 'Autoridade estratégica para médicos, advogados, empresários e especialistas.',
+        destaque: false,
+        badge: 'AUTORIDADE',
+        aplicacao: 'Transformamos o conhecimento técnico do especialista em vídeos e pautas claras que educam o cliente antes da primeira reunião.',
+        retorno: 'Profissionais que constroem autoridade contínua chegam à negociação com menos disputa de preço e maior taxa de fechamento em serviços de ticket médio e alto.'
+      },
+      {
+        num: '03',
+        icone: 'img/icone-03.png',
+        titulo: 'Gestão de Redes Sociais',
+        resumoCurto: 'Direção de arte e calendário editorial orientado a oportunidades reais.',
+        destaque: false,
+        badge: 'PRESENÇA ATIVA',
+        aplicacao: 'Em vez de postagens soltas sem direção, organizamos linhas editoriais de prova, bastidor, oferta e relacionamento com identidade visual coesa.',
+        retorno: 'O perfil deixa de ser apenas um mural estático e passa a converter seguidores locais em conversas comerciais e visitas recorrentes.'
+      },
+      {
+        num: '04',
+        icone: 'img/icone-04.png',
+        titulo: 'Documentários & Autorais',
+        resumoCurto: 'Narrativas profundas com estética de cinema para marcas e projetos culturais.',
+        destaque: false,
+        badge: 'CINEMA AUTORAL',
+        aplicacao: 'Desenvolvimento narrativo, fotografia e direção de arte para histórias de impacto, instituições, editais e projetos especiais.',
+        retorno: 'Eleva o patamar institucional da marca, fortalece parcerias estratégicas e cria ativos audiovisuais duradouros para lançamentos e apresentações.'
+      },
+      {
+        num: '05',
+        icone: 'img/icone-05.png',
+        titulo: 'Lançamento do Zero',
+        resumoCurto: 'Estruturação completa: posicionamento, identidade, landing page e criativos.',
+        destaque: true,
+        badge: 'MAIOR CONVERSÃO · DO ZERO',
+        aplicacao: 'Montamos os fundamentos do negócio desde o início: proposta de valor, identidade visual, página de captura/vendas, scripts comerciais e primeiros anúncios.',
+        retorno: 'Quem está começando evita meses de improviso e já entra no mercado com mensagem clara, página estruturada para converter e caminho direto para captar clientes.'
+      },
+      {
+        num: '06',
+        icone: 'img/icone-06.png',
+        titulo: 'Tráfego Pago, Páginas & Apps Nativos',
+        resumoCurto: 'Meta Ads, Google Ads, páginas de conversão, CRM e criação de aplicativo nativo.',
+        destaque: true,
+        badge: 'MAIOR CONVERSÃO · ESCALA & TECH',
+        aplicacao: 'Unimos aquisição paga (Meta/Google), landing pages rápidas, fluxos comerciais e desenvolvimento de aplicativo nativo para clientes, pedidos, agendamentos ou fidelização.',
+        retorno: 'Quando anúncio, página/app e atendimento trabalham integrados, a empresa reduz desperdício de verba, captura mais leads e cria recorrência própria fora do algoritmo.'
+      },
+      {
+        num: '07',
+        icone: 'img/icone-07.png',
+        titulo: 'Identidade & Personagens',
+        resumoCurto: 'Sistemas visuais marcantes, mascotes 3D/ilustrados e campanhas temáticas.',
+        destaque: false,
+        badge: 'MARCA MEMORÁVEL',
+        aplicacao: 'Criação de identidade visual, personagens proprietários e desdobramentos gráficos para campanhas sazonais e linhas de produtos.',
+        retorno: 'Facilita o reconhecimento imediato da marca no feed e em campanhas promocionais, aumentando a lembrança espontânea do público.'
+      },
+      {
+        num: '08',
+        icone: 'img/icone-08.png',
+        titulo: 'Copywriting & Roteiros',
+        resumoCurto: 'Roteiros persuasivos, páginas de vendas e narrativa comercial de conversão.',
+        destaque: false,
+        badge: 'PERSUASÃO & VENDA',
+        aplicacao: 'Escrita estratégica de headlines, roteiros de vídeo, páginas de vendas e abordagens comerciais focadas em clareza de oferta e quebra de objeções.',
+        retorno: 'Melhora a taxa de resposta e conversão em cada etapa do funil sem depender de descontos agressivos para convencer o cliente.'
+      }
+    ];
+
+    const gridFrentes = document.getElementById('grid-frentes');
+    gridFrentes.innerHTML = FRENTES.map((f, i) => `
+      <button
+        type="button"
+        onclick="abrirFrente(${i})"
+        class="group relative flex flex-col justify-between rounded-2xl border p-6 text-left backdrop-blur-sm transition duration-200 hover:-translate-y-1 ${
+          f.destaque
+            ? 'border-[#e62314]/70 bg-[#171111]/95 shadow-lg shadow-[#e62314]/15 hover:border-[#e62314]'
+            : 'border-white/10 bg-[#111010]/90 hover:border-[#e62314]/50'
+        }"
+      >
+        <div>
+          <div class="mb-4 flex items-center justify-between gap-2">
+            <img src="${f.icone}" alt="" class="h-11 w-11 object-contain" />
+            <span class="font-accent rounded-full px-2.5 py-1 text-[10px] uppercase tracking-wider ${
+              f.destaque
+                ? 'bg-[#e62314] text-white'
+                : 'border border-white/10 bg-white/5 text-white/65'
+            }">${f.badge}</span>
+          </div>
+          <h3 class="font-display text-lg uppercase text-white group-hover:text-[#ff4b3d]">${f.titulo}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-white/75">${f.resumoCurto}</p>
+        </div>
+
+        <span class="font-label mt-5 inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#e62314]">
+          Ver aplicação e retorno <span class="transition group-hover:translate-x-1">→</span>
+        </span>
+      </button>
+    `).join('');
+
+    function abrirFrente(idx) {
+      const f = FRENTES[idx];
+      if (!f) return;
+      document.getElementById('frente-icone').src = f.icone;
+      document.getElementById('frente-badge').textContent = `FRENTE ${f.num} · ${f.badge}`;
+      document.getElementById('frente-titulo').textContent = f.titulo;
+      document.getElementById('frente-resumo').textContent = f.resumoCurto;
+      document.getElementById('frente-aplicacao').textContent = f.aplicacao;
+      document.getElementById('frente-retorno').textContent = f.retorno;
+      const msg = `Olá, Chama Cine! Quero entender melhor como aplicar a frente "${f.titulo}" no meu negócio e ver o retorno prático.`;
+      document.getElementById('frente-whats').href = `https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`;
+      const modal = document.getElementById('modal-frente');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function fecharModalFrente() {
+      const modal = document.getElementById('modal-frente');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.getElementById('modal-frente').addEventListener('click', (e) => {
+      if (e.target.id === 'modal-frente') fecharModalFrente();
+    });
+
+    // Seletor Integrador de Cases (Operação Real & Bastidores)
+    const CASES_DATA = [
+      {
+        tipo: 'video',
+        src: 'video/bem-leve-black.mp4',
+        tag: 'Motion & Oferta Direta · Formato Vertical 9:16',
+        titulo: 'Campanha Black Bem Leve',
+        desc: 'Vídeo em proporção vertical de Story/Reels sem sobras laterais, desenhado para prender atenção rápida e impulsionar pedidos promocionais.',
+        linkTexto: 'Ver Case no Instagram ↗',
+        linkUrl: 'https://www.instagram.com/bemleve_docesfit/'
+      },
+      {
+        tipo: 'img',
+        src: 'img/cases/bem-leve-marca.jpeg',
+        fallback: ['img/cases/bem-leve-marca.jpg', 'img/cases/bem-leve-marca.png'],
+        alt: 'Case Bem Leve Doces Fit',
+        tag: 'Branding · Personagem 3D · Campanha',
+        titulo: 'Bem Leve Doces Fit',
+        desc: 'Construção de universo visual, personagem proprietária, peças promocionais de Black Friday e vídeos curtos focados em giro rápido.',
+        linkTexto: 'Ver Case no Instagram ↗',
+        linkUrl: 'https://www.instagram.com/bemleve_docesfit/'
+      },
+      {
+        tipo: 'img',
+        src: 'img/cases/buji-bbq.jpeg',
+        fallback: ['img/cases/buji-bbq.jpg', 'img/cases/buji-bbq.png'],
+        alt: 'Case Buji Bar da Praia',
+        tag: 'Direção Criativa · Gastronomia & Experiência',
+        titulo: 'Buji BBQ à Beira Mar',
+        desc: 'Do conceito ao evento: identidade visual, cobertura audiovisual, direção de arte e posicionamento digital para experiência gastronômica.',
+        linkTexto: 'Ver Case no Instagram ↗',
+        linkUrl: 'https://www.instagram.com/bujibardapraia/'
+      },
+      {
+        tipo: 'img',
+        src: 'img/cases/clubedolivro.jpg',
+        fallback: ['img/cases/clubedolivro.jpeg', 'img/cases/clubedolivro.png'],
+        alt: 'Case Clube do Livro - Instituto Damasi',
+        tag: 'Design de Conversão · Varejo',
+        titulo: 'Clube do Livro · Instituto Damasi',
+        desc: 'Peças de comunicação e conversão pensadas com hierarquia de oferta, clareza de proposta e chamada direta para engajamento e matrícula.',
+        linkTexto: 'Ver Publicação no Instagram ↗',
+        linkUrl: 'https://www.instagram.com/institutodamasi/'
+      }
+    ];
+
+    function selecionarCase(idx) {
+      const c = CASES_DATA[idx];
+      if (!c) return;
+
+      document.querySelectorAll('.case-tab').forEach((btn, i) => {
+        const ativo = i === idx;
+        btn.className = ativo
+          ? 'case-tab flex w-full items-center justify-between rounded-2xl border border-[#e62314] bg-[#e62314]/15 p-4 text-left transition'
+          : 'case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/40 p-4 text-left transition hover:border-white/30';
+        const tagEl = btn.querySelector('span.font-accent');
+        const arrowEl = btn.lastElementChild;
+        if (tagEl) tagEl.className = `font-accent block text-[11px] uppercase tracking-widest ${ativo ? 'text-[#e62314]' : 'text-white/50'}`;
+        if (arrowEl) {
+          arrowEl.textContent = ativo ? '▶' : '→';
+          arrowEl.className = ativo ? 'text-sm font-bold text-[#e62314]' : 'text-sm text-white/50';
+        }
+      });
+
+      const box = document.getElementById('case-midia-box');
+      if (c.tipo === 'video') {
+        box.innerHTML = `
+          <div class="aspect-[9/16] w-full max-w-[250px] overflow-hidden rounded-2xl border border-white/15 bg-black shadow-xl">
+            <video class="h-full w-full object-cover" controls playsinline preload="metadata">
+              <source src="${c.src}" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+          </div>
+        `;
+      } else {
+        const fb1 = c.fallback[0] || c.src;
+        const fb2 = c.fallback[1] || c.src;
+        box.innerHTML = `
+          <div class="flex aspect-[4/5] w-full max-w-[270px] items-center justify-center overflow-hidden rounded-2xl border border-white/15 bg-black/80 p-2 shadow-xl">
+            <img
+              src="${c.src}"
+              onerror="if(!this.dataset.t){this.dataset.t=1;this.src='${fb1}';}else if(this.dataset.t==1){this.dataset.t=2;this.src='${fb2}';}"
+              alt="${c.alt}"
+              class="h-full w-full rounded-xl object-contain"
+            />
+          </div>
+        `;
+      }
+
+      document.getElementById('case-tag').textContent = c.tag;
+      document.getElementById('case-titulo').textContent = c.titulo;
+      document.getElementById('case-desc').textContent = c.desc;
+      const link = document.getElementById('case-link');
+      link.textContent = c.linkTexto;
+      link.href = c.linkUrl;
+    }
+
+    selecionarCase(0);
+
+    // Quiz da 1ª Dobra
     let estagioSelecionado = '';
 
     function selecionarEstagio(estagio) {
@@ -919,7 +1134,7 @@
       window.open(`https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // Ponte window.Chama exigida por roda.js
+    // Ponte window.Chama para roda.js
     window.Chama = {
       mostrar(idx) {
         const lista = window.PROJETOS || [];
@@ -962,7 +1177,6 @@
     });
   </script>
 
-  <!-- Dados e motor 3D da Roda de Pôsteres -->
   <script src="projetos.js"></script>
   <script type="module" src="roda.js"></script>
 </body>
