@@ -107,11 +107,11 @@
       animation: marquee 32s linear infinite;
     }
 
-    /* Seção Roda 3D de Pôsteres (compatível com roda.js) */
+    /* Seção Roda 3D de Pôsteres enquadrada sem cortes */
     .s.recentes {
       position: relative;
       width: 100%;
-      min-height: 780px;
+      min-height: 820px;
       background-color: #070606;
       background-image: linear-gradient(to bottom, rgba(7,6,6,0.88), rgba(7,6,6,0.94)), url('img/fundo-projetos.jpg');
       background-size: cover;
@@ -119,6 +119,7 @@
       overflow: hidden;
       display: flex;
       align-items: center;
+      padding: 3.5rem 0;
     }
 
     .s.recentes .borda-topo {
@@ -140,7 +141,7 @@
       z-index: 15;
       width: 100%;
       max-width: 560px;
-      padding: 4rem 1.5rem 4rem 6%;
+      padding: 3.5rem 1.5rem 3.5rem 6%;
     }
 
     .s.recentes .tit {
@@ -278,7 +279,7 @@
       .s.recentes {
         flex-direction: column;
         min-height: auto;
-        padding-bottom: 2rem;
+        padding: 0 0 2rem;
       }
       .s.recentes .info {
         max-width: 100%;
@@ -325,8 +326,8 @@
     </div>
   </header>
 
-  <!-- HERO (1ª DOBRA ENXUTA E DIRETA) -->
-  <section class="relative overflow-hidden border-b border-white/10 py-16 sm:py-24">
+  <!-- HERO (1ª DOBRA) -->
+  <section class="relative overflow-hidden border-b border-white/10 py-14 sm:py-20">
     <div
       class="pointer-events-none absolute inset-0 opacity-20"
       style="background-image: url('img/_fundo-inteiro-prev.jpg'); background-size: cover; background-position: center;"
@@ -335,7 +336,6 @@
 
     <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
       <div class="lg:col-span-7">
-        <!-- 1 & 2. Tag + Título destacado conforme solicitado -->
         <div class="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/40 bg-[#e62314]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#f4f1ea]">
           <span class="h-2 w-2 rounded-full bg-[#e62314]"></span>
           Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN
@@ -364,72 +364,99 @@
           </a>
         </div>
 
-        <div class="mt-10 grid grid-cols-3 gap-4 border-t border-white/10 pt-6 text-xs sm:text-sm">
-          <div>
-            <strong class="block font-bold uppercase text-white">360° Comercial</strong>
-            <span class="text-white/65">Da estratégia ao anúncio no ar.</span>
+        <!-- 3 Pilares em Destaque -->
+        <div class="mt-10 grid gap-3.5 sm:grid-cols-3">
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/35 bg-[#111010]/90 p-4 shadow-lg transition hover:border-[#e62314] hover:bg-[#171212]">
+            <span class="mb-2 block h-1 w-8 rounded-full bg-[#e62314]"></span>
+            <strong class="block font-display text-sm uppercase tracking-wide text-white">360° Comercial</strong>
+            <span class="mt-1 block text-xs leading-relaxed text-white/75">Da estratégia ao anúncio no ar.</span>
           </div>
-          <div>
-            <strong class="block font-bold uppercase text-white">Padrão Cinema</strong>
-            <span class="text-white/65">Estética autoral para retenção.</span>
+
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/35 bg-[#111010]/90 p-4 shadow-lg transition hover:border-[#e62314] hover:bg-[#171212]">
+            <span class="mb-2 block h-1 w-8 rounded-full bg-[#e62314]"></span>
+            <strong class="block font-display text-sm uppercase tracking-wide text-white">Padrão Cinema</strong>
+            <span class="mt-1 block text-xs leading-relaxed text-white/75">Estética autoral para retenção.</span>
           </div>
-          <div>
-            <strong class="block font-bold uppercase text-white">Do Zero à Escala</strong>
-            <span class="text-white/65">Estrutura completa de vendas.</span>
+
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/35 bg-[#111010]/90 p-4 shadow-lg transition hover:border-[#e62314] hover:bg-[#171212]">
+            <span class="mb-2 block h-1 w-8 rounded-full bg-[#e62314]"></span>
+            <strong class="block font-display text-sm uppercase tracking-wide text-white">Do Zero à Escala</strong>
+            <span class="mt-1 block text-xs leading-relaxed text-white/75">Estrutura completa de vendas.</span>
           </div>
         </div>
       </div>
 
-      <!-- QUIZ DIAGNÓSTICO RÁPIDO -->
+      <!-- QUIZ DIAGNÓSTICO LEVE E ESCANEÁVEL -->
       <div class="lg:col-span-5">
-        <div class="rounded-3xl border border-white/15 bg-[#111010]/95 p-6 shadow-2xl sm:p-8">
-          <div class="mb-4 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-white/60">
-            <span id="quiz-step-label">Etapa 1 de 2 · Diagnóstico Rápido</span>
-            <span id="quiz-progress-text" class="text-[#e62314]">50%</span>
+        <div class="rounded-3xl border border-white/12 bg-gradient-to-b from-[#171616]/95 to-[#100f0f]/95 p-6 shadow-2xl backdrop-blur-md sm:p-8">
+          <div class="mb-3 flex items-center justify-between text-xs font-medium text-white/60">
+            <span id="quiz-step-label">Passo 1 de 2 · Diagnóstico rápido</span>
+            <span id="quiz-progress-text" class="rounded-full bg-[#e62314]/15 px-2.5 py-0.5 font-semibold text-[#e62314]">50%</span>
           </div>
-          <div class="mb-6 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+
+          <div class="mb-6 h-1 w-full overflow-hidden rounded-full bg-white/10">
             <div id="quiz-bar" class="h-full w-1/2 rounded-full bg-[#e62314] transition-all duration-300"></div>
           </div>
 
           <!-- Passo 1 -->
           <div id="quiz-step-1">
-            <h2 class="font-display text-xl uppercase text-white sm:text-2xl">
-              Qual é o momento atual do seu negócio hoje?
+            <h2 class="text-xl font-bold leading-snug text-white sm:text-2xl">
+              Qual é o momento do seu negócio?
             </h2>
-            <div class="mt-5 space-y-3">
-              <button type="button" onclick="selecionarEstagio('Quero começar do zero (ainda não tenho estrutura)')" class="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left text-sm font-medium text-white transition hover:border-[#e62314] hover:bg-[#e62314]/10">
-                <span>Quero começar do zero (não tenho estrutura ainda)</span>
-                <span class="text-xs font-bold uppercase text-[#e62314]">Do Zero</span>
+            <p class="mt-1 text-sm text-white/65">
+              Escolha a opção que mais se aproxima do seu cenário:
+            </p>
+
+            <div class="mt-5 space-y-2.5">
+              <button type="button" onclick="selecionarEstagio('Começar do zero (estruturar marca e canais)')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+                <div>
+                  <span class="block text-sm font-semibold text-white">Começar do zero</span>
+                  <span class="block text-xs text-white/60">Ainda não tenho estrutura comercial ou digital</span>
+                </div>
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
-              <button type="button" onclick="selecionarEstagio('Já tenho empresa, mas minhas redes não vendem')" class="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left text-sm font-medium text-white transition hover:border-[#e62314] hover:bg-[#e62314]/10">
-                <span>Já tenho empresa, mas minhas redes não vendem</span>
-                <span class="text-[#e62314]">→</span>
+
+              <button type="button" onclick="selecionarEstagio('Destravar vendas nas redes sociais')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+                <div>
+                  <span class="block text-sm font-semibold text-white">Destravar vendas nas redes</span>
+                  <span class="block text-xs text-white/60">Já tenho empresa ativa, mas o perfil não converte</span>
+                </div>
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
-              <button type="button" onclick="selecionarEstagio('Já faço anúncios e preciso de vídeos de alta conversão')" class="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left text-sm font-medium text-white transition hover:border-[#e62314] hover:bg-[#e62314]/10">
-                <span>Já faço anúncios e preciso de vídeos de alta conversão</span>
-                <span class="text-[#e62314]">→</span>
+
+              <button type="button" onclick="selecionarEstagio('Escalar anúncios com vídeos de alta conversão')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+                <div>
+                  <span class="block text-sm font-semibold text-white">Escalar tráfego e criativos</span>
+                  <span class="block text-xs text-white/60">Já anuncio e preciso de vídeos e páginas que vendem</span>
+                </div>
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
-              <button type="button" onclick="selecionarEstagio('Quero um filme institucional, documentário ou campanha')" class="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left text-sm font-medium text-white transition hover:border-[#e62314] hover:bg-[#e62314]/10">
-                <span>Quero um filme institucional, documentário ou campanha</span>
-                <span class="text-[#e62314]">→</span>
+
+              <button type="button" onclick="selecionarEstagio('Produzir filme institucional, documentário ou campanha')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+                <div>
+                  <span class="block text-sm font-semibold text-white">Filme, documentário ou campanha</span>
+                  <span class="block text-xs text-white/60">Produção audiovisual autoral de alto impacto</span>
+                </div>
+                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
             </div>
           </div>
 
           <!-- Passo 2 -->
           <form id="quiz-step-2" class="hidden space-y-4" onsubmit="enviarQuizWhatsApp(event)">
-            <h2 class="font-display text-xl uppercase text-white">
-              Para onde enviamos seu plano de ação?
-            </h2>
-            <p id="quiz-selected-badge" class="rounded-xl border border-[#e62314]/30 bg-[#e62314]/10 px-3 py-2 text-xs text-white/90"></p>
+            <div>
+              <h2 class="text-xl font-bold text-white">Para onde enviamos seu plano?</h2>
+              <p class="mt-1 text-xs text-white/60">Preencha os dois campos abaixo para iniciar no WhatsApp.</p>
+            </div>
+            <p id="quiz-selected-badge" class="rounded-xl border border-[#e62314]/30 bg-[#e62314]/10 px-3.5 py-2 text-xs font-medium text-white/90"></p>
             <input type="text" id="quiz-nome" required placeholder="Seu nome" class="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
             <input type="text" id="quiz-empresa" required placeholder="Nome da empresa ou @instagram" class="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
             <div class="flex gap-3 pt-1">
-              <button type="button" onclick="voltarQuiz()" class="rounded-xl border border-white/15 px-4 py-3 text-xs font-bold uppercase text-white/75 hover:text-white">
+              <button type="button" onclick="voltarQuiz()" class="rounded-xl border border-white/15 px-4 py-3 text-xs font-semibold text-white/75 transition hover:text-white">
                 Voltar
               </button>
               <button type="submit" class="flex-1 rounded-xl bg-[#e62314] px-5 py-3 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
-                Iniciar no WhatsApp
+                Receber no WhatsApp
               </button>
             </div>
           </form>
@@ -441,12 +468,12 @@
   <!-- FAIXA LETREIRO -->
   <div class="overflow-hidden border-b border-white/10 bg-[#e62314] py-3 text-xs font-black uppercase tracking-widest text-white">
     <div class="animate-marquee">
-      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO & PERFORMANCE ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
-      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO & PERFORMANCE ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
+      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO & PERFORMANCE ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
+      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO & PERFORMANCE ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
     </div>
   </div>
 
-  <!-- 02 · SOLUÇÕES (com fundo-servicos.jpg) -->
+  <!-- 02 · SOLUÇÕES -->
   <section id="servicos" class="relative border-b border-white/10 py-20">
     <div
       class="pointer-events-none absolute inset-0 opacity-20"
@@ -514,7 +541,7 @@
     </div>
   </section>
 
-  <!-- 03 · CASES & REELS (3. Vídeo em formato Storie 9:16 + 4. Fallback .jpg/.jpeg nos cases) -->
+  <!-- 03 · CASES & REELS -->
   <section id="cases" class="border-b border-white/10 bg-[#0a0909] py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
@@ -537,7 +564,6 @@
                 controls
                 playsinline
                 preload="metadata"
-                poster="img/cases/Black-Bem-Leve_08.jpeg"
               >
                 <source src="video/bem-leve-black.mp4" type="video/mp4" />
                 Seu navegador não suporta vídeo HTML5.
@@ -552,16 +578,16 @@
           </div>
         </div>
 
-        <!-- Coluna Direita: Cards dos Cases com imagens corrigidas -->
+        <!-- Coluna Direita: Cards dos Cases com enquadramento ajustado ao quadro -->
         <div class="space-y-6 lg:col-span-8">
           <!-- Case 1 -->
           <div class="grid items-center gap-6 rounded-3xl border border-white/10 bg-[#111010] p-6 sm:grid-cols-12">
-            <div class="overflow-hidden rounded-2xl bg-black sm:col-span-5">
+            <div class="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/80 p-2 sm:col-span-5">
               <img
                 src="img/cases/bem-leve-marca.jpeg"
-                onerror="this.onerror=null;this.src='img/cases/bem-leve-marca.jpg';"
+                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='img/cases/bem-leve-marca.jpg';}else if(this.dataset.t==1){this.dataset.t=2;this.src='img/cases/bem-leve-marca.png';}"
                 alt="Case Bem Leve Doces Fit"
-                class="h-56 w-full object-cover transition duration-300 hover:scale-105"
+                class="h-full w-full rounded-xl object-contain transition duration-300 hover:scale-[1.03]"
               />
             </div>
             <div class="sm:col-span-7">
@@ -578,12 +604,12 @@
 
           <!-- Case 2 -->
           <div class="grid items-center gap-6 rounded-3xl border border-white/10 bg-[#111010] p-6 sm:grid-cols-12">
-            <div class="overflow-hidden rounded-2xl bg-black sm:col-span-5">
+            <div class="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/80 p-2 sm:col-span-5">
               <img
                 src="img/cases/buji-bbq.jpeg"
-                onerror="this.onerror=null;this.src='img/cases/buji-bbq.jpg';"
+                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='img/cases/buji-bbq.jpg';}else if(this.dataset.t==1){this.dataset.t=2;this.src='img/cases/buji-bbq.png';}"
                 alt="Case Buji Bar da Praia"
-                class="h-56 w-full object-cover transition duration-300 hover:scale-105"
+                class="h-full w-full rounded-xl object-contain transition duration-300 hover:scale-[1.03]"
               />
             </div>
             <div class="sm:col-span-7">
@@ -598,24 +624,24 @@
             </div>
           </div>
 
-          <!-- Case 3 -->
+          <!-- Case 3: Clube do Livro / Instituto Damasi -->
           <div class="grid items-center gap-6 rounded-3xl border border-white/10 bg-[#111010] p-6 sm:grid-cols-12">
-            <div class="overflow-hidden rounded-2xl bg-black sm:col-span-5">
+            <div class="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-black/80 p-2 sm:col-span-5">
               <img
-                src="img/cases/Black-Bem-Leve_08.jpeg"
-                onerror="this.onerror=null;this.src='img/cases/Black-Bem-Leve_08.jpg';"
-                alt="Peça promocional Black Bem Leve"
-                class="h-56 w-full object-cover transition duration-300 hover:scale-105"
+                src="img/cases/clubedolivro.jpg"
+                onerror="if(!this.dataset.t){this.dataset.t=1;this.src='img/cases/clubedolivro.jpeg';}else if(this.dataset.t==1){this.dataset.t=2;this.src='img/cases/clubedolivro.png';}"
+                alt="Case Clube do Livro - Instituto Damasi"
+                class="h-full w-full rounded-xl object-contain transition duration-300 hover:scale-[1.03]"
               />
             </div>
             <div class="sm:col-span-7">
               <span class="text-xs font-bold uppercase tracking-widest text-[#e62314]">Design de Conversão · Varejo</span>
               <h3 class="font-display mt-2 text-2xl uppercase text-white">Criativos de Alta Conversão</h3>
               <p class="mt-2 text-sm leading-relaxed text-white/75">
-                Peças estáticas e animadas desenhadas com hierarquia de oferta, prova de produto e chamada direta para WhatsApp e delivery.
+                Peças estáticas e animadas desenhadas com hierarquia de oferta, prova de valor e chamada direta para conversão.
               </p>
-              <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-[#e62314] hover:bg-[#e62314]">
-                Ver Perfil @chamacine ↗
+              <a href="https://www.instagram.com/institutodamasi/" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:border-[#e62314] hover:bg-[#e62314]">
+                Ver Case no Instagram ↗
               </a>
             </div>
           </div>
@@ -624,7 +650,7 @@
     </div>
   </section>
 
-  <!-- ============ 04 · NOSSOS PROJETOS (roda de pôsteres 3D) ============ -->
+  <!-- ============ 04 · NOSSOS PROJETOS (roda de pôsteres 3D ajustada à seção) ============ -->
   <section class="s recentes border-b border-white/10" id="projetos" style="--h:1260" aria-labelledby="titulo-projetos">
     <div class="borda-topo" aria-hidden="true"></div>
 
@@ -651,14 +677,14 @@
       </div>
     </div>
 
-    <div class="a roda" id="roda" style="--x:0;--y:0;--w:1920" data-cx="1360" data-cy="700" data-h="1040">
+    <div class="a roda" id="roda" style="--x:0;--y:0;--w:1920" data-cx="1340" data-cy="560" data-h="720">
       <div class="sombra-chao" aria-hidden="true"></div>
       <canvas id="palco" aria-label="Roda de pôsteres dos projetos" role="img"></canvas>
     </div>
     <ul class="lista-oculta" id="lista"></ul>
   </section>
 
-  <!-- 05 · QUEM SOMOS (6. Texto resumido + 5. fundo-sobre.jpg, silhuetas.png e dinossauro.png) -->
+  <!-- 05 · QUEM SOMOS -->
   <section id="sobre" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
       class="pointer-events-none absolute inset-0 opacity-20"
@@ -696,7 +722,7 @@
     </div>
   </section>
 
-  <!-- 06 · CONTATO & DIAGNÓSTICO (com fundo-contato.jpg) -->
+  <!-- 06 · CONTATO & DIAGNÓSTICO -->
   <section id="contato" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
       class="pointer-events-none absolute inset-0 opacity-20"
@@ -761,10 +787,10 @@
           </div>
 
           <div>
-            <label class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/70">Estágio Atual</label>
+            <label class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/70">Momento do Negócio</label>
             <select id="form-estagio" required class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white focus:border-[#e62314] focus:outline-none">
-              <option value="">Selecione o estágio atual...</option>
-              <option value="Quero começar do zero (ainda não tenho nada)">Quero começar do zero (ainda não tenho nada)</option>
+              <option value="">Selecione uma opção...</option>
+              <option value="Começar do zero (ainda não tenho estrutura)">Começar do zero (ainda não tenho estrutura)</option>
               <option value="Preciso de filmes publicitários / Reels">Preciso de filmes publicitários / Reels</option>
               <option value="Quero tráfego pago + estrutura de vendas">Quero tráfego pago + estrutura de vendas</option>
               <option value="Documentário, edital ou projeto especial">Documentário, edital ou projeto especial</option>
@@ -803,7 +829,7 @@
     </div>
   </footer>
 
-  <!-- MODAL FICHA DO PROJETO (usado por roda.js) -->
+  <!-- MODAL FICHA DO PROJETO -->
   <div id="modal-ficha" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-sm" role="dialog" aria-modal="true">
     <div class="relative grid max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-white/15 bg-[#111010] p-6 shadow-2xl sm:grid-cols-12 sm:gap-6 sm:p-8">
       <button type="button" onclick="fecharModal()" aria-label="Fechar ficha" class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/60 text-lg text-white hover:border-[#e62314] hover:bg-[#e62314]">×</button>
@@ -860,7 +886,7 @@
       document.getElementById('quiz-step-1').classList.add('hidden');
       document.getElementById('quiz-step-2').classList.remove('hidden');
       document.getElementById('quiz-selected-badge').textContent = 'Cenário: ' + estagio;
-      document.getElementById('quiz-step-label').textContent = 'Etapa 2 de 2 · Seus Dados';
+      document.getElementById('quiz-step-label').textContent = 'Passo 2 de 2 · Seus dados';
       document.getElementById('quiz-progress-text').textContent = '100%';
       document.getElementById('quiz-bar').classList.replace('w-1/2', 'w-full');
     }
@@ -868,7 +894,7 @@
     function voltarQuiz() {
       document.getElementById('quiz-step-2').classList.add('hidden');
       document.getElementById('quiz-step-1').classList.remove('hidden');
-      document.getElementById('quiz-step-label').textContent = 'Etapa 1 de 2 · Diagnóstico Rápido';
+      document.getElementById('quiz-step-label').textContent = 'Passo 1 de 2 · Diagnóstico rápido';
       document.getElementById('quiz-progress-text').textContent = '50%';
       document.getElementById('quiz-bar').classList.replace('w-full', 'w-1/2');
     }
@@ -877,7 +903,7 @@
       e.preventDefault();
       const nome = document.getElementById('quiz-nome').value.trim();
       const empresa = document.getElementById('quiz-empresa').value.trim();
-      const msg = `Olá, Chama Cine! Meu nome é ${nome} (${empresa}). Meu momento atual é: "${estagioSelecionado}". Quero estruturar meu negócio para vender mais.`;
+      const msg = `Olá, Chama Cine! Meu nome é ${nome} (${empresa}). Meu momento é: "${estagioSelecionado}". Quero estruturar meu negócio para vender mais.`;
       trackLead('Quiz Hero');
       window.open(`https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`, '_blank');
     }
@@ -888,7 +914,7 @@
       const empresa = document.getElementById('form-empresa').value.trim();
       const estagio = document.getElementById('form-estagio').value;
       const objetivo = document.getElementById('form-objetivo').value.trim();
-      const msg = `Olá, Chama Cine! Solicito um diagnóstico comercial.\n• Nome: ${nome}\n• Empresa: ${empresa}\n• Estágio: ${estagio}\n• Objetivo: ${objetivo || 'Estruturar vendas'}`;
+      const msg = `Olá, Chama Cine! Solicito um diagnóstico comercial.\n• Nome: ${nome}\n• Empresa: ${empresa}\n• Momento: ${estagio}\n• Objetivo: ${objetivo || 'Estruturar vendas'}`;
       trackLead('Formulario Contato');
       window.open(`https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`, '_blank');
     }
