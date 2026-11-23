@@ -129,26 +129,23 @@
       animation: marquee 32s linear infinite;
     }
 
-    /* Roda 3D de Pôsteres — espaçamento vertical compacto */
+    /* Roda 3D de Pôsteres — alinhada ao padrão de container do site */
     .s.recentes {
       position: relative;
       width: 100%;
-      min-height: 760px;
       background-color: #070606;
       background-image: url('img/fundo-projetos.jpg');
       background-size: cover;
       background-position: center;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      padding: 2.75rem 0;
+      padding: 4.5rem 0;
     }
 
     .s.recentes::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(7, 6, 6, 0.72) 0%, rgba(7, 6, 6, 0.45) 55%, rgba(7, 6, 6, 0.25) 100%);
+      background: linear-gradient(90deg, rgba(7, 6, 6, 0.75) 0%, rgba(7, 6, 6, 0.5) 55%, rgba(7, 6, 6, 0.3) 100%);
       pointer-events: none;
       z-index: 5;
     }
@@ -167,19 +164,47 @@
       z-index: 20;
     }
 
-    .s.recentes .info {
+    .s.recentes .container-acervo {
       position: relative;
       z-index: 15;
+      max-width: 80rem; /* max-w-7xl */
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (min-width: 640px) {
+      .s.recentes .container-acervo {
+        padding: 0 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .s.recentes .container-acervo {
+        padding: 0 2rem;
+      }
+    }
+
+    .s.recentes .info {
+      grid-column: span 12 / span 12;
       width: 100%;
       max-width: 560px;
-      padding: 1.5rem 1.5rem 1.5rem 6%;
+    }
+
+    @media (min-width: 1024px) {
+      .s.recentes .info {
+        grid-column: span 5 / span 5;
+      }
     }
 
     .s.recentes .tit {
       font-family: 'Stara', sans-serif;
       font-weight: 900;
-      font-size: clamp(2rem, 4vw, 3.15rem);
-      line-height: 1.04;
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      line-height: 1.05;
       text-transform: uppercase;
       color: var(--off-white);
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
@@ -215,19 +240,19 @@
     .s.recentes #info-titulo {
       font-family: 'Stara', sans-serif;
       font-weight: 900;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      line-height: 1.08;
+      font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+      line-height: 1.1;
       color: #ffffff;
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
       margin-bottom: 0.55rem;
     }
 
     .s.recentes #info-resumo {
-      font-size: 0.96rem;
+      font-size: 0.95rem;
       line-height: 1.55;
       color: rgba(244, 241, 234, 0.96);
       text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
-      min-height: 3.4rem;
+      min-height: 3.2rem;
       margin-bottom: 1.15rem;
     }
 
@@ -280,10 +305,19 @@
     }
 
     .s.recentes .roda {
-      position: absolute;
-      inset: 0;
+      grid-column: span 12 / span 12;
+      position: relative;
+      width: 100%;
+      height: 440px;
       z-index: 10;
       pointer-events: auto;
+    }
+
+    @media (min-width: 1024px) {
+      .s.recentes .roda {
+        grid-column: span 7 / span 7;
+        height: 540px;
+      }
     }
 
     .s.recentes #palco {
@@ -300,44 +334,17 @@
 
     .s.recentes .sombra-chao {
       position: absolute;
-      right: 12%;
-      bottom: 8%;
-      width: 340px;
-      height: 48px;
+      left: 50%;
+      bottom: 4%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 44px;
       background: radial-gradient(ellipse at center, rgba(230, 35, 20, 0.28) 0%, rgba(0, 0, 0, 0) 72%);
       pointer-events: none;
     }
 
     .lista-oculta {
       display: none;
-    }
-
-    @media (max-width: 760px) {
-      .s.recentes {
-        flex-direction: column;
-        min-height: auto;
-        padding: 0 0 1.5rem;
-      }
-      .s.recentes .info {
-        max-width: 100%;
-        padding: 2.5rem 1.25rem 0.75rem;
-      }
-      .s.recentes .dica {
-        margin-bottom: 0.75rem;
-      }
-      .s.recentes #info-resumo {
-        min-height: 2.8rem;
-        margin-bottom: 0.95rem;
-      }
-      .s.recentes .roda {
-        position: relative;
-        width: 100%;
-        height: 420px;
-      }
-      .s.recentes .sombra-chao {
-        right: 50%;
-        transform: translateX(50%);
-      }
     }
   </style>
 </head>
@@ -351,11 +358,11 @@
       </a>
 
       <nav class="hidden items-center gap-7 font-label text-sm text-white/90 md:flex">
-        <a href="#servicos" class="transition hover:text-white">Soluções</a>
-        <a href="#cases" class="transition hover:text-white">Operação Real</a>
-        <a href="#projetos" class="transition hover:text-white">Acervo</a>
-        <a href="#sobre" class="transition hover:text-white">Quem Somos</a>
-        <a href="#contato" class="transition hover:text-white">Diagnóstico</a>
+        <a href="#solucoes" class="transition hover:text-white">Soluções</a>
+        <a href="#operacao-real" class="transition hover:text-white">Operação Real</a>
+        <a href="#acervo" class="transition hover:text-white">Acervo</a>
+        <a href="#quem-somos" class="transition hover:text-white">Quem Somos</a>
+        <a href="#diagnostico" class="transition hover:text-white">Diagnóstico</a>
       </nav>
 
       <a
@@ -394,13 +401,13 @@
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
           <a
-            href="#contato"
+            href="#diagnostico"
             class="font-display rounded-full bg-[#e62314] px-7 py-4 text-sm uppercase tracking-wider text-white shadow-xl shadow-[#e62314]/25 transition hover:bg-[#ff3322]"
           >
             Agendar Diagnóstico Gratuito
           </a>
           <a
-            href="#projetos"
+            href="#acervo"
             class="font-display rounded-full border border-white/25 bg-[#0e0d0d]/80 px-7 py-4 text-sm uppercase tracking-wider text-white backdrop-blur-sm transition hover:border-white/50 hover:bg-white/10"
           >
             Ver Acervo & Cases
@@ -514,8 +521,8 @@
     </div>
   </div>
 
-  <!-- 02 · ARQUITETURA COMERCIAL & AUDIOVISUAL -->
-  <section id="servicos" class="relative overflow-hidden border-b border-white/15 py-20">
+  <!-- 02 · SOLUÇÕES -->
+  <section id="solucoes" class="relative overflow-hidden border-b border-white/15 py-20">
     <div
       class="pointer-events-none absolute inset-0"
       style="background-image: url('img/fundo-servicos.jpg'); background-size: cover; background-position: center;"
@@ -524,7 +531,7 @@
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
         <div class="max-w-3xl">
-          <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Arquitetura Comercial & Audiovisual</span>
+          <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Soluções · Arquitetura Comercial & Audiovisual</span>
           <h2 class="font-display mt-2 text-3xl uppercase text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-4xl">
             8 frentes integradas para tirar sua marca da invisibilidade e gerar vendas recorrentes
           </h2>
@@ -538,8 +545,8 @@
     </div>
   </section>
 
-  <!-- 03 · OPERAÇÃO REAL & BASTIDORES -->
-  <section id="cases" class="relative overflow-hidden border-b border-white/15 bg-[#0a0909] py-20">
+  <!-- 03 · OPERAÇÃO REAL -->
+  <section id="operacao-real" class="relative overflow-hidden border-b border-white/15 bg-[#0a0909] py-20">
     <div
       class="pointer-events-none absolute inset-0"
       style="background-image: url('img/_fundo-inteiro-prev.jpg'); background-size: cover; background-position: center;"
@@ -615,49 +622,51 @@
     </div>
   </section>
 
-  <!-- ============ 04 · NOSSOS PROJETOS (RODA 3D DE PÔSTERES) ============ -->
-  <section class="s recentes border-b border-white/15" id="projetos" style="--h:1260" aria-labelledby="titulo-projetos">
+  <!-- ============ 04 · ACERVO (RODA 3D DE PÔSTERES) ============ -->
+  <section class="s recentes border-b border-white/15" id="acervo" style="--h:1260" aria-labelledby="titulo-projetos">
     <div class="borda-topo" aria-hidden="true"></div>
 
-    <div class="a info" id="info" aria-live="polite" style="--x:134;--y:470;--w:640">
-      <div class="font-label mb-1.5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#ff4738]">
-        <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
-        Acervo Cinematográfico Chama Cine
-      </div>
-      <h2 class="a t tit" id="titulo-projetos" data-x="134" data-y="227">Nossos projetos</h2>
-      <div class="a t dica" id="dica" data-x="136" data-y="312">Arraste, role para o lado ou use as setas</div>
+    <div class="container-acervo">
+      <div class="a info" id="info" aria-live="polite" style="--x:134;--y:470;--w:640">
+        <div class="font-label mb-1.5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#ff4738]">
+          <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
+          Acervo Cinematográfico Chama Cine
+        </div>
+        <h2 class="a t tit" id="titulo-projetos" data-x="134" data-y="227">Nossos projetos</h2>
+        <div class="a t dica" id="dica" data-x="136" data-y="312">Arraste, role para o lado ou use as setas</div>
 
-      <div class="contador" id="info-num">01 / 12</div>
-      <div class="tipo" id="info-tipo"></div>
-      <h3 id="info-titulo"></h3>
-      <p id="info-resumo"></p>
-      <div class="acoes">
-        <button type="button" class="btn-ficha" id="ver-ficha">Ver ficha do projeto</button>
-        <button type="button" class="btn-seta" id="anterior" aria-label="Projeto anterior">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button type="button" class="btn-seta" id="proximo" aria-label="Próximo projeto">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        <div class="contador" id="info-num">01 / 12</div>
+        <div class="tipo" id="info-tipo"></div>
+        <h3 id="info-titulo"></h3>
+        <p id="info-resumo"></p>
+        <div class="acoes">
+          <button type="button" class="btn-ficha" id="ver-ficha">Ver ficha do projeto</button>
+          <button type="button" class="btn-seta" id="anterior" aria-label="Projeto anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="btn-seta" id="proximo" aria-label="Próximo projeto">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="a roda" id="roda" style="--x:0;--y:0;--w:1920" data-cx="1340" data-cy="560" data-h="720">
-      <div class="sombra-chao" aria-hidden="true"></div>
-      <canvas id="palco" aria-label="Roda de pôsteres dos projetos" role="img"></canvas>
+      <div class="a roda" id="roda" style="--x:0;--y:0;--w:1920" data-cx="1340" data-cy="560" data-h="720">
+        <div class="sombra-chao" aria-hidden="true"></div>
+        <canvas id="palco" aria-label="Roda de pôsteres dos projetos" role="img"></canvas>
+      </div>
     </div>
     <ul class="lista-oculta" id="lista"></ul>
   </section>
 
   <!-- 05 · QUEM SOMOS -->
-  <section id="sobre" class="relative overflow-hidden border-b border-white/15 py-20 sm:py-24">
+  <section id="quem-somos" class="relative overflow-hidden border-b border-white/15 py-20 sm:py-24">
     <div
       class="pointer-events-none absolute inset-0"
       style="background-image: url('img/fundo-sobre.jpg'); background-size: cover; background-position: center;"
     ></div>
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/75 via-[#070606]/65 to-[#070606]/80"></div>
 
-    <div class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="rounded-3xl border border-white/15 bg-[#111010]/85 p-7 shadow-2xl backdrop-blur-md sm:p-10 lg:p-12">
         <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
           <div class="inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/50 bg-[#e62314]/15 px-4 py-1.5">
@@ -701,13 +710,13 @@
 
             <div class="flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
               <a
-                href="#contato"
+                href="#diagnostico"
                 class="font-display inline-flex flex-1 items-center justify-center rounded-full bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]"
               >
                 Falar com o Núcleo →
               </a>
               <a
-                href="#projetos"
+                href="#acervo"
                 class="font-label inline-flex items-center justify-center rounded-full border border-white/20 px-4 py-3 text-xs uppercase tracking-wider text-white/85 transition hover:border-white/40 hover:text-white"
               >
                 Ver Acervo
@@ -719,8 +728,8 @@
     </div>
   </section>
 
-  <!-- 06 · DIAGNÓSTICO COMERCIAL -->
-  <section id="contato" class="relative overflow-hidden border-b border-white/15 py-20">
+  <!-- 06 · DIAGNÓSTICO -->
+  <section id="diagnostico" class="relative overflow-hidden border-b border-white/15 py-20">
     <div
       class="pointer-events-none absolute inset-0"
       style="background-image: url('img/fundo-contato.jpg'); background-size: cover; background-position: center;"
