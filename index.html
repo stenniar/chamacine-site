@@ -125,6 +125,16 @@
       padding: 3.5rem 0;
     }
 
+    /* Máscara leve para preservar o background e garantir leitura nítida */
+    .s.recentes::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(7, 6, 6, 0.72) 0%, rgba(7, 6, 6, 0.45) 55%, rgba(7, 6, 6, 0.25) 100%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
     .s.recentes .borda-topo {
       position: absolute;
       top: 0;
@@ -154,12 +164,14 @@
       line-height: 1.05;
       text-transform: uppercase;
       color: var(--off-white);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
       margin-bottom: 0.5rem;
     }
 
     .s.recentes .dica {
       font-size: 0.85rem;
-      color: rgba(244, 241, 234, 0.85);
+      color: rgba(244, 241, 234, 0.9);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
       margin-bottom: 2rem;
     }
 
@@ -167,7 +179,8 @@
       font-family: 'StretchPro', 'Stara', sans-serif;
       font-size: 0.85rem;
       letter-spacing: 0.14em;
-      color: var(--chama-red);
+      color: #ff4738;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
       margin-bottom: 0.5rem;
     }
 
@@ -176,7 +189,8 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: rgba(244, 241, 234, 0.85);
+      color: rgba(244, 241, 234, 0.9);
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
       margin-bottom: 0.5rem;
     }
 
@@ -186,13 +200,15 @@
       font-size: clamp(1.75rem, 3vw, 2.5rem);
       line-height: 1.1;
       color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
       margin-bottom: 1rem;
     }
 
     .s.recentes #info-resumo {
       font-size: 0.98rem;
       line-height: 1.65;
-      color: rgba(244, 241, 234, 0.92);
+      color: rgba(244, 241, 234, 0.96);
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
       min-height: 5.2rem;
       margin-bottom: 1.75rem;
     }
@@ -225,8 +241,8 @@
       width: 44px;
       height: 44px;
       border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(17, 16, 16, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(17, 16, 16, 0.88);
       color: var(--off-white);
       display: inline-flex;
       align-items: center;
@@ -599,7 +615,7 @@
     <div class="borda-topo" aria-hidden="true"></div>
 
     <div class="a info" id="info" aria-live="polite" style="--x:134;--y:470;--w:640">
-      <div class="font-label mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#e62314]">
+      <div class="font-label mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#ff4738]">
         <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
         Acervo Cinematográfico Chama Cine
       </div>

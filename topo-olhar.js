@@ -3,7 +3,12 @@ import * as THREE from 'three';
 
 const palco = document.getElementById('palco-olhar');
 const canvas = document.getElementById('rosto');
-const POSES = window.POSES_OLHAR;
+const POSES = Array.isArray(window.POSES_OLHAR) && window.POSES_OLHAR.length
+  ? window.POSES_OLHAR
+  : Array.from({ length: 160 }, (_, i) => {
+      const ang = (i / 160) * Math.PI * 2;
+      return [Math.cos(ang), Math.sin(ang)];
+    });
 const N = POSES.length;
 const quadro = i => `olhar/f_${String(i + 1).padStart(3, '0')}.jpg`;
 const celular = () => matchMedia('(max-width: 760px)').matches;
@@ -22,15 +27,21 @@ function carregar(i) {
   if (imgs[i]) return imgs[i];
   const im = new Image();
   im.decoding = 'async';
-  im.addEventListener('load', () => arrumar(), { once: true });
+  im.addEventListener('load', () => {
+    arrumar();
+    if (!mostrarPos(posLaco)) {
+      renderer.render(cena, camera);
+    }
+  }, { once: true });
   im.src = quadro(i);
   imgs[i] = im;
   return im;
 }
+
 const pronto = im => im && im.complete && im.naturalWidth > 0;
 const centro = POSES.reduce((m, p, i) => (Math.hypot(p[0], p[1]) < Math.hypot(POSES[m][0], POSES[m][1]) ? i : m), 0);
 carregar(centro);
-setTimeout(() => { for (let i = 0; i < N; i++) carregar(i); }, 200);
+setTimeout(() => { for (let i = 0; i < N; i++) carregar(i); }, 150);
 
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, premultipliedAlpha: true });
 renderer.setClearColor(0x000000, 0);
@@ -57,7 +68,7 @@ const material = new THREE.ShaderMaterial({
     uRet: { value: new THREE.Vector4(0, 0, 1, 1) },
     uAlt: { value: 1 },
     uCel: { value: 10 },
-    uEntrada: { value: 0 },
+    uEntrada: { value: 1 },
     uMouse: { value: new THREE.Vector2(-9999, -9999) },
     uLuz: { value: 0 },
     uLuzRaio: { value: 300 }
@@ -82,20 +93,20 @@ const material = new THREE.ShaderMaterial({
       vec2 p = vec2(gl_FragCoord.x, uAlt - gl_FragCoord.y);
       vec2 c = (floor(p / uCel) + 0.5) * uCel;
       float L = lum(c);
-      float m = smoothstep(0.03, 0.10, L);
+      float m = smoothstep(0.015, 0.075, L);
       if (m <= 0.0) discard;
-      float t = min(1.0, pow(L, 1.2) * 1.25);
-      float r = uCel * (0.16 + 0.30 * t) * mix(0.6, 1.0, uEntrada);
+      float t = min(1.0, pow(L, 1.15) * 1.35);
+      float r = uCel * (0.18 + 0.32 * t) * mix(0.6, 1.0, uEntrada);
       float d = distance(p, c);
-      float aa = 0.7;
-      float largura = max(0.8, uCel * 0.075);
+      float aa = 0.75;
+      float largura = max(0.95, uCel * 0.085);
       float anel = 1.0 - smoothstep(largura * 0.5 - aa * 0.5, largura * 0.5 + aa * 0.5, abs(d - r));
       float dentro = 1.0 - smoothstep(r - largura * 0.5 - aa, r - largura * 0.5, d);
       float dl = distance(p, uMouse);
       float luz = uLuz * exp(-(dl * dl) / (uLuzRaio * uLuzRaio));
-      vec3 cor = mix(vec3(0.82, 0.79, 0.76), vec3(1.0, 0.24, 0.16), luz);
-      float aAnel = anel * mix(0.78, 1.0, luz) * m * uEntrada;
-      float aFundo = 0.55 * m * uEntrada * (1.0 - dentro) * (1.0 - anel);
+      vec3 cor = mix(vec3(0.84, 0.81, 0.78), vec3(1.0, 0.24, 0.16), luz);
+      float aAnel = anel * mix(0.82, 1.0, luz) * m * uEntrada;
+      float aFundo = 0.68 * m * uEntrada * (1.0 - dentro) * (1.0 - anel);
       float a = aAnel + aFundo;
       gl_FragColor = vec4(cor * aAnel, a);
     }
@@ -105,7 +116,8 @@ cena.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
 
 function arrumar() {
   if (!palco) return;
-  const W = palco.clientWidth, H = palco.clientHeight;
+  const W = palco.clientWidth || palco.parentElement?.clientWidth || 480;
+  const H = palco.clientHeight || 420;
   if (!W || !H) return;
   const dpr = Math.min(devicePixelRatio || 1, 2);
   const cw = W * dpr, ch = H * dpr;
@@ -116,8 +128,8 @@ function arrumar() {
   const aspectImg = amostra ? (amostra.naturalWidth / amostra.naturalHeight) : (16 / 9);
   const aspectBox = cw / ch;
 
-  // Cabe inteiramente dentro das margens do quadro sem cortar
-  const ajuste = celular() ? 0.82 : 0.74;
+  // Enquadra dentro das margens do quadro sem cortar bordas
+  const ajuste = celular() ? 0.84 : 0.76;
   let rw, rh;
   if (aspectBox > aspectImg) {
     rh = ch * ajuste;
@@ -132,8 +144,8 @@ function arrumar() {
 
   material.uniforms.uRet.value.set(rx, ry, rw, rh);
   material.uniforms.uAlt.value = ch;
-  material.uniforms.uCel.value = (celular() ? 6 : 7.5) * dpr;
-  material.uniforms.uLuzRaio.value = Math.min(cw, ch) * 0.35;
+  material.uniforms.uCel.value = (celular() ? 6.5 : 8) * dpr;
+  material.uniforms.uLuzRaio.value = Math.min(cw, ch) * 0.36;
 }
 arrumar();
 addEventListener('resize', arrumar);
@@ -146,8 +158,8 @@ function apontar(cx, cy) {
   const r = palco.getBoundingClientRect();
   const hx = r.left + r.width * 0.5;
   const hy = r.top + r.height * 0.5;
-  alvo.x = Math.max(-1, Math.min(1, (cx - hx) / (r.width * 0.45))) * MOV.alcanceX;
-  alvo.y = Math.max(-1, Math.min(1, -(cy - hy) / (r.height * 0.45))) * MOV.alcanceY;
+  alvo.x = Math.max(-1, Math.min(1, (cx - hx) / Math.max(1, r.width * 0.45))) * MOV.alcanceX;
+  alvo.y = Math.max(-1, Math.min(1, -(cy - hy) / Math.max(1, r.height * 0.45))) * MOV.alcanceY;
   const dpr = renderer.getPixelRatio();
   luz.x = (cx - r.left) * dpr;
   luz.y = (cy - r.top) * dpr;
@@ -155,12 +167,17 @@ function apontar(cx, cy) {
   ultimoMov = performance.now();
 }
 addEventListener('pointermove', e => apontar(e.clientX, e.clientY), { passive: true });
-addEventListener('touchmove', e => apontar(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+addEventListener('touchmove', e => {
+  if (e.touches && e.touches[0]) apontar(e.touches[0].clientX, e.touches[0].clientY);
+}, { passive: true });
 document.addEventListener('pointerleave', () => { luz.alvo = 0; });
 
 let visivel = true;
 if (palco) {
-  new IntersectionObserver(es => { visivel = es[0].isIntersecting; }).observe(palco);
+  new IntersectionObserver(es => {
+    visivel = es[0].isIntersecting;
+    if (visivel) arrumar();
+  }).observe(palco);
 }
 
 const angQuadro = POSES.map(p => Math.atan2(p[1], p[0]));
@@ -173,12 +190,23 @@ function quadroDoAngulo(a) {
 const modN = i => ((i % N) + N) % N;
 let posLaco = quadroDoAngulo(Math.atan2(0.45, -0.55));
 let carregadoA = -1, carregadoB = -1;
+
 function mostrarPos(p) {
   const a = modN(Math.floor(p)), b = modN(a + 1), f = p - Math.floor(p);
   carregar(a); carregar(b);
-  if (!pronto(imgs[a]) || !pronto(imgs[b])) return false;
-  if (a !== carregadoA) { texAntes.image = imgs[a]; texAntes.needsUpdate = true; carregadoA = a; }
-  if (b !== carregadoB) { texAtual.image = imgs[b]; texAtual.needsUpdate = true; carregadoB = b; }
+  const imA = pronto(imgs[a]) ? imgs[a] : (pronto(imgs[centro]) ? imgs[centro] : imgs.find(pronto));
+  const imB = pronto(imgs[b]) ? imgs[b] : imA;
+  if (!imA || !imB) return false;
+  if (imA !== texAntes.image || a !== carregadoA) {
+    texAntes.image = imA;
+    texAntes.needsUpdate = true;
+    carregadoA = a;
+  }
+  if (imB !== texAtual.image || b !== carregadoB) {
+    texAtual.image = imB;
+    texAtual.needsUpdate = true;
+    carregadoB = b;
+  }
   material.uniforms.uMistura.value = f;
   return true;
 }
@@ -208,10 +236,10 @@ function laco(agora) {
       posLaco += passo;
     }
   }
-  if (!mostrarPos(posLaco)) { renderer.render(cena, camera); return; }
 
+  mostrarPos(posLaco);
   const u = material.uniforms;
-  u.uEntrada.value = reduzir ? 1 : 1 - Math.pow(1 - Math.min(1, t / 1.2), 3);
+  u.uEntrada.value = reduzir ? 1 : Math.min(1, 0.25 + 0.75 * (1 - Math.pow(1 - Math.min(1, t / 0.8), 3)));
   u.uMouse.value.set(luz.x, luz.y);
   u.uLuz.value = luz.f * 0.9;
   renderer.render(cena, camera);
