@@ -474,13 +474,13 @@
     </div>
   </div>
 
-  <!-- 02 · ARQUITETURA COMERCIAL & AUDIOVISUAL (8 FRENTES ESCANEÁVEIS + DESTAQUES + APP NATIVO + MODAL APROFUNDADO) -->
-  <section id="servicos" class="relative border-b border-white/10 py-20">
+  <!-- 02 · ARQUITETURA COMERCIAL & AUDIOVISUAL (FUNDO fundo-servicos.jpg + DESTAQUES REORDENADOS) -->
+  <section id="servicos" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
-      class="pointer-events-none absolute inset-0 opacity-20"
+      class="pointer-events-none absolute inset-0 opacity-30"
       style="background-image: url('img/fundo-servicos.jpg'); background-size: cover; background-position: center;"
     ></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606] via-[#070606]/85 to-[#070606]"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/85 via-[#070606]/80 to-[#070606]/95"></div>
 
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
@@ -490,7 +490,7 @@
             8 frentes integradas para tirar sua marca da invisibilidade e gerar vendas recorrentes
           </h2>
         </div>
-        <p class="font-label text-xs uppercase tracking-wider text-white/60">
+        <p class="font-label text-xs uppercase tracking-wider text-white/65">
           Clique em qualquer frente para ver o plano de retorno e cases reais →
         </p>
       </div>
@@ -513,7 +513,6 @@
       </div>
 
       <div class="mt-10 grid items-center gap-8 rounded-3xl border border-white/10 bg-[#111010] p-6 shadow-2xl lg:grid-cols-12 lg:p-8">
-        <!-- Seletor Integrador à Esquerda -->
         <div class="space-y-3 lg:col-span-5" id="seletor-cases">
           <button type="button" data-case="0" onclick="selecionarCase(0)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-[#e62314] bg-[#e62314]/15 p-4 text-left transition">
             <div>
@@ -552,11 +551,8 @@
           </button>
         </div>
 
-        <!-- Palco Integrado à Direita (sem sobra lateral no vídeo) -->
         <div class="grid items-center gap-6 rounded-2xl border border-white/10 bg-[#080707] p-5 sm:grid-cols-12 lg:col-span-7">
-          <div id="case-midia-box" class="flex justify-center sm:col-span-5">
-            <!-- Preenchido via JS com proporção exata sem sobra -->
-          </div>
+          <div id="case-midia-box" class="flex justify-center sm:col-span-5"></div>
 
           <div class="sm:col-span-7">
             <span id="case-tag" class="font-label text-xs uppercase tracking-widest text-[#e62314]">Motion & Oferta Direta · 9:16</span>
@@ -609,7 +605,7 @@
     <ul class="lista-oculta" id="lista"></ul>
   </section>
 
-  <!-- 05 · QUEM SOMOS (IMAGENS VISÍVEIS E NÍTIDAS) -->
+  <!-- 05 · QUEM SOMOS -->
   <section id="sobre" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
       class="pointer-events-none absolute inset-0 opacity-20"
@@ -655,63 +651,78 @@
     </div>
   </section>
 
-  <!-- 06 · FECHAMENTO & DIAGNÓSTICO COMERCIAL -->
+  <!-- 06 · DIAGNÓSTICO COMERCIAL (BACKGROUND fundo-contato.jpg + TÍTULO E ESCANEABILIDADE REFEITOS) -->
   <section id="contato" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
-      class="pointer-events-none absolute inset-0 opacity-20"
+      class="pointer-events-none absolute inset-0 opacity-30"
       style="background-image: url('img/fundo-contato.jpg'); background-size: cover; background-position: center;"
     ></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606] via-[#070606]/90 to-[#070606]"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#070606]/90 via-[#070606]/80 to-[#070606]/95"></div>
 
-    <div class="relative mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-      <div class="flex flex-col justify-between lg:col-span-6">
-        <div>
-          <div class="font-label inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs uppercase tracking-wider text-white">
-            <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
-            Chama Cine · Natal/RN
-          </div>
-          <h2 class="font-display mt-4 text-3xl uppercase text-white sm:text-5xl">
-            Pronto para estruturar seu negócio e vender mais?
-          </h2>
-          <p class="mt-4 text-base leading-relaxed text-white/75">
-            Fale direto com nosso núcleo comercial para mapear o gargalo atual, escolher as frentes certas e receber um plano prático de ação.
-          </p>
-
-          <div class="mt-8 space-y-4">
-            <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20estruturar%20meu%20neg%C3%B3cio%20para%20vender%20mais." target="_blank" rel="noopener" onclick="trackLead('Contato WhatsApp')" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/95 p-5 transition hover:border-[#e62314]">
-              <div>
-                <strong class="font-label block text-sm text-white">WhatsApp Comercial · (84) 99630-5371</strong>
-                <span class="text-xs text-white/65">Atendimento direto para diagnóstico, tráfego, apps e produção</span>
-              </div>
-              <span class="font-display text-xs uppercase text-[#e62314]">Abrir ↗</span>
-            </a>
-
-            <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/95 p-5 transition hover:border-[#e62314]">
-              <div>
-                <strong class="font-label block text-sm text-white">E-mail Oficial · adm@chamacine.com.br</strong>
-                <span class="text-xs text-white/65">Envie seu briefing, edital ou proposta corporativa</span>
-              </div>
-              <span class="font-display text-xs uppercase text-[#e62314]">Enviar ↗</span>
-            </a>
-
-            <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="flex items-center justify-between rounded-2xl border border-white/15 bg-[#111010]/95 p-5 transition hover:border-[#e62314]">
-              <div>
-                <strong class="font-label block text-sm text-white">Instagram · @chamacine</strong>
-                <span class="text-xs text-white/65">Bastidores, lançamentos e novos cases</span>
-              </div>
-              <span class="font-display text-xs uppercase text-[#e62314]">Seguir ↗</span>
-            </a>
-          </div>
+    <div class="relative mx-auto grid max-w-7xl items-start gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+      <div class="lg:col-span-6">
+        <div class="font-label inline-flex items-center gap-2 rounded-full border border-[#e62314]/40 bg-[#121010]/90 px-3.5 py-1.5 text-xs uppercase tracking-wider text-white">
+          <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
+          Chama Cine · Natal/RN
         </div>
 
-        <div class="mt-8 rounded-2xl border border-[#e62314]/30 bg-[#e62314]/10 p-4 text-xs leading-relaxed text-white/85">
-          <strong class="font-display uppercase text-white">O que acontece após o envio:</strong> analisamos seu momento atual, indicamos a frente prioritária (estruturação, filmes, tráfego pago ou tecnologia/app) e alinhamos os próximos passos sem enrolação.
+        <h2 class="font-display mt-4 text-3xl uppercase leading-[1.06] text-white sm:text-4xl lg:text-[2.7rem]">
+          Diagnóstico comercial: onde sua marca pode <span class="text-[#e62314]">vender mais?</span>
+        </h2>
+
+        <p class="mt-3 text-base leading-relaxed text-white/80">
+          Em uma conversa objetiva, mapeamos o que está travando suas vendas e indicamos a estrutura ideal para o seu momento.
+        </p>
+
+        <!-- Blocos escaneáveis do que é avaliado -->
+        <ul class="mt-6 space-y-3">
+          <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
+            <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">01</span>
+            <div class="text-xs leading-relaxed">
+              <strong class="font-display block text-sm uppercase text-white">Gargalo de Atração & Conversão</strong>
+              <span class="text-white/75">Identificamos onde o lead esfria entre o anúncio, o perfil, a página/app e o fechamento.</span>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
+            <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">02</span>
+            <div class="text-xs leading-relaxed">
+              <strong class="font-display block text-sm uppercase text-white">Frentes Prioritárias Sob Medida</strong>
+              <span class="text-white/75">Definimos se o foco imediato é lançar do zero, produzir filmes, rodar tráfego ou criar app/página.</span>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
+            <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">03</span>
+            <div class="text-xs leading-relaxed">
+              <strong class="font-display block text-sm uppercase text-white">Plano Prático Sem Enrolação</strong>
+              <span class="text-white/75">Você sai com clareza de próximos passos, entregáveis e caminhos diretos para falar com o time.</span>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Canais Diretos -->
+        <div class="mt-6 grid gap-3 sm:grid-cols-3">
+          <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20estruturar%20meu%20neg%C3%B3cio%20para%20vender%20mais." target="_blank" rel="noopener" onclick="trackLead('Contato WhatsApp')" class="rounded-2xl border border-white/15 bg-[#111010]/90 p-3.5 transition hover:border-[#e62314]">
+            <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">WHATSAPP ↗</span>
+            <strong class="font-label mt-1 block text-xs text-white">(84) 99630-5371</strong>
+          </a>
+
+          <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" class="rounded-2xl border border-white/15 bg-[#111010]/90 p-3.5 transition hover:border-[#e62314]">
+            <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">E-MAIL ↗</span>
+            <strong class="font-label mt-1 block truncate text-xs text-white">adm@chamacine.com.br</strong>
+          </a>
+
+          <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="rounded-2xl border border-white/15 bg-[#111010]/90 p-3.5 transition hover:border-[#e62314]">
+            <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">INSTAGRAM ↗</span>
+            <strong class="font-label mt-1 block text-xs text-white">@chamacine</strong>
+          </a>
         </div>
       </div>
 
       <!-- Formulário Comercial -->
       <div class="lg:col-span-6">
-        <form onsubmit="enviarFormContato(event)" class="space-y-4 rounded-3xl border border-white/15 bg-[#111010]/95 p-6 shadow-2xl sm:p-8">
+        <form onsubmit="enviarFormContato(event)" class="space-y-4 rounded-3xl border border-white/15 bg-[#111010]/95 p-6 shadow-2xl backdrop-blur-md sm:p-8">
           <h3 class="font-display text-2xl uppercase text-white">Solicitar Diagnóstico Comercial</h3>
           <p class="text-sm text-white/65">Preencha abaixo e enviaremos sua solicitação diretamente no WhatsApp da Chama Cine.</p>
 
@@ -853,51 +864,21 @@
     </div>
   </div>
 
-  <!-- SCRIPTS: FRENTES, CASES INTEGRADORES, QUIZ E RODA 3D -->
+  <!-- SCRIPTS: FRENTES REORDENADAS, CASES INTEGRADORES, QUIZ E RODA 3D -->
   <script>
     const FRENTES = [
       {
         num: '01',
-        icone: 'img/icone-01.png',
-        titulo: 'Filmes Publicitários & Reels',
-        resumoCurto: 'Produção audiovisual com ritmo de retenção e gancho comercial para anúncios.',
-        destaque: false,
-        badge: 'ALTA RETENÇÃO',
-        aplicacao: 'Roteiro direto ao ponto, captação cinematográfica e edição pensada para segurar a atenção nos primeiros 3 segundos em Reels, Stories e YouTube.',
-        retorno: 'Em operações de varejo e alimentação em Natal, criativos curtos com gancho de oferta e prova visual aumentam o clique para o WhatsApp e reduzem o custo por mensagem qualificada.'
+        icone: 'img/icone-06.png',
+        titulo: 'Tráfego Pago, Páginas & Apps Nativos',
+        resumoCurto: 'Meta Ads, Google Ads, páginas de conversão, CRM e criação de aplicativo nativo.',
+        destaque: true,
+        badge: 'MAIOR CONVERSÃO · ESCALA & TECH',
+        aplicacao: 'Unimos aquisição paga (Meta/Google), landing pages rápidas, fluxos comerciais e desenvolvimento de aplicativo nativo para clientes, pedidos, agendamentos ou fidelização.',
+        retorno: 'Quando anúncio, página/app e atendimento trabalham integrados, a empresa reduz desperdício de verba, captura mais leads e cria recorrência própria fora do algoritmo.'
       },
       {
         num: '02',
-        icone: 'img/icone-02.png',
-        titulo: 'Conteúdo para Profissionais',
-        resumoCurto: 'Autoridade estratégica para médicos, advogados, empresários e especialistas.',
-        destaque: false,
-        badge: 'AUTORIDADE',
-        aplicacao: 'Transformamos o conhecimento técnico do especialista em vídeos e pautas claras que educam o cliente antes da primeira reunião.',
-        retorno: 'Profissionais que constroem autoridade contínua chegam à negociação com menos disputa de preço e maior taxa de fechamento em serviços de ticket médio e alto.'
-      },
-      {
-        num: '03',
-        icone: 'img/icone-03.png',
-        titulo: 'Gestão de Redes Sociais',
-        resumoCurto: 'Direção de arte e calendário editorial orientado a oportunidades reais.',
-        destaque: false,
-        badge: 'PRESENÇA ATIVA',
-        aplicacao: 'Em vez de postagens soltas sem direção, organizamos linhas editoriais de prova, bastidor, oferta e relacionamento com identidade visual coesa.',
-        retorno: 'O perfil deixa de ser apenas um mural estático e passa a converter seguidores locais em conversas comerciais e visitas recorrentes.'
-      },
-      {
-        num: '04',
-        icone: 'img/icone-04.png',
-        titulo: 'Documentários & Autorais',
-        resumoCurto: 'Narrativas profundas com estética de cinema para marcas e projetos culturais.',
-        destaque: false,
-        badge: 'CINEMA AUTORAL',
-        aplicacao: 'Desenvolvimento narrativo, fotografia e direção de arte para histórias de impacto, instituições, editais e projetos especiais.',
-        retorno: 'Eleva o patamar institucional da marca, fortalece parcerias estratégicas e cria ativos audiovisuais duradouros para lançamentos e apresentações.'
-      },
-      {
-        num: '05',
         icone: 'img/icone-05.png',
         titulo: 'Lançamento do Zero',
         resumoCurto: 'Estruturação completa: posicionamento, identidade, landing page e criativos.',
@@ -907,14 +888,44 @@
         retorno: 'Quem está começando evita meses de improviso e já entra no mercado com mensagem clara, página estruturada para converter e caminho direto para captar clientes.'
       },
       {
+        num: '03',
+        icone: 'img/icone-01.png',
+        titulo: 'Filmes Publicitários & Reels',
+        resumoCurto: 'Produção audiovisual com ritmo de retenção e gancho comercial para anúncios.',
+        destaque: false,
+        badge: 'ALTA RETENÇÃO',
+        aplicacao: 'Roteiro direto ao ponto, captação cinematográfica e edição pensada para segurar a atenção nos primeiros 3 segundos em Reels, Stories e YouTube.',
+        retorno: 'Em operações de varejo e alimentação em Natal, criativos curtos com gancho de oferta e prova visual aumentam o clique para o WhatsApp e reduzem o custo por mensagem qualificada.'
+      },
+      {
+        num: '04',
+        icone: 'img/icone-02.png',
+        titulo: 'Conteúdo para Profissionais',
+        resumoCurto: 'Autoridade estratégica para médicos, advogados, empresários e especialistas.',
+        destaque: false,
+        badge: 'AUTORIDADE',
+        aplicacao: 'Transformamos o conhecimento técnico do especialista em vídeos e pautas claras que educam o cliente antes da primeira reunião.',
+        retorno: 'Profissionais que constroem autoridade contínua chegam à negociação com menos disputa de preço e maior taxa de fechamento em serviços de ticket médio e alto.'
+      },
+      {
+        num: '05',
+        icone: 'img/icone-03.png',
+        titulo: 'Gestão de Redes Sociais',
+        resumoCurto: 'Direção de arte e calendário editorial orientado a oportunidades reais.',
+        destaque: false,
+        badge: 'PRESENÇA ATIVA',
+        aplicacao: 'Em vez de postagens soltas sem direção, organizamos linhas editoriais de prova, bastidor, oferta e relacionamento com identidade visual coesa.',
+        retorno: 'O perfil deixa de ser apenas um mural estático e passa a converter seguidores locais em conversas comerciais e visitas recorrentes.'
+      },
+      {
         num: '06',
-        icone: 'img/icone-06.png',
-        titulo: 'Tráfego Pago, Páginas & Apps Nativos',
-        resumoCurto: 'Meta Ads, Google Ads, páginas de conversão, CRM e criação de aplicativo nativo.',
-        destaque: true,
-        badge: 'MAIOR CONVERSÃO · ESCALA & TECH',
-        aplicacao: 'Unimos aquisição paga (Meta/Google), landing pages rápidas, fluxos comerciais e desenvolvimento de aplicativo nativo para clientes, pedidos, agendamentos ou fidelização.',
-        retorno: 'Quando anúncio, página/app e atendimento trabalham integrados, a empresa reduz desperdício de verba, captura mais leads e cria recorrência própria fora do algoritmo.'
+        icone: 'img/icone-04.png',
+        titulo: 'Documentários & Autorais',
+        resumoCurto: 'Narrativas profundas com estética de cinema para marcas e projetos culturais.',
+        destaque: false,
+        badge: 'CINEMA AUTORAL',
+        aplicacao: 'Desenvolvimento narrativo, fotografia e direção de arte para histórias de impacto, instituições, editais e projetos especiais.',
+        retorno: 'Eleva o patamar institucional da marca, fortalece parcerias estratégicas e cria ativos audiovisuais duradouros para lançamentos e apresentações.'
       },
       {
         num: '07',
@@ -994,7 +1005,6 @@
       if (e.target.id === 'modal-frente') fecharModalFrente();
     });
 
-    // Seletor Integrador de Cases (Operação Real & Bastidores)
     const CASES_DATA = [
       {
         tipo: 'video',
@@ -1093,7 +1103,6 @@
 
     selecionarCase(0);
 
-    // Quiz da 1ª Dobra
     let estagioSelecionado = '';
 
     function selecionarEstagio(estagio) {
@@ -1134,7 +1143,6 @@
       window.open(`https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // Ponte window.Chama para roda.js
     window.Chama = {
       mostrar(idx) {
         const lista = window.PROJETOS || [];
