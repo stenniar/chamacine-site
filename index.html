@@ -1,18 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chama Cine | Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN</title>
-  <meta name="description" content="Núcleo de Comunicação e Tecnologia em Vendas em Natal/RN. Estruturamos o seu negócio para vender mais com audiovisual, posicionamento, tráfego pago, páginas e apps nativos." />
+  <meta name="description" content="Produtora audiovisual, posicionamento estratégico, tráfego pago, páginas, apps nativos e estruturação comercial em Natal/RN. Agende seu diagnóstico gratuito com a Chama Cine." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="Chama Cine" />
+  <meta name="geo.region" content="BR-RN" />
+  <meta name="geo.placename" content="Natal, Rio Grande do Norte" />
+  <link rel="canonical" href="https://chamacine.com.br/" />
   <link rel="icon" type="image/png" href="img/fogo.png" />
 
-  <meta property="og:title" content="Chama Cine | Núcleo de Comunicação e Tecnologia em Vendas" />
-  <meta property="og:description" content="Estruturamos o seu negócio para vender mais. Cinema comercial, tráfego pago, tecnologia e apps nativos em Natal/RN." />
-  <meta property="og:url" content="https://chamacine.com.br/" />
+  <!-- Open Graph & Twitter -->
+  <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Chama Cine" />
+  <meta property="og:title" content="Chama Cine | Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN" />
+  <meta property="og:description" content="Estruturamos o seu negócio para vender mais: filmes publicitários, posicionamento, tráfego pago, páginas de conversão e apps nativos." />
+  <meta property="og:url" content="https://chamacine.com.br/" />
+  <meta property="og:image" content="https://chamacine.com.br/img/og-chama.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Chama Cine | Núcleo de Comunicação e Tecnologia em Vendas" />
+  <meta name="twitter:description" content="Cinema como linguagem, tecnologia e venda como resultado em Natal/RN." />
+  <meta name="twitter:image" content="https://chamacine.com.br/img/og-chama.jpg" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Dados Estruturados (Schema.org JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Chama Cine",
+    "description": "Núcleo de Comunicação e Tecnologia em Vendas em Natal/RN: produção audiovisual, posicionamento estratégico, tráfego pago, páginas de conversão e aplicativos nativos.",
+    "url": "https://chamacine.com.br/",
+    "logo": "https://chamacine.com.br/img/logo-chama.svg",
+    "image": "https://chamacine.com.br/img/og-chama.jpg",
+    "email": "adm@chamacine.com.br",
+    "telephone": "+55-84-99630-5371",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Natal",
+      "addressRegion": "RN",
+      "addressCountry": "BR"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Natal"
+    },
+    "sameAs": [
+      "https://www.instagram.com/chamacine"
+    ]
+  }
+  </script>
 
   <script type="importmap">
   {
@@ -22,9 +63,13 @@
   }
   </script>
 
-  <!-- Meta Pixel (carregado apenas com consentimento explícito de cookies) -->
+  <!-- Configuração de Medição (GA4 + Meta Pixel) com bloqueio até consentimento LGPD -->
   <script>
-    const META_PIXEL_ID = '';
+    const GA4_MEASUREMENT_ID = ''; // Ex.: 'G-XXXXXXXXXX'
+    const META_PIXEL_ID = '';      // Ex.: '123456789012345'
+    const LEAD_WEBHOOK_URL = '';   // Opcional: URL de webhook / CRM para registrar leads antes do WhatsApp
+
+    let ga4Iniciado = false;
     let metaPixelIniciado = false;
 
     function obterConsentimentoCookies() {
@@ -34,6 +79,52 @@
       } catch (_) {
         return null;
       }
+    }
+
+    function capturarUtms() {
+      const params = new URLSearchParams(window.location.search);
+      const chaves = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      const utms = {};
+      chaves.forEach((k) => {
+        const val = params.get(k);
+        if (val) utms[k] = val.trim();
+      });
+      if (Object.keys(utms).length > 0) {
+        try {
+          sessionStorage.setItem('chama_utms_v1', JSON.stringify(utms));
+        } catch (_) {}
+        return utms;
+      }
+      try {
+        const salvo = sessionStorage.getItem('chama_utms_v1');
+        return salvo ? JSON.parse(salvo) : {};
+      } catch (_) {
+        return {};
+      }
+    }
+
+    const UTMS_ATUAIS = capturarUtms();
+
+    function ativarGa4SeAutorizado() {
+      const consent = obterConsentimentoCookies();
+      if (!consent || !consent.analytics || !GA4_MEASUREMENT_ID || ga4Iniciado) return;
+
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA4_MEASUREMENT_ID)}`;
+      document.head.appendChild(s);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', GA4_MEASUREMENT_ID, {
+        send_page_view: true,
+        utm_source: UTMS_ATUAIS.utm_source || undefined,
+        utm_medium: UTMS_ATUAIS.utm_medium || undefined,
+        utm_campaign: UTMS_ATUAIS.utm_campaign || undefined
+      });
+      ga4Iniciado = true;
     }
 
     function ativarMetaPixelSeAutorizado() {
@@ -50,11 +141,53 @@
       metaPixelIniciado = true;
     }
 
-    function trackLead(origem) {
+    function rastrearEvento(nomeEvento, parametros = {}) {
       const consent = obterConsentimentoCookies();
-      if (consent && consent.marketing && typeof fbq === 'function') {
-        fbq('track', 'Lead', { content_name: origem });
+      const payload = { ...parametros, ...UTMS_ATUAIS };
+
+      if (consent && consent.analytics && typeof window.gtag === 'function') {
+        window.gtag('event', nomeEvento, payload);
       }
+      if (consent && consent.marketing && typeof window.fbq === 'function') {
+        if (nomeEvento === 'generate_lead') {
+          window.fbq('track', 'Lead', payload);
+        } else {
+          window.fbq('trackCustom', nomeEvento, payload);
+        }
+      }
+    }
+
+    function trackLead(origem, extras = {}) {
+      rastrearEvento('generate_lead', { content_name: origem, ...extras });
+    }
+
+    function registrarLeadNoWebhook(dadosLead) {
+      if (!LEAD_WEBHOOK_URL) return;
+      const corpo = JSON.stringify({
+        ...dadosLead,
+        utms: UTMS_ATUAIS,
+        pagina: window.location.href,
+        dataHora: new Date().toISOString()
+      });
+      try {
+        if (navigator.sendBeacon) {
+          const blob = new Blob([corpo], { type: 'application/json' });
+          navigator.sendBeacon(LEAD_WEBHOOK_URL, blob);
+        } else {
+          fetch(LEAD_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: corpo,
+            keepalive: true
+          }).catch(() => {});
+        }
+      } catch (_) {}
+    }
+
+    function montarUrlWhatsApp(mensagemBase) {
+      const utmResumo = Object.entries(UTMS_ATUAIS).map(([k, v]) => `${k}=${v}`).join(' | ');
+      const textoFinal = utmResumo ? `${mensagemBase}\n[Origem: ${utmResumo}]` : mensagemBase;
+      return `https://wa.me/5584996305371?text=${encodeURIComponent(textoFinal)}`;
     }
   </script>
 
@@ -96,12 +229,37 @@
       --off-white: #f4f1ea;
     }
 
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      margin: 0;
       background-color: var(--bg-dark);
       color: var(--off-white);
       font-family: 'Stara', system-ui, -apple-system, sans-serif;
       font-weight: 500;
+      line-height: 1.5;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body ::selection {
+      background-color: #e62314;
+      color: #ffffff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
     }
 
     .font-display {
@@ -119,20 +277,498 @@
       font-family: 'StretchPro', 'Stara', sans-serif;
     }
 
+    .container-padrao {
+      width: 100%;
+      max-width: 80rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .container-padrao {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container-padrao {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .flex {
+      display: flex;
+    }
+
     @keyframes marquee {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+
     .animate-marquee {
       display: flex;
       width: max-content;
       animation: marquee 32s linear infinite;
     }
 
-    /* Roda 3D de Pôsteres — container padrão e proporção vertical ampla */
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      background-color: rgba(7, 6, 6, 0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.875rem;
+      padding-bottom: 0.875rem;
+      gap: 1rem;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      height: 2.25rem;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: none;
+      align-items: center;
+      gap: 1.75rem;
+      font-family: 'Stara', sans-serif;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    @media (min-width: 768px) {
+      .nav-menu {
+        display: flex;
+      }
+    }
+
+    .nav-menu a:hover {
+      color: #ffffff;
+    }
+
+    .btn-red {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 9999px;
+      background-color: #e62314;
+      color: #ffffff;
+      font-family: 'Stara', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border: 0;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-red:hover {
+      background-color: #ff3322;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background-color: rgba(14, 13, 13, 0.85);
+      color: #ffffff;
+      font-family: 'Stara', sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(255, 255, 255, 0.55);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero */
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      background: radial-gradient(circle at 80% 20%, rgba(230, 35, 20, 0.22), transparent 45%),
+                  linear-gradient(135deg, #070606 0%, #120909 55%, #200908 100%);
+      padding-top: 3.5rem;
+      padding-bottom: 3.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero-section {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+      }
+      .hero-left {
+        grid-column: span 7 / span 7;
+      }
+      .hero-right {
+        grid-column: span 5 / span 5;
+      }
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(230, 35, 20, 0.5);
+      background-color: rgba(13, 11, 11, 0.85);
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #f4f1ea;
+      margin-bottom: 1.5rem;
+    }
+
+    .pill-dot {
+      height: 0.5rem;
+      width: 0.5rem;
+      border-radius: 9999px;
+      background-color: #e62314;
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      line-height: 1.03;
+      text-transform: uppercase;
+      color: #f4f1ea;
+    }
+
+    .text-red {
+      color: #e62314;
+    }
+
+    .hero-subtitle {
+      margin-top: 1.25rem;
+      max-width: 42rem;
+      font-size: 1.125rem;
+      line-height: 1.55;
+      color: rgba(244, 241, 234, 0.92);
+    }
+
+    .hero-ctas {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .pillars-grid {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.875rem;
+    }
+
+    @media (min-width: 640px) {
+      .pillars-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .pillar-card {
+      border-radius: 1rem;
+      border: 1px solid rgba(230, 35, 20, 0.45);
+      background-color: rgba(16, 14, 14, 0.85);
+      padding: 1rem;
+    }
+
+    .pillar-line {
+      display: block;
+      height: 0.25rem;
+      width: 2.25rem;
+      border-radius: 9999px;
+      background-color: #e62314;
+      margin-bottom: 0.625rem;
+    }
+
+    /* Quiz Card */
+    .quiz-card {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background-color: rgba(18, 16, 16, 0.9);
+      padding: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65);
+    }
+
+    @media (min-width: 640px) {
+      .quiz-card {
+        padding: 2rem;
+      }
+    }
+
+    .quiz-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 0.75rem;
+    }
+
+    .quiz-pct {
+      border-radius: 9999px;
+      background-color: rgba(230, 35, 20, 0.2);
+      color: #e62314;
+      padding: 0.15rem 0.625rem;
+      font-size: 0.75rem;
+    }
+
+    .progress-track {
+      height: 0.25rem;
+      width: 100%;
+      border-radius: 9999px;
+      background-color: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 50%;
+      border-radius: 9999px;
+      background-color: #e62314;
+      transition: width 0.3s ease;
+    }
+
+    .quiz-option {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.04);
+      padding: 0.875rem 1rem;
+      text-align: left;
+      color: #ffffff;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: rgba(230, 35, 20, 0.75);
+      background-color: rgba(230, 35, 20, 0.12);
+    }
+
+    .input-dark {
+      width: 100%;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      color: #ffffff;
+    }
+
+    .input-dark:focus {
+      outline: none;
+      border-color: #e62314;
+    }
+
+    /* Marquee */
+    .marquee-strip {
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: #e62314;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+    }
+
+    /* Soluções */
+    .section-dark {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .frentes-grid {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .frentes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .frentes-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .frente-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: left;
+      color: #ffffff;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .frente-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .frente-card--destaque {
+      border: 1px solid rgba(230, 35, 20, 0.7);
+      background-color: rgba(23, 17, 17, 0.85);
+    }
+
+    .frente-card--padrao {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background-color: rgba(17, 16, 16, 0.78);
+    }
+
+    /* Operação Real (Fundo branco de alto contraste) */
+    .section-light {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid #e5e5e5;
+      background-color: #ffffff;
+      color: #111010;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .cases-box {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+      border-radius: 1.5rem;
+      border: 1px solid #e5e5e5;
+      background-color: #f8f7f5;
+      padding: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (min-width: 1024px) {
+      .cases-box {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        padding: 2rem;
+      }
+      .cases-selector {
+        grid-column: span 5 / span 5;
+      }
+      .cases-preview {
+        grid-column: span 7 / span 7;
+      }
+    }
+
+    .case-tab {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 1rem;
+      padding: 1rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .case-tab--active {
+      border: 1px solid #e62314;
+      background-color: rgba(230, 35, 20, 0.1);
+    }
+
+    .case-tab--idle {
+      border: 1px solid #e5e5e5;
+      background-color: #ffffff;
+    }
+
+    .case-preview-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: center;
+      border-radius: 1rem;
+      border: 1px solid #e5e5e5;
+      background-color: #ffffff;
+      padding: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .case-preview-inner {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+      }
+      .case-media-col {
+        grid-column: span 5 / span 5;
+      }
+      .case-info-col {
+        grid-column: span 7 / span 7;
+      }
+    }
+
+    /* Roda 3D de Pôsteres */
     .s.recentes {
       position: relative;
       width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
       background-color: #070606;
       background-image: url('img/fundo-projetos.jpg');
       background-size: cover;
@@ -209,7 +845,7 @@
       text-transform: uppercase;
       color: var(--off-white);
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
-      margin-bottom: 0.25rem;
+      margin: 0 0 0.25rem 0;
     }
 
     .s.recentes .dica {
@@ -245,7 +881,7 @@
       line-height: 1.08;
       color: #ffffff;
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-      margin-bottom: 0.55rem;
+      margin: 0 0 0.55rem 0;
     }
 
     .s.recentes #info-resumo {
@@ -254,7 +890,7 @@
       color: rgba(244, 241, 234, 0.96);
       text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
       min-height: 3.3rem;
-      margin-bottom: 1.15rem;
+      margin: 0 0 1.15rem 0;
     }
 
     .s.recentes .acoes {
@@ -273,6 +909,8 @@
       letter-spacing: 0.08em;
       padding: 0.85rem 1.5rem;
       border-radius: 9999px;
+      border: 0;
+      cursor: pointer;
       transition: background 0.2s ease, transform 0.2s ease;
     }
 
@@ -291,6 +929,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
 
@@ -347,23 +986,109 @@
     .lista-oculta {
       display: none;
     }
+
+    /* Quem Somos & Diagnóstico */
+    .about-box {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background-color: rgba(17, 16, 16, 0.9);
+      padding: 1.75rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    @media (min-width: 1024px) {
+      .about-box {
+        padding: 3rem;
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 2.5rem;
+        align-items: start;
+      }
+      .about-left {
+        grid-column: span 7 / span 7;
+      }
+      .about-right {
+        grid-column: span 5 / span 5;
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 2.5rem;
+        align-items: start;
+      }
+      .contact-left {
+        grid-column: span 6 / span 6;
+      }
+      .contact-right {
+        grid-column: span 6 / span 6;
+      }
+    }
+
+    /* Footer */
+    .site-footer {
+      position: relative;
+      overflow: hidden;
+      background-color: #050505;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer-inner {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .footer-inner {
+        flex-direction: row;
+      }
+    }
+
+    /* Modais & Banner */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 1rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .cookie-banner {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: 50;
+      padding: 0.75rem 1rem;
+    }
   </style>
 </head>
-<body id="topo" class="antialiased selection:bg-[#e62314] selection:text-white">
+<body id="topo">
 
   <!-- HEADER -->
-  <header class="sticky top-0 z-50 border-b border-white/15 bg-[#070606]/75 backdrop-blur-md">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-      <a href="#topo" class="flex items-center gap-3">
-        <img src="img/logo-chama.svg" alt="Chama Cine" class="h-9 w-auto object-contain" />
+  <header class="site-header">
+    <div class="container-padrao header-inner">
+      <a href="#topo" class="brand-link" onclick="rastrearEvento('nav_click', { label: 'logo_topo' })">
+        <img src="img/logo-chama.svg" alt="Chama Cine" class="brand-logo" />
       </a>
 
-      <nav class="hidden items-center gap-7 font-label text-sm text-white/90 md:flex">
-        <a href="#solucoes" class="transition hover:text-white">Soluções</a>
-        <a href="#operacao-real" class="transition hover:text-white">Operação Real</a>
-        <a href="#acervo" class="transition hover:text-white">Acervo</a>
-        <a href="#quem-somos" class="transition hover:text-white">Quem Somos</a>
-        <a href="#diagnostico" class="transition hover:text-white">Diagnóstico</a>
+      <nav class="nav-menu" aria-label="Navegação principal">
+        <a href="#solucoes">Soluções</a>
+        <a href="#operacao-real">Operação Real</a>
+        <a href="#acervo">Acervo</a>
+        <a href="#quem-somos">Quem Somos</a>
+        <a href="#diagnostico">Diagnóstico</a>
       </nav>
 
       <a
@@ -371,7 +1096,8 @@
         target="_blank"
         rel="noopener"
         onclick="trackLead('Header WhatsApp')"
-        class="font-display inline-flex items-center gap-2 rounded-full bg-[#e62314] px-5 py-2.5 text-xs uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]"
+        class="btn-red"
+        style="padding: 0.65rem 1.25rem; font-size: 0.75rem;"
       >
         Falar no WhatsApp
       </a>
@@ -379,127 +1105,130 @@
   </header>
 
   <!-- HERO (1ª DOBRA) -->
-  <section class="relative overflow-hidden border-b border-white/15 bg-gradient-to-br from-[#070606] via-[#120909] to-[#230908] py-14 sm:py-20">
-    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-      <div class="lg:col-span-7">
-        <div class="font-label mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/50 bg-[#0d0b0b]/80 px-4 py-1.5 text-xs uppercase tracking-widest text-[#f4f1ea] backdrop-blur-sm">
-          <span class="h-2 w-2 rounded-full bg-[#e62314]"></span>
+  <section class="hero-section">
+    <div class="container-padrao hero-grid">
+      <div class="hero-left">
+        <div class="pill-badge">
+          <span class="pill-dot"></span>
           Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN
         </div>
 
-        <h1 class="font-display text-4xl uppercase leading-[1.03] text-[#f4f1ea] drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-5xl lg:text-6xl">
-          Núcleo de <span class="text-[#e62314]">Comunicação</span> e Tecnologia em Vendas.
+        <h1 class="font-display hero-title">
+          Núcleo de <span class="text-red">Comunicação</span> e Tecnologia em Vendas.
         </h1>
 
-        <p class="mt-5 max-w-2xl text-lg font-medium leading-relaxed text-[#f4f1ea] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] sm:text-xl">
+        <p class="hero-subtitle">
           Estruturamos o seu negócio para vender mais — combinando direção audiovisual, posicionamento estratégico, tráfego pago e tecnologia aplicada a vendas.
         </p>
 
-        <div class="mt-8 flex flex-wrap items-center gap-4">
+        <div class="hero-ctas">
           <a
             href="#diagnostico"
-            class="font-display rounded-full bg-[#e62314] px-7 py-4 text-sm uppercase tracking-wider text-white shadow-xl shadow-[#e62314]/25 transition hover:bg-[#ff3322]"
+            onclick="rastrearEvento('cta_click', { label: 'agendar_diagnostico_hero' })"
+            class="btn-red"
+            style="padding: 1rem 1.75rem; font-size: 0.85rem;"
           >
             Agendar Diagnóstico Gratuito
           </a>
           <a
             href="#acervo"
-            class="font-display rounded-full border border-white/25 bg-[#0e0d0d]/80 px-7 py-4 text-sm uppercase tracking-wider text-white backdrop-blur-sm transition hover:border-white/50 hover:bg-white/10"
+            onclick="rastrearEvento('cta_click', { label: 'ver_acervo_hero' })"
+            class="btn-outline"
+            style="padding: 1rem 1.75rem; font-size: 0.85rem;"
           >
             Ver Acervo & Cases
           </a>
         </div>
 
-        <!-- 3 Pilares em Destaque -->
-        <div class="mt-10 grid gap-3.5 sm:grid-cols-3">
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/50 bg-[#100e0e]/80 p-4 shadow-lg shadow-[#e62314]/10 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#e62314]">
-            <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
-            <strong class="font-display block text-sm uppercase tracking-wide text-white">360° Comercial</strong>
-            <span class="mt-1 block text-xs leading-relaxed text-white/80">Da estratégia ao anúncio no ar.</span>
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <span class="pillar-line"></span>
+            <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">360° Comercial</strong>
+            <span style="display: block; margin-top: 0.25rem; font-size: 0.75rem; color: rgba(255,255,255,0.8);">Da estratégia ao anúncio no ar.</span>
           </div>
 
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/50 bg-[#100e0e]/80 p-4 shadow-lg shadow-[#e62314]/10 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#e62314]">
-            <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
-            <strong class="font-display block text-sm uppercase tracking-wide text-white">Padrão Cinema</strong>
-            <span class="mt-1 block text-xs leading-relaxed text-white/80">Estética autoral para retenção.</span>
+          <div class="pillar-card">
+            <span class="pillar-line"></span>
+            <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">Padrão Cinema</strong>
+            <span style="display: block; margin-top: 0.25rem; font-size: 0.75rem; color: rgba(255,255,255,0.8);">Estética autoral para retenção.</span>
           </div>
 
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/50 bg-[#100e0e]/80 p-4 shadow-lg shadow-[#e62314]/10 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#e62314]">
-            <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
-            <strong class="font-display block text-sm uppercase tracking-wide text-white">Do Zero à Escala</strong>
-            <span class="mt-1 block text-xs leading-relaxed text-white/80">Estrutura completa de vendas.</span>
+          <div class="pillar-card">
+            <span class="pillar-line"></span>
+            <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">Do Zero à Escala</strong>
+            <span style="display: block; margin-top: 0.25rem; font-size: 0.75rem; color: rgba(255,255,255,0.8);">Estrutura completa de vendas.</span>
           </div>
         </div>
       </div>
 
-      <!-- QUIZ DIAGNÓSTICO LEVE E ESCANEÁVEL -->
-      <div class="lg:col-span-5">
-        <div class="rounded-3xl border border-white/15 bg-[#121010]/85 p-6 shadow-2xl backdrop-blur-md sm:p-8">
-          <div class="mb-3 flex items-center justify-between font-label text-xs text-white/70">
+      <!-- QUIZ DIAGNÓSTICO LEVE -->
+      <div class="hero-right">
+        <div class="quiz-card">
+          <div class="quiz-meta font-label">
             <span id="quiz-step-label">Passo 1 de 2 · Diagnóstico rápido</span>
-            <span id="quiz-progress-text" class="font-accent rounded-full bg-[#e62314]/20 px-2.5 py-0.5 text-[#e62314]">50%</span>
+            <span id="quiz-progress-text" class="quiz-pct font-accent">50%</span>
           </div>
 
-          <div class="mb-6 h-1 w-full overflow-hidden rounded-full bg-white/10">
-            <div id="quiz-bar" class="h-full w-1/2 rounded-full bg-[#e62314] transition-all duration-300"></div>
+          <div class="progress-track">
+            <div id="quiz-bar" class="progress-fill"></div>
           </div>
 
           <div id="quiz-step-1">
-            <h2 class="font-label text-xl leading-snug text-white sm:text-2xl">
+            <h2 class="font-label" style="margin: 0; font-size: 1.35rem; color: #fff;">
               Qual é o momento do seu negócio?
             </h2>
-            <p class="mt-1 text-sm text-white/75">
+            <p style="margin-top: 0.35rem; font-size: 0.875rem; color: rgba(255,255,255,0.75);">
               Escolha a opção que melhor representa o seu cenário:
             </p>
 
-            <div class="mt-5 space-y-2.5">
-              <button type="button" onclick="selecionarEstagio('Começar do zero (estruturar marca e canais)')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+            <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.65rem;">
+              <button type="button" onclick="selecionarEstagio('Começar do zero (estruturar marca e canais)')" class="quiz-option">
                 <div>
-                  <span class="font-label block text-sm text-white">Começar do zero</span>
-                  <span class="block text-xs text-white/65">Ainda não tenho estrutura comercial ou digital</span>
+                  <span class="font-label" style="display: block; font-size: 0.875rem;">Começar do zero</span>
+                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Ainda não tenho estrutura comercial ou digital</span>
                 </div>
-                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
+                <span class="text-red" style="font-weight: 700;">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Destravar vendas nas redes sociais')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+              <button type="button" onclick="selecionarEstagio('Destravar vendas nas redes sociais')" class="quiz-option">
                 <div>
-                  <span class="font-label block text-sm text-white">Destravar vendas nas redes</span>
-                  <span class="block text-xs text-white/65">Já tenho empresa ativa, mas o perfil não converte</span>
+                  <span class="font-label" style="display: block; font-size: 0.875rem;">Destravar vendas nas redes</span>
+                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Já tenho empresa ativa, mas o perfil não converte</span>
                 </div>
-                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
+                <span class="text-red" style="font-weight: 700;">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Escalar anúncios, páginas e app com conversão')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+              <button type="button" onclick="selecionarEstagio('Escalar anúncios, páginas e app com conversão')" class="quiz-option">
                 <div>
-                  <span class="font-label block text-sm text-white">Escalar tráfego, criativos e tecnologia</span>
-                  <span class="block text-xs text-white/65">Quero anúncios, páginas, CRM ou app que gerem receita</span>
+                  <span class="font-label" style="display: block; font-size: 0.875rem;">Escalar tráfego, criativos e tecnologia</span>
+                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Quero anúncios, páginas, CRM ou app que gerem receita</span>
                 </div>
-                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
+                <span class="text-red" style="font-weight: 700;">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Produzir filme institucional, documentário ou campanha')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+              <button type="button" onclick="selecionarEstagio('Produzir filme institucional, documentário ou campanha')" class="quiz-option">
                 <div>
-                  <span class="font-label block text-sm text-white">Filme, documentário ou campanha</span>
-                  <span class="block text-xs text-white/65">Produção audiovisual autoral de alto impacto</span>
+                  <span class="font-label" style="display: block; font-size: 0.875rem;">Filme, documentário ou campanha</span>
+                  <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Produção audiovisual autoral de alto impacto</span>
                 </div>
-                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
+                <span class="text-red" style="font-weight: 700;">→</span>
               </button>
             </div>
           </div>
 
-          <form id="quiz-step-2" class="hidden space-y-4" onsubmit="enviarQuizWhatsApp(event)">
+          <form id="quiz-step-2" class="hidden" style="display: flex; flex-direction: column; gap: 1rem;" onsubmit="enviarQuizWhatsApp(event)">
             <div>
-              <h2 class="font-label text-xl text-white">Para onde enviamos seu plano?</h2>
-              <p class="mt-1 text-xs text-white/65">Preencha os dois campos abaixo para iniciar no WhatsApp.</p>
+              <h2 class="font-label" style="margin: 0; font-size: 1.25rem; color: #fff;">Para onde enviamos seu plano?</h2>
+              <p style="margin-top: 0.25rem; font-size: 0.75rem; color: rgba(255,255,255,0.65);">Preencha os dois campos abaixo para iniciar no WhatsApp.</p>
             </div>
-            <p id="quiz-selected-badge" class="rounded-xl border border-[#e62314]/30 bg-[#e62314]/10 px-3.5 py-2 text-xs font-medium text-white/90"></p>
-            <input type="text" id="quiz-nome" required placeholder="Seu nome" class="w-full rounded-xl border border-white/15 bg-black/55 px-4 py-3 text-sm text-white placeholder-white/45 focus:border-[#e62314] focus:outline-none" />
-            <input type="text" id="quiz-empresa" required placeholder="Nome da empresa ou @instagram" class="w-full rounded-xl border border-white/15 bg-black/55 px-4 py-3 text-sm text-white placeholder-white/45 focus:border-[#e62314] focus:outline-none" />
-            <div class="flex gap-3 pt-1">
-              <button type="button" onclick="voltarQuiz()" class="font-label rounded-xl border border-white/15 px-4 py-3 text-xs text-white/75 transition hover:text-white">
+            <p id="quiz-selected-badge" style="margin: 0; border-radius: 0.75rem; border: 1px solid rgba(230,35,20,0.35); background: rgba(230,35,20,0.12); padding: 0.5rem 0.85rem; font-size: 0.75rem; color: #f4f1ea;"></p>
+            <input type="text" id="quiz-nome" required placeholder="Seu nome" class="input-dark" />
+            <input type="text" id="quiz-empresa" required placeholder="Nome da empresa ou @instagram" class="input-dark" />
+            <div style="display: flex; gap: 0.75rem; padding-top: 0.25rem;">
+              <button type="button" onclick="voltarQuiz()" class="btn-outline" style="padding: 0.75rem 1rem; font-size: 0.75rem;">
                 Voltar
               </button>
-              <button type="submit" class="font-display flex-1 rounded-xl bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+              <button type="submit" class="btn-red" style="flex: 1; padding: 0.75rem 1.25rem; font-size: 0.75rem;">
                 Receber no WhatsApp
               </button>
             </div>
@@ -510,102 +1239,99 @@
   </section>
 
   <!-- FAIXA LETREIRO -->
-  <div class="font-display overflow-hidden border-b border-white/10 bg-[#e62314] py-3 text-xs uppercase tracking-widest text-white">
+  <div class="marquee-strip font-display">
     <div class="animate-marquee">
-      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO, PÁGINAS & APPS NATIVOS ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
-      <span class="mx-4">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO, PÁGINAS & APPS NATIVOS ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
+      <span style="margin: 0 1rem;">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO, PÁGINAS & APPS NATIVOS ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
+      <span style="margin: 0 1rem;">CHAMA CINE ★ NÚCLEO DE COMUNICAÇÃO E TECNOLOGIA EM VENDAS ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO, PÁGINAS & APPS NATIVOS ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ CLUBE DO LIVRO · INSTITUTO DAMASI ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★</span>
     </div>
   </div>
 
   <!-- 02 · SOLUÇÕES -->
-  <section id="solucoes" class="relative overflow-hidden border-b border-white/15 py-20">
-    <div
-      class="pointer-events-none absolute inset-0"
-      style="background-image: url('img/fundo-servicos.jpg'); background-size: cover; background-position: center;"
-    ></div>
-
-    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
-        <div class="max-w-3xl">
-          <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Soluções · Arquitetura Comercial & Audiovisual</span>
-          <h2 class="font-display mt-2 text-3xl uppercase text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-4xl">
+  <section id="solucoes" class="section-dark" style="background-color: #090808; background-image: url('img/fundo-servicos.jpg'); background-size: cover; background-position: center;">
+    <div class="container-padrao">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem;">
+        <div style="max-width: 48rem;">
+          <span class="font-label text-red" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Soluções · Arquitetura Comercial & Audiovisual</span>
+          <h2 class="font-display" style="margin: 0.5rem 0 0 0; font-size: clamp(1.75rem, 3.5vw, 2.5rem); text-transform: uppercase; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
             8 frentes integradas para tirar sua marca da invisibilidade e gerar vendas recorrentes
           </h2>
         </div>
-        <p class="font-label text-xs uppercase tracking-wider text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)]">
+        <p class="font-label" style="margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.9); text-shadow: 0 1px 6px rgba(0,0,0,0.85);">
           Clique em qualquer frente para ver o plano de retorno e cases reais →
         </p>
       </div>
 
-      <div id="grid-frentes" class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"></div>
+      <div id="grid-frentes" class="frentes-grid"></div>
     </div>
   </section>
 
-  <!-- 03 · OPERAÇÃO REAL & BASTIDORES (FUNDO BRANCO + CORES DE ALTO CONTRASTE) -->
-  <section id="operacao-real" class="relative overflow-hidden border-b border-neutral-200 bg-white py-20 text-[#111010]">
-    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Operação Real & Bastidores</span>
-        <h2 class="font-display mt-2 text-3xl uppercase text-[#0a0909] sm:text-4xl">
+  <!-- 03 · OPERAÇÃO REAL & BASTIDORES -->
+  <section id="operacao-real" class="section-light">
+    <div class="container-padrao">
+      <div style="max-width: 48rem;">
+        <span class="font-label text-red" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Operação Real & Bastidores</span>
+        <h2 class="font-display" style="margin: 0.5rem 0 0 0; font-size: clamp(1.75rem, 3.5vw, 2.5rem); text-transform: uppercase; color: #0a0909;">
           Criativos e marcas que já rodam com a assinatura Chama
         </h2>
-        <p class="mt-3 text-base text-[#3a3535]">
+        <p style="margin-top: 0.75rem; font-size: 1rem; color: #3a3535;">
           Selecione uma peça ao lado para inspecionar o formato real, a estratégia aplicada e o canal oficial do case.
         </p>
       </div>
 
-      <div class="mt-10 grid items-center gap-8 rounded-3xl border border-neutral-200 bg-[#f8f7f5] p-6 shadow-xl lg:grid-cols-12 lg:p-8">
-        <div class="space-y-3 lg:col-span-5" id="seletor-cases">
-          <button type="button" data-case="0" onclick="selecionarCase(0)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-[#e62314] bg-[#e62314]/10 p-4 text-left transition">
+      <div class="cases-box">
+        <div class="cases-selector" style="display: flex; flex-direction: column; gap: 0.75rem;" id="seletor-cases">
+          <button type="button" data-case="0" onclick="selecionarCase(0)" class="case-tab case-tab--active">
             <div>
-              <span class="font-accent block text-[11px] uppercase tracking-widest text-[#e62314]">01 · REELS / STORY 9:16</span>
-              <strong class="font-display mt-0.5 block text-base uppercase text-[#111010]">Bem Leve · Campanha Black</strong>
-              <span class="text-xs text-[#4a4545]">Vídeo vertical de oferta direta & giro rápido</span>
+              <span class="font-accent text-red" style="display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em;">01 · REELS / STORY 9:16</span>
+              <strong class="font-display" style="display: block; margin-top: 0.15rem; font-size: 1rem; text-transform: uppercase; color: #111010;">Bem Leve · Campanha Black</strong>
+              <span style="font-size: 0.75rem; color: #4a4545;">Vídeo vertical de oferta direta & giro rápido</span>
             </div>
-            <span class="text-sm font-bold text-[#e62314]">▶</span>
+            <span class="text-red" style="font-size: 0.875rem; font-weight: 700;">▶</span>
           </button>
 
-          <button type="button" data-case="1" onclick="selecionarCase(1)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-neutral-200 bg-white p-4 text-left transition hover:border-neutral-400">
+          <button type="button" data-case="1" onclick="selecionarCase(1)" class="case-tab case-tab--idle">
             <div>
-              <span class="font-accent block text-[11px] uppercase tracking-widest text-[#6b6565]">02 · BRANDING & 3D</span>
-              <strong class="font-display mt-0.5 block text-base uppercase text-[#111010]">Bem Leve Doces Fit</strong>
-              <span class="text-xs text-[#4a4545]">Universo visual, mascote 3D e campanha</span>
+              <span class="font-accent" style="display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6565;">02 · BRANDING & 3D</span>
+              <strong class="font-display" style="display: block; margin-top: 0.15rem; font-size: 1rem; text-transform: uppercase; color: #111010;">Bem Leve Doces Fit</strong>
+              <span style="font-size: 0.75rem; color: #4a4545;">Universo visual, mascote 3D e campanha</span>
             </div>
-            <span class="text-sm text-[#6b6565]">→</span>
+            <span style="font-size: 0.875rem; color: #6b6565;">→</span>
           </button>
 
-          <button type="button" data-case="2" onclick="selecionarCase(2)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-neutral-200 bg-white p-4 text-left transition hover:border-neutral-400">
+          <button type="button" data-case="2" onclick="selecionarCase(2)" class="case-tab case-tab--idle">
             <div>
-              <span class="font-accent block text-[11px] uppercase tracking-widest text-[#6b6565]">03 · GASTRONOMIA & EVENTO</span>
-              <strong class="font-display mt-0.5 block text-base uppercase text-[#111010]">Buji BBQ à Beira Mar</strong>
-              <span class="text-xs text-[#4a4545]">Identidade, direção de arte e cobertura</span>
+              <span class="font-accent" style="display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6565;">03 · GASTRONOMIA & EVENTO</span>
+              <strong class="font-display" style="display: block; margin-top: 0.15rem; font-size: 1rem; text-transform: uppercase; color: #111010;">Buji BBQ à Beira Mar</strong>
+              <span style="font-size: 0.75rem; color: #4a4545;">Identidade, direção de arte e cobertura</span>
             </div>
-            <span class="text-sm text-[#6b6565]">→</span>
+            <span style="font-size: 0.875rem; color: #6b6565;">→</span>
           </button>
 
-          <button type="button" data-case="3" onclick="selecionarCase(3)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-neutral-200 bg-white p-4 text-left transition hover:border-neutral-400">
+          <button type="button" data-case="3" onclick="selecionarCase(3)" class="case-tab case-tab--idle">
             <div>
-              <span class="font-accent block text-[11px] uppercase tracking-widest text-[#6b6565]">04 · DESIGN DE CONVERSÃO · VAREJO</span>
-              <strong class="font-display mt-0.5 block text-base uppercase text-[#111010]">Clube do Livro · Instituto Damasi</strong>
-              <span class="text-xs text-[#4a4545]">Hierarquia de oferta e prova de valor</span>
+              <span class="font-accent" style="display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6b6565;">04 · DESIGN DE CONVERSÃO · VAREJO</span>
+              <strong class="font-display" style="display: block; margin-top: 0.15rem; font-size: 1rem; text-transform: uppercase; color: #111010;">Clube do Livro · Instituto Damasi</strong>
+              <span style="font-size: 0.75rem; color: #4a4545;">Hierarquia de oferta e prova de valor</span>
             </div>
-            <span class="text-sm text-[#6b6565]">→</span>
+            <span style="font-size: 0.875rem; color: #6b6565;">→</span>
           </button>
         </div>
 
-        <div class="grid items-center gap-6 rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:grid-cols-12 lg:col-span-7">
-          <div id="case-midia-box" class="flex justify-center sm:col-span-5"></div>
+        <div class="cases-preview">
+          <div class="case-preview-inner">
+            <div id="case-midia-box" class="case-media-col" style="display: flex; justify-content: center;"></div>
 
-          <div class="sm:col-span-7">
-            <span id="case-tag" class="font-label text-xs uppercase tracking-widest text-[#e62314]">Motion & Oferta Direta · 9:16</span>
-            <h3 id="case-titulo" class="font-display mt-2 text-2xl uppercase text-[#111010] sm:text-3xl">Campanha Black Bem Leve</h3>
-            <p id="case-desc" class="mt-3 text-sm leading-relaxed text-[#3a3535]">
-              Peça audiovisual vertical construída para reter no feed e Storie, apresentar a oferta com clareza e acelerar pedidos diretos.
-            </p>
-            <div class="mt-6 flex flex-wrap items-center gap-3">
-              <a id="case-link" href="https://www.instagram.com/bemleve_docesfit/" target="_blank" rel="noopener" class="font-display inline-flex items-center gap-2 rounded-full bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
-                Ver Case no Instagram ↗
-              </a>
+            <div class="case-info-col">
+              <span id="case-tag" class="font-label text-red" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">Motion & Oferta Direta · 9:16</span>
+              <h3 id="case-titulo" class="font-display" style="margin: 0.5rem 0 0 0; font-size: 1.75rem; text-transform: uppercase; color: #111010;">Campanha Black Bem Leve</h3>
+              <p id="case-desc" style="margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.55; color: #3a3535;">
+                Peça audiovisual vertical construída para reter no feed e Storie, apresentar a oferta com clareza e acelerar pedidos diretos.
+              </p>
+              <div style="margin-top: 1.5rem;">
+                <a id="case-link" href="https://www.instagram.com/bemleve_docesfit/" target="_blank" rel="noopener" onclick="rastrearEvento('case_instagram_click', { case_title: document.getElementById('case-titulo').textContent })" class="btn-red" style="padding: 0.75rem 1.25rem; font-size: 0.75rem;">
+                  Ver Case no Instagram ↗
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -614,13 +1340,13 @@
   </section>
 
   <!-- ============ 04 · ACERVO (RODA 3D DE PÔSTERES) ============ -->
-  <section class="s recentes border-b border-white/15" id="acervo" style="--h:1260" aria-labelledby="titulo-projetos">
+  <section class="s recentes" id="acervo" style="--h:1260" aria-labelledby="titulo-projetos">
     <div class="borda-topo" aria-hidden="true"></div>
 
     <div class="container-acervo">
       <div class="a info" id="info" aria-live="polite" style="--x:134;--y:470;--w:640">
-        <div class="font-label mb-1.5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#ff4738]">
-          <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
+        <div class="font-label" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #ff4738;">
+          <img src="img/fogo.png" alt="" style="height: 1rem; width: 1rem; object-fit: contain;" />
           Acervo Cinematográfico Chama Cine
         </div>
         <h2 class="a t tit" id="titulo-projetos" data-x="134" data-y="227">Nossos projetos</h2>
@@ -650,60 +1376,54 @@
   </section>
 
   <!-- 05 · QUEM SOMOS -->
-  <section id="quem-somos" class="relative overflow-hidden border-b border-white/15 bg-gradient-to-b from-[#0b0909] via-[#120c0c] to-[#070606] py-20 sm:py-24">
-    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="rounded-3xl border border-white/15 bg-[#111010]/90 p-7 shadow-2xl sm:p-10 lg:p-12">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
-          <div class="inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/50 bg-[#e62314]/15 px-4 py-1.5">
-            <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
-            <span class="font-label text-xs uppercase tracking-widest text-[#ff4b3d]">Quem Somos · Natal/RN</span>
+  <section id="quem-somos" class="section-dark" style="background: linear-gradient(180deg, #0b0909 0%, #120c0c 55%, #070606 100%);">
+    <div class="container-padrao">
+      <div class="about-box">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.5rem;">
+          <div style="display: inline-flex; align-items: center; gap: 0.625rem; border-radius: 9999px; border: 1px solid rgba(230,35,20,0.5); background: rgba(230,35,20,0.15); padding: 0.35rem 1rem;">
+            <img src="img/fogo.png" alt="" style="height: 1rem; width: 1rem; object-fit: contain;" />
+            <span class="font-label" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #ff4b3d;">Quem Somos · Natal/RN</span>
           </div>
-          <span class="font-accent text-[11px] uppercase tracking-widest text-white/60">Comunicação & Tecnologia em Vendas</span>
+          <span class="font-accent" style="font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);">Comunicação & Tecnologia em Vendas</span>
         </div>
 
-        <div class="mt-8 grid items-start gap-10 lg:grid-cols-12">
-          <div class="lg:col-span-7">
-            <h2 class="font-display text-3xl uppercase leading-[1.05] text-white sm:text-4xl lg:text-5xl">
-              Cinema como linguagem, <span class="text-[#e62314]">tecnologia e venda</span> como resultado
+        <div class="about-grid" style="margin-top: 2rem;">
+          <div class="about-left">
+            <h2 class="font-display" style="margin: 0; font-size: clamp(1.85rem, 3.8vw, 3rem); line-height: 1.05; text-transform: uppercase; color: #fff;">
+              Cinema como linguagem, <span class="text-red">tecnologia e venda</span> como resultado
             </h2>
 
-            <div class="mt-6 space-y-4 text-base leading-relaxed text-white/90 sm:text-lg">
-              <p>
+            <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; font-size: 1.05rem; color: rgba(255,255,255,0.9);">
+              <p style="margin: 0;">
                 Sediada em Natal/RN, a Chama Cine une realizadores audiovisuais e estrategistas comerciais em um único núcleo de comunicação e tecnologia em vendas.
               </p>
-              <p>
+              <p style="margin: 0;">
                 Diagnosticamos o gargalo da sua operação, estruturamos sua marca e colocamos filmes, páginas, apps e campanhas para rodar com foco em retorno real.
               </p>
             </div>
           </div>
 
-          <div class="flex flex-col justify-between gap-6 rounded-2xl border border-white/10 bg-[#0b0a0a] p-6 lg:col-span-5">
-            <div class="flex items-start gap-4">
+          <div class="about-right" style="border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background-color: #0b0a0a; padding: 1.5rem;">
+            <div style="display: flex; align-items: flex-start; gap: 1rem;">
               <img
                 src="img/dinossauro.png"
                 alt="Selo criativo Chama Cine"
-                class="h-16 w-16 shrink-0 rounded-xl border border-white/15 bg-[#f4f1ea] p-1.5 object-contain"
+                style="height: 4rem; width: 4rem; flex-shrink: 0; border-radius: 0.75rem; border: 1px solid rgba(255,255,255,0.15); background-color: #f4f1ea; padding: 0.35rem; object-fit: contain;"
               />
               <div>
-                <span class="font-accent block text-[10px] uppercase tracking-widest text-[#e62314]">Assinatura & Repertório</span>
-                <strong class="font-display mt-1 block text-base uppercase text-white">Direção Artística & Estratégia Comercial</strong>
-                <p class="mt-1.5 text-xs leading-relaxed text-white/75">
+                <span class="font-accent text-red" style="display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;">Assinatura & Repertório</span>
+                <strong class="font-display" style="display: block; margin-top: 0.25rem; font-size: 1rem; text-transform: uppercase; color: #fff;">Direção Artística & Estratégia Comercial</strong>
+                <p style="margin: 0.35rem 0 0 0; font-size: 0.75rem; color: rgba(255,255,255,0.75);">
                   Obras e campanhas com assinatura Chama Cine no Rio2C, TV, cinema e performance digital.
                 </p>
               </div>
             </div>
 
-            <div class="flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
-              <a
-                href="#diagnostico"
-                class="font-display inline-flex flex-1 items-center justify-center rounded-full bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]"
-              >
+            <div style="margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.75rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.25rem;">
+              <a href="#diagnostico" class="btn-red" style="flex: 1; padding: 0.75rem 1.25rem; font-size: 0.75rem;">
                 Falar com o Núcleo →
               </a>
-              <a
-                href="#acervo"
-                class="font-label inline-flex items-center justify-center rounded-full border border-white/20 px-4 py-3 text-xs uppercase tracking-wider text-white/85 transition hover:border-white/40 hover:text-white"
-              >
+              <a href="#acervo" class="btn-outline" style="padding: 0.75rem 1rem; font-size: 0.75rem;">
                 Ver Acervo
               </a>
             </div>
@@ -714,90 +1434,85 @@
   </section>
 
   <!-- 06 · DIAGNÓSTICO -->
-  <section id="diagnostico" class="relative overflow-hidden border-b border-white/15 py-20">
-    <div
-      class="pointer-events-none absolute inset-0"
-      style="background-image: url('img/fundo-contato.jpg'); background-size: cover; background-position: center;"
-    ></div>
-
-    <div class="relative z-10 mx-auto grid max-w-7xl items-start gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-      <div class="lg:col-span-6">
-        <div class="font-label inline-flex items-center gap-2 rounded-full border border-[#e62314]/50 bg-[#121010]/80 px-3.5 py-1.5 text-xs uppercase tracking-wider text-white backdrop-blur-sm">
-          <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
+  <section id="diagnostico" class="section-dark" style="background-color: #090808; background-image: url('img/fundo-contato.jpg'); background-size: cover; background-position: center;">
+    <div class="container-padrao contact-grid">
+      <div class="contact-left">
+        <div class="font-label" style="display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 9999px; border: 1px solid rgba(230,35,20,0.5); background: rgba(18,16,16,0.85); padding: 0.35rem 0.85rem; font-size: 0.75rem; text-transform: uppercase; color: #fff;">
+          <img src="img/fogo.png" alt="" style="height: 1rem; width: 1rem; object-fit: contain;" />
           Chama Cine · Natal/RN
         </div>
 
-        <h2 class="font-display mt-4 text-3xl uppercase leading-[1.06] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-4xl lg:text-[2.7rem]">
-          Diagnóstico comercial: onde sua marca pode <span class="text-[#e62314]">vender mais?</span>
+        <h2 class="font-display" style="margin: 1rem 0 0 0; font-size: clamp(1.85rem, 3.6vw, 2.7rem); line-height: 1.06; text-transform: uppercase; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.85);">
+          Diagnóstico comercial: onde sua marca pode <span class="text-red">vender mais?</span>
         </h2>
 
-        <p class="mt-3 text-base leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
+        <p style="margin-top: 0.75rem; font-size: 1rem; color: rgba(255,255,255,0.95); text-shadow: 0 1px 8px rgba(0,0,0,0.85);">
           Em uma conversa objetiva, mapeamos o que está travando suas vendas e indicamos a estrutura ideal para o seu momento.
         </p>
 
-        <ul class="mt-6 space-y-3">
-          <li class="flex items-start gap-3 rounded-2xl border border-white/15 bg-[#111010]/80 p-3.5 backdrop-blur-sm">
-            <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">01</span>
-            <div class="text-xs leading-relaxed">
-              <strong class="font-display block text-sm uppercase text-white">Gargalo de Atração & Conversão</strong>
-              <span class="text-white/80">Identificamos onde o lead esfria entre o anúncio, o perfil, a página/app e o fechamento.</span>
+        <ul style="margin: 1.5rem 0 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+          <li style="display: flex; align-items: flex-start; gap: 0.75rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(17,16,16,0.85); padding: 0.875rem;">
+            <span class="font-accent" style="display: inline-flex; height: 1.5rem; width: 1.5rem; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 9999px; background: #e62314; font-size: 0.65rem; color: #fff;">01</span>
+            <div style="font-size: 0.75rem;">
+              <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">Gargalo de Atração & Conversão</strong>
+              <span style="color: rgba(255,255,255,0.8);">Identificamos onde o lead esfria entre o anúncio, o perfil, a página/app e o fechamento.</span>
             </div>
           </li>
 
-          <li class="flex items-start gap-3 rounded-2xl border border-white/15 bg-[#111010]/80 p-3.5 backdrop-blur-sm">
-            <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">02</span>
-            <div class="text-xs leading-relaxed">
-              <strong class="font-display block text-sm uppercase text-white">Frentes Prioritárias Sob Medida</strong>
-              <span class="text-white/80">Definimos se o foco imediato é lançar do zero, produzir filmes, rodar tráfego ou criar app/página.</span>
+          <li style="display: flex; align-items: flex-start; gap: 0.75rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(17,16,16,0.85); padding: 0.875rem;">
+            <span class="font-accent" style="display: inline-flex; height: 1.5rem; width: 1.5rem; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 9999px; background: #e62314; font-size: 0.65rem; color: #fff;">02</span>
+            <div style="font-size: 0.75rem;">
+              <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">Frentes Prioritárias Sob Medida</strong>
+              <span style="color: rgba(255,255,255,0.8);">Definimos se o foco imediato é lançar do zero, produzir filmes, rodar tráfego ou criar app/página.</span>
             </div>
           </li>
 
-          <li class="flex items-start gap-3 rounded-2xl border border-white/15 bg-[#111010]/80 p-3.5 backdrop-blur-sm">
-            <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">03</span>
-            <div class="text-xs leading-relaxed">
-              <strong class="font-display block text-sm uppercase text-white">Plano Prático Sem Enrolação</strong>
-              <span class="text-white/80">Você sai com clareza de próximos passos, entregáveis e caminhos diretos para falar com o time.</span>
+          <li style="display: flex; align-items: flex-start; gap: 0.75rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(17,16,16,0.85); padding: 0.875rem;">
+            <span class="font-accent" style="display: inline-flex; height: 1.5rem; width: 1.5rem; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 9999px; background: #e62314; font-size: 0.65rem; color: #fff;">03</span>
+            <div style="font-size: 0.75rem;">
+              <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">Plano Prático Sem Enrolação</strong>
+              <span style="color: rgba(255,255,255,0.8);">Você sai com clareza de próximos passos, entregáveis e caminhos diretos para falar com o time.</span>
             </div>
           </li>
         </ul>
 
-        <div class="mt-6 grid gap-3 sm:grid-cols-3">
-          <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20estruturar%20meu%20neg%C3%B3cio%20para%20vender%20mais." target="_blank" rel="noopener" onclick="trackLead('Contato WhatsApp')" class="rounded-2xl border border-white/15 bg-[#111010]/80 p-3.5 backdrop-blur-sm transition hover:border-[#e62314]">
-            <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">WHATSAPP ↗</span>
-            <strong class="font-label mt-1 block text-xs text-white">(84) 99630-5371</strong>
+        <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.75rem;">
+          <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20estruturar%20meu%20neg%C3%B3cio%20para%20vender%20mais." target="_blank" rel="noopener" onclick="trackLead('Contato WhatsApp')" style="border-radius: 1rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(17,16,16,0.85); padding: 0.875rem; display: block;">
+            <span class="font-accent text-red" style="display: block; font-size: 0.65rem; text-transform: uppercase;">WHATSAPP ↗</span>
+            <strong class="font-label" style="display: block; margin-top: 0.25rem; font-size: 0.75rem; color: #fff;">(84) 99630-5371</strong>
           </a>
 
-          <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" class="rounded-2xl border border-white/15 bg-[#111010]/80 p-3.5 backdrop-blur-sm transition hover:border-[#e62314]">
-            <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">E-MAIL ↗</span>
-            <strong class="font-label mt-1 block truncate text-xs text-white">adm@chamacine.com.br</strong>
+          <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" onclick="rastrearEvento('email_click')" style="border-radius: 1rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(17,16,16,0.85); padding: 0.875rem; display: block;">
+            <span class="font-accent text-red" style="display: block; font-size: 0.65rem; text-transform: uppercase;">E-MAIL ↗</span>
+            <strong class="font-label" style="display: block; margin-top: 0.25rem; font-size: 0.75rem; color: #fff; overflow: hidden; text-overflow: ellipsis;">adm@chamacine.com.br</strong>
           </a>
 
-          <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="rounded-2xl border border-white/15 bg-[#111010]/80 p-3.5 backdrop-blur-sm transition hover:border-[#e62314]">
-            <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">INSTAGRAM ↗</span>
-            <strong class="font-label mt-1 block text-xs text-white">@chamacine</strong>
+          <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" onclick="rastrearEvento('instagram_click')" style="border-radius: 1rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(17,16,16,0.85); padding: 0.875rem; display: block;">
+            <span class="font-accent text-red" style="display: block; font-size: 0.65rem; text-transform: uppercase;">INSTAGRAM ↗</span>
+            <strong class="font-label" style="display: block; margin-top: 0.25rem; font-size: 0.75rem; color: #fff;">@chamacine</strong>
           </a>
         </div>
       </div>
 
       <!-- Formulário Comercial -->
-      <div class="lg:col-span-6">
-        <form onsubmit="enviarFormContato(event)" class="space-y-4 rounded-3xl border border-white/15 bg-[#111010]/85 p-6 shadow-2xl backdrop-blur-md sm:p-8">
-          <h3 class="font-display text-2xl uppercase text-white">Solicitar Diagnóstico Comercial</h3>
-          <p class="text-sm text-white/75">Preencha abaixo e enviaremos sua solicitação diretamente no WhatsApp da Chama Cine.</p>
+      <div class="contact-right" style="margin-top: 2rem;">
+        <form onsubmit="enviarFormContato(event)" style="display: flex; flex-direction: column; gap: 1rem; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(17,16,16,0.88); padding: 1.75rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.65);">
+          <h3 class="font-display" style="margin: 0; font-size: 1.5rem; text-transform: uppercase; color: #fff;">Solicitar Diagnóstico Comercial</h3>
+          <p style="margin: 0; font-size: 0.875rem; color: rgba(255,255,255,0.75);">Preencha abaixo e enviaremos sua solicitação diretamente no WhatsApp da Chama Cine.</p>
 
           <div>
-            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/80">Seu Nome</label>
-            <input type="text" id="form-nome" required placeholder="Ex.: João Silva" class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/45 focus:border-[#e62314] focus:outline-none" />
+            <label for="form-nome" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Seu Nome</label>
+            <input type="text" id="form-nome" required placeholder="Ex.: João Silva" class="input-dark" />
           </div>
 
           <div>
-            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/80">Empresa ou Instagram</label>
-            <input type="text" id="form-empresa" required placeholder="Ex.: @suaempresa" class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/45 focus:border-[#e62314] focus:outline-none" />
+            <label for="form-empresa" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Empresa ou Instagram</label>
+            <input type="text" id="form-empresa" required placeholder="Ex.: @suaempresa" class="input-dark" />
           </div>
 
           <div>
-            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/80">Momento do Negócio</label>
-            <select id="form-estagio" required class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white focus:border-[#e62314] focus:outline-none">
+            <label for="form-estagio" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Momento do Negócio</label>
+            <select id="form-estagio" required class="input-dark">
               <option value="">Selecione uma opção...</option>
               <option value="Começar do zero (ainda não tenho estrutura)">Começar do zero (ainda não tenho estrutura)</option>
               <option value="Preciso de filmes publicitários / Reels">Preciso de filmes publicitários / Reels</option>
@@ -807,15 +1522,15 @@
           </div>
 
           <div>
-            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/80">Resumo do Objetivo</label>
-            <textarea id="form-objetivo" rows="3" placeholder="Conte em poucas linhas o que você quer estruturar ou vender..." class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/45 focus:border-[#e62314] focus:outline-none"></textarea>
+            <label for="form-objetivo" class="font-label" style="display: block; margin-bottom: 0.35rem; font-size: 0.75rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Resumo do Objetivo</label>
+            <textarea id="form-objetivo" rows="3" placeholder="Conte em poucas linhas o que você quer estruturar ou vender..." class="input-dark"></textarea>
           </div>
 
-          <p class="text-[11px] leading-relaxed text-white/65">
-            Ao enviar, você concorda com o tratamento dos seus dados para retorno comercial conforme o <button type="button" onclick="abrirAvisoLgpd()" class="underline hover:text-white">Aviso de Privacidade (LGPD)</button>.
+          <p style="margin: 0; font-size: 0.7rem; color: rgba(255,255,255,0.65);">
+            Ao enviar, você concorda com o tratamento dos seus dados para retorno comercial conforme o <button type="button" onclick="abrirAvisoLgpd()" style="background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; cursor: pointer;">Aviso de Privacidade (LGPD)</button>.
           </p>
 
-          <button type="submit" class="font-display w-full rounded-full bg-[#e62314] px-6 py-4 text-xs uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]">
+          <button type="submit" class="btn-red" style="width: 100%; padding: 1rem 1.5rem; font-size: 0.75rem;">
             Enviar e Abrir WhatsApp
           </button>
         </form>
@@ -824,89 +1539,84 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="relative overflow-hidden bg-[#050505] py-12 text-xs text-white/80">
-    <div
-      class="pointer-events-none absolute inset-0"
-      style="background-image: url('img/fundo-rodape.jpg'); background-size: cover; background-position: center;"
-    ></div>
-
-    <div class="relative z-10 mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
-      <div class="flex items-center gap-4">
-        <img src="img/logo-rodape.png" alt="Chama Cine" class="h-10 w-auto object-contain" />
-        <span class="font-label drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">© 2026 Chama Cine · Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN.</span>
+  <footer class="site-footer" style="background-image: url('img/fundo-rodape.jpg'); background-size: cover; background-position: center;">
+    <div class="container-padrao footer-inner">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <img src="img/logo-rodape.png" alt="Chama Cine" style="height: 2.5rem; width: auto; object-fit: contain;" />
+        <span class="font-label" style="text-shadow: 0 1px 6px rgba(0,0,0,0.9);">© 2026 Chama Cine · Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN.</span>
       </div>
-      <div class="font-label flex flex-wrap items-center gap-5 text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
-        <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="hover:text-[#e62314]">@chamacine</a>
-        <a href="mailto:adm@chamacine.com.br" class="hover:text-[#e62314]">adm@chamacine.com.br</a>
-        <a href="https://wa.me/5584996305371" target="_blank" rel="noopener" class="hover:text-[#e62314]">(84) 99630-5371</a>
-        <button type="button" onclick="abrirAvisoLgpd()" class="underline-offset-4 hover:text-[#e62314] hover:underline">
+      <div class="font-label" style="display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.9);">
+        <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener">@chamacine</a>
+        <a href="mailto:adm@chamacine.com.br">adm@chamacine.com.br</a>
+        <a href="https://wa.me/5584996305371" target="_blank" rel="noopener">(84) 99630-5371</a>
+        <button type="button" onclick="abrirAvisoLgpd()" style="background: none; border: 0; padding: 0; color: #fff; font-size: inherit; text-decoration: underline; cursor: pointer;">
           Aviso de Privacidade (LGPD) & Cookies
         </button>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL LGPD & COOKIES (ACESSADO PELO LINK NO RODAPÉ) -->
-  <div id="modal-lgpd" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-lgpd">
-    <div class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-white/15 bg-[#111010] p-6 shadow-2xl sm:p-8">
-      <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
+  <!-- MODAL LGPD & COOKIES -->
+  <div id="modal-lgpd" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-lgpd">
+    <div style="max-height: 90vh; width: 100%; max-width: 42rem; overflow-y: auto; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.15); background-color: #111010; padding: 1.75rem;">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
         <div>
-          <span class="font-accent text-[10px] uppercase tracking-widest text-[#e62314]">Conformidade Legal · Lei nº 13.709/2018</span>
-          <h3 id="titulo-modal-lgpd" class="font-display mt-1 text-xl uppercase text-white sm:text-2xl">
+          <span class="font-accent text-red" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;">Conformidade Legal · Lei nº 13.709/2018</span>
+          <h3 id="titulo-modal-lgpd" class="font-display" style="margin: 0.25rem 0 0 0; font-size: 1.25rem; text-transform: uppercase; color: #fff;">
             Aviso de Privacidade (LGPD) & Cookies
           </h3>
         </div>
-        <button type="button" onclick="fecharAvisoLgpd()" aria-label="Fechar aviso de privacidade" class="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-base text-white hover:border-[#e62314] hover:bg-[#e62314]">×</button>
+        <button type="button" onclick="fecharAvisoLgpd()" aria-label="Fechar aviso de privacidade" class="btn-outline" style="height: 2rem; width: 2rem; padding: 0;">×</button>
       </div>
 
-      <div class="mt-5 space-y-4 text-xs leading-relaxed text-white/80">
-        <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
-          <strong class="font-display block text-sm uppercase text-white">1. Finalidade e Base Legal (LGPD)</strong>
-          <p class="mt-1.5">
+      <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 1rem; font-size: 0.75rem; color: rgba(255,255,255,0.8);">
+        <div style="border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.45); padding: 1rem;">
+          <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">1. Finalidade e Base Legal (LGPD)</strong>
+          <p style="margin: 0.35rem 0 0 0;">
             Os dados informados nos formulários de diagnóstico (nome, empresa ou @instagram, momento do negócio e resumo do objetivo) são coletados e tratados exclusivamente para retorno comercial, diagnóstico e elaboração de propostas solicitadas pelo titular, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
-          <strong class="font-display block text-sm uppercase text-white">2. Direitos do Titular e Canal de Atendimento</strong>
-          <p class="mt-1.5">
-            Nos termos do art. 18 da LGPD, você pode solicitar confirmação de existência de tratamento, acesso, correção, anonimização, portabilidade, revogação de consentimento ou eliminação de dados pessoais entrando em contato com a Chama Cine (Natal/RN) pelo e-mail <a href="mailto:adm@chamacine.com.br" class="text-[#ff4b3d] underline">adm@chamacine.com.br</a>.
+        <div style="border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.45); padding: 1rem;">
+          <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">2. Direitos do Titular e Canal de Atendimento</strong>
+          <p style="margin: 0.35rem 0 0 0;">
+            Nos termos do art. 18 da LGPD, você pode solicitar confirmação de existência de tratamento, acesso, correção, anonimização, portabilidade, revogação de consentimento ou eliminação de dados pessoais entrando em contato com a Chama Cine (Natal/RN) pelo e-mail <a href="mailto:adm@chamacine.com.br" style="color: #ff4b3d; text-decoration: underline;">adm@chamacine.com.br</a>.
           </p>
         </div>
 
-        <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
-          <strong class="font-display block text-sm uppercase text-white">3. Autorização e Gestão de Cookies</strong>
-          <p class="mt-1.5">
+        <div style="border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.45); padding: 1rem;">
+          <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">3. Autorização e Gestão de Cookies</strong>
+          <p style="margin: 0.35rem 0 0 0;">
             Utilizamos armazenamento essencial para funcionamento e memorização das suas escolhas. Cookies ou tags opcionais de medição e marketing somente são ativados mediante o seu consentimento explícito.
           </p>
         </div>
       </div>
 
-      <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
-        <button type="button" onclick="fecharAvisoLgpd(); abrirPreferenciasCookies();" class="font-label rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs text-white transition hover:border-[#e62314]">
+      <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+        <button type="button" onclick="fecharAvisoLgpd(); abrirPreferenciasCookies();" class="btn-outline" style="padding: 0.5rem 1rem; font-size: 0.75rem;">
           Gerenciar preferências de cookies
         </button>
-        <button type="button" onclick="fecharAvisoLgpd()" class="font-display rounded-full bg-[#e62314] px-5 py-2 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+        <button type="button" onclick="fecharAvisoLgpd()" class="btn-red" style="padding: 0.5rem 1.25rem; font-size: 0.75rem;">
           Fechar
         </button>
       </div>
     </div>
   </div>
 
-  <!-- BANNER COMPACTO DE CONSENTIMENTO DE COOKIES (LGPD) -->
-  <div id="banner-cookies" class="fixed inset-x-0 bottom-0 z-50 hidden p-3 sm:p-4" role="region" aria-label="Consentimento de cookies">
-    <div class="mx-auto flex max-w-5xl flex-col justify-between gap-3 rounded-2xl border border-white/20 bg-[#111010]/95 px-4 py-3 shadow-2xl backdrop-blur-md sm:flex-row sm:items-center">
-      <p class="text-xs leading-relaxed text-white/85">
-        <strong class="font-label text-white">Cookies e LGPD:</strong> utilizamos cookies essenciais e, com sua autorização, cookies opcionais. Veja o <button type="button" onclick="abrirAvisoLgpd()" class="text-[#ff4b3d] underline">Aviso de Privacidade (LGPD) & Cookies</button>.
+  <!-- BANNER DE CONSENTIMENTO DE COOKIES (LGPD) -->
+  <div id="banner-cookies" class="cookie-banner hidden" role="region" aria-label="Consentimento de cookies">
+    <div style="margin: 0 auto; max-width: 64rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.2); background: rgba(17,16,16,0.96); padding: 0.75rem 1rem; backdrop-filter: blur(12px);">
+      <p style="margin: 0; font-size: 0.75rem; color: rgba(255,255,255,0.85);">
+        <strong class="font-label" style="color: #fff;">Cookies e LGPD:</strong> utilizamos cookies essenciais e, com sua autorização, cookies opcionais. Veja o <button type="button" onclick="abrirAvisoLgpd()" style="background: none; border: 0; padding: 0; color: #ff4b3d; font-size: inherit; text-decoration: underline; cursor: pointer;">Aviso de Privacidade (LGPD) & Cookies</button>.
       </p>
-      <div class="flex shrink-0 flex-wrap items-center gap-2">
-        <button type="button" onclick="rejeitarCookies()" class="font-label rounded-full border border-white/20 px-3.5 py-1.5 text-xs text-white/85 transition hover:border-white/40 hover:text-white">
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <button type="button" onclick="rejeitarCookies()" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.75rem;">
           Apenas essenciais
         </button>
-        <button type="button" onclick="abrirPreferenciasCookies()" class="font-label rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-xs text-white transition hover:border-white/40">
+        <button type="button" onclick="abrirPreferenciasCookies()" class="btn-outline" style="padding: 0.4rem 0.85rem; font-size: 0.75rem;">
           Configurar
         </button>
-        <button type="button" onclick="aceitarTodosCookies()" class="font-display rounded-full bg-[#e62314] px-4 py-1.5 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+        <button type="button" onclick="aceitarTodosCookies()" class="btn-red" style="padding: 0.4rem 1rem; font-size: 0.75rem;">
           Aceitar todos
         </button>
       </div>
@@ -914,126 +1624,103 @@
   </div>
 
   <!-- MODAL DE PREFERÊNCIAS DE COOKIES -->
-  <div id="modal-cookies" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-cookies">
-    <div class="w-full max-w-xl rounded-3xl border border-white/15 bg-[#111010] p-6 shadow-2xl sm:p-7">
-      <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
+  <div id="modal-cookies" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-cookies">
+    <div style="width: 100%; max-width: 36rem; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.15); background-color: #111010; padding: 1.75rem;">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
         <div>
-          <span class="font-accent text-[10px] uppercase tracking-widest text-[#e62314]">LGPD · Lei nº 13.709/2018</span>
-          <h3 id="titulo-modal-cookies" class="font-display mt-1 text-xl uppercase text-white">Preferências de Cookies</h3>
+          <span class="font-accent text-red" style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;">LGPD · Lei nº 13.709/2018</span>
+          <h3 id="titulo-modal-cookies" class="font-display" style="margin: 0.25rem 0 0 0; font-size: 1.25rem; text-transform: uppercase; color: #fff;">Preferências de Cookies</h3>
         </div>
-        <button type="button" onclick="fecharPreferenciasCookies()" aria-label="Fechar preferências de cookies" class="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-base text-white hover:border-[#e62314] hover:bg-[#e62314]">×</button>
+        <button type="button" onclick="fecharPreferenciasCookies()" aria-label="Fechar preferências de cookies" class="btn-outline" style="height: 2rem; width: 2rem; padding: 0;">×</button>
       </div>
 
-      <div class="mt-5 space-y-3 text-xs">
-        <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/45 p-4">
+      <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.75rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.45); padding: 1rem;">
           <div>
-            <strong class="font-display block text-sm uppercase text-white">Cookies Essenciais</strong>
-            <span class="mt-0.5 block text-white/70">Necessários para navegação, segurança e registro do seu consentimento.</span>
+            <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">Cookies Essenciais</strong>
+            <span style="display: block; margin-top: 0.15rem; color: rgba(255,255,255,0.7);">Necessários para navegação, segurança e registro do seu consentimento.</span>
           </div>
-          <span class="font-accent rounded-full bg-white/10 px-3 py-1 text-[10px] uppercase text-white/80">Sempre ativo</span>
+          <span class="font-accent" style="border-radius: 9999px; background: rgba(255,255,255,0.1); padding: 0.25rem 0.75rem; font-size: 0.65rem; text-transform: uppercase; color: rgba(255,255,255,0.8);">Sempre ativo</span>
         </div>
 
-        <label class="flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/45 p-4">
+        <label style="display: flex; cursor: pointer; align-items: center; justify-content: space-between; gap: 1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.45); padding: 1rem;">
           <div>
-            <strong class="font-display block text-sm uppercase text-white">Medição e Desempenho</strong>
-            <span class="mt-0.5 block text-white/70">Ajuda a entender estabilidade e uso das páginas e seções do site.</span>
+            <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">Medição e Desempenho (GA4)</strong>
+            <span style="display: block; margin-top: 0.15rem; color: rgba(255,255,255,0.7);">Ajuda a medir visitas, navegação e eventos de conversão no Google Analytics.</span>
           </div>
-          <input type="checkbox" id="cookie-analytics" class="h-4 w-4 accent-[#e62314]" />
+          <input type="checkbox" id="cookie-analytics" style="height: 1rem; width: 1rem; accent-color: #e62314;" />
         </label>
 
-        <label class="flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/45 p-4">
+        <label style="display: flex; cursor: pointer; align-items: center; justify-content: space-between; gap: 1rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.45); padding: 1rem;">
           <div>
-            <strong class="font-display block text-sm uppercase text-white">Marketing e Conversão</strong>
-            <span class="mt-0.5 block text-white/70">Permite mensurar campanhas e eventos de contato (como Meta Pixel) quando habilitado.</span>
+            <strong class="font-display" style="display: block; font-size: 0.875rem; text-transform: uppercase; color: #fff;">Marketing e Conversão (Meta)</strong>
+            <span style="display: block; margin-top: 0.15rem; color: rgba(255,255,255,0.7);">Permite mensurar campanhas e leads no Meta Pixel quando habilitado.</span>
           </div>
-          <input type="checkbox" id="cookie-marketing" class="h-4 w-4 accent-[#e62314]" />
+          <input type="checkbox" id="cookie-marketing" style="height: 1rem; width: 1rem; accent-color: #e62314;" />
         </label>
       </div>
 
-      <div class="mt-6 flex flex-wrap justify-end gap-2.5">
-        <button type="button" onclick="rejeitarCookies()" class="font-label rounded-full border border-white/20 px-4 py-2.5 text-xs text-white/85 hover:text-white">
+      <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.65rem;">
+        <button type="button" onclick="rejeitarCookies()" class="btn-outline" style="padding: 0.6rem 1rem; font-size: 0.75rem;">
           Rejeitar opcionais
         </button>
-        <button type="button" onclick="salvarPreferenciasCookies()" class="font-display rounded-full bg-[#e62314] px-5 py-2.5 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+        <button type="button" onclick="salvarPreferenciasCookies()" class="btn-red" style="padding: 0.6rem 1.25rem; font-size: 0.75rem;">
           Salvar preferências
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL EDITORIAL COM IDENTIDADE VISUAL CHAMA CINE (8 FRENTES) -->
-  <div id="modal-frente" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-md" role="dialog" aria-modal="true">
-    <div class="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-3xl border border-[#e62314]/45 bg-[#090808] shadow-[0_25px_90px_rgba(230,35,20,0.22)]">
-      <div
-        class="h-6 w-full opacity-90"
-        style="background-image: url('img/borda-projetos.png'); background-repeat: repeat-x; background-size: auto 100%;"
-        aria-hidden="true"
-      ></div>
+  <!-- MODAL EDITORIAL (8 FRENTES) -->
+  <div id="modal-frente" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div style="position: relative; max-height: 92vh; width: 100%; max-width: 56rem; overflow-y: auto; border-radius: 1.5rem; border: 1px solid rgba(230,35,20,0.45); background-color: #090808;">
+      <div style="height: 1.5rem; width: 100%; background-image: url('img/borda-projetos.png'); background-repeat: repeat-x; background-size: auto 100%; opacity: 0.9;" aria-hidden="true"></div>
 
-      <button
-        type="button"
-        onclick="fecharModalFrente()"
-        aria-label="Fechar detalhes da frente"
-        class="absolute right-4 top-8 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-[#070606]/90 text-xl text-white transition hover:border-[#e62314] hover:bg-[#e62314]"
-      >×</button>
+      <button type="button" onclick="fecharModalFrente()" aria-label="Fechar detalhes da frente" class="btn-outline" style="position: absolute; right: 1rem; top: 2rem; z-index: 20; height: 2.5rem; width: 2.5rem; padding: 0;">×</button>
 
-      <div class="grid md:grid-cols-12">
-        <div
-          class="relative flex flex-col justify-between overflow-hidden border-b border-white/10 bg-gradient-to-br from-[#190908] via-[#0e0a0a] to-[#070606] p-6 sm:p-8 md:col-span-5 md:border-b-0 md:border-r"
-        >
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <div style="display: flex; flex-direction: column; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); background: linear-gradient(135deg, #190908 0%, #0e0a0a 60%, #070606 100%); padding: 1.75rem;">
           <div>
-            <div class="inline-flex items-center gap-2 rounded-full border border-[#e62314]/60 bg-black/75 px-3 py-1">
-              <img src="img/fogo.png" alt="" class="h-3.5 w-3.5 object-contain" />
-              <span id="frente-badge" class="font-accent text-[10px] uppercase tracking-widest text-[#e62314]"></span>
+            <div style="display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 9999px; border: 1px solid rgba(230,35,20,0.6); background: rgba(0,0,0,0.75); padding: 0.25rem 0.75rem;">
+              <img src="img/fogo.png" alt="" style="height: 0.875rem; width: 0.875rem; object-fit: contain;" />
+              <span id="frente-badge" class="font-accent text-red" style="font-size: 0.65rem; text-transform: uppercase;"></span>
             </div>
 
-            <div class="mt-6 flex items-center gap-4">
-              <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#e62314]/50 bg-[#0d0c0c]/90 p-3 shadow-lg shadow-[#e62314]/20">
-                <img id="frente-icone" src="" alt="" class="h-full w-full object-contain" />
+            <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+              <div style="display: flex; height: 4rem; width: 4rem; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 1rem; border: 1px solid rgba(230,35,20,0.5); background: #0d0c0c; padding: 0.75rem;">
+                <img id="frente-icone" src="" alt="" style="height: 100%; width: 100%; object-fit: contain;" />
               </div>
-              <span id="frente-numero-grande" class="font-accent text-4xl tracking-wider text-white/30">01</span>
+              <span id="frente-numero-grande" class="font-accent" style="font-size: 2.25rem; color: rgba(255,255,255,0.3);">01</span>
             </div>
 
-            <h3 id="frente-titulo" class="font-display mt-5 text-2xl uppercase leading-tight text-[#f4f1ea] sm:text-3xl"></h3>
-            <p id="frente-resumo" class="mt-3 text-sm leading-relaxed text-[#f4f1ea]/90"></p>
+            <h3 id="frente-titulo" class="font-display" style="margin: 1.25rem 0 0 0; font-size: 1.65rem; text-transform: uppercase; color: #f4f1ea;"></h3>
+            <p id="frente-resumo" style="margin-top: 0.75rem; font-size: 0.875rem; color: rgba(244,241,234,0.9);"></p>
           </div>
 
-          <div class="mt-8 flex items-center gap-3 rounded-2xl border border-white/15 bg-black/75 p-3.5 backdrop-blur-sm">
-            <img src="img/dinossauro.png" alt="Assinatura Chama Cine" class="h-11 w-11 shrink-0 rounded-xl bg-[#f4f1ea] p-1 object-contain" />
-            <div class="text-[11px] leading-snug text-white/85">
-              <strong class="font-display block uppercase text-white">Arquitetura Chama Cine</strong>
+          <div style="margin-top: 2rem; display: flex; align-items: center; gap: 0.75rem; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.75); padding: 0.85rem;">
+            <img src="img/dinossauro.png" alt="Assinatura Chama Cine" style="height: 2.75rem; width: 2.75rem; flex-shrink: 0; border-radius: 0.75rem; background: #f4f1ea; padding: 0.25rem; object-fit: contain;" />
+            <div style="font-size: 0.7rem; color: rgba(255,255,255,0.85);">
+              <strong class="font-display" style="display: block; text-transform: uppercase; color: #fff;">Arquitetura Chama Cine</strong>
               Direção criativa + performance comercial integrada.
             </div>
           </div>
         </div>
 
-        <div class="flex flex-col justify-between bg-[#0b0a0a] p-6 sm:p-8 md:col-span-7">
-          <div class="space-y-5">
-            <div class="rounded-2xl border border-white/15 bg-[#131111] p-5">
-              <div class="flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-[#e62314]"></span>
-                <h4 class="font-accent text-[11px] uppercase tracking-widest text-white">Como funciona na prática</h4>
-              </div>
-              <p id="frente-aplicacao" class="mt-2.5 text-sm leading-relaxed text-white/85"></p>
+        <div style="display: flex; flex-direction: column; justify-content: space-between; background-color: #0b0a0a; padding: 1.75rem;">
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div style="border-radius: 1rem; border: 1px solid rgba(255,255,255,0.15); background: #131111; padding: 1.25rem;">
+              <h4 class="font-accent" style="margin: 0; font-size: 0.7rem; text-transform: uppercase; color: #fff;">Como funciona na prática</h4>
+              <p id="frente-aplicacao" style="margin: 0.65rem 0 0 0; font-size: 0.875rem; color: rgba(255,255,255,0.85);"></p>
             </div>
 
-            <div class="rounded-2xl border-l-4 border-[#e62314] bg-[#f4f1ea] p-5 text-[#070606] shadow-xl">
-              <div class="flex items-center gap-2">
-                <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
-                <h4 class="font-accent text-[11px] uppercase tracking-widest text-[#e62314]">Retorno real para o negócio</h4>
-              </div>
-              <p id="frente-retorno" class="mt-2.5 text-sm font-semibold leading-relaxed text-[#141212]"></p>
+            <div style="border-radius: 1rem; border-left: 4px solid #e62314; background: #f4f1ea; padding: 1.25rem; color: #070606;">
+              <h4 class="font-accent text-red" style="margin: 0; font-size: 0.7rem; text-transform: uppercase;">Retorno real para o negócio</h4>
+              <p id="frente-retorno" style="margin: 0.65rem 0 0 0; font-size: 0.875rem; font-weight: 600; color: #141212;"></p>
             </div>
           </div>
 
-          <div class="mt-7 pt-2">
-            <a
-              id="frente-whats"
-              href="https://wa.me/5584996305371"
-              target="_blank"
-              rel="noopener"
-              class="font-display inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#e62314] px-6 py-4 text-xs uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/30 transition hover:bg-[#ff3322]"
-            >
+          <div style="margin-top: 1.75rem;">
+            <a id="frente-whats" href="https://wa.me/5584996305371" target="_blank" rel="noopener" onclick="trackLead('Modal Frente WhatsApp')" class="btn-red" style="width: 100%; padding: 1rem 1.5rem; font-size: 0.75rem;">
               Quero aplicar essa frente no meu negócio ↗
             </a>
           </div>
@@ -1043,49 +1730,45 @@
   </div>
 
   <!-- MODAL FICHA DO PROJETO (RODA 3D) -->
-  <div id="modal-ficha" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-sm" role="dialog" aria-modal="true">
-    <div class="relative grid max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl border border-white/15 bg-[#111010] p-6 shadow-2xl sm:grid-cols-12 sm:gap-6 sm:p-8">
-      <button type="button" onclick="fecharModal()" aria-label="Fechar ficha" class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-black/60 text-lg text-white hover:border-[#e62314] hover:bg-[#e62314]">×</button>
+  <div id="modal-ficha" class="modal-backdrop hidden" role="dialog" aria-modal="true">
+    <div style="position: relative; max-height: 90vh; width: 100%; max-width: 48rem; overflow-y: auto; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.15); background-color: #111010; padding: 1.75rem;">
+      <button type="button" onclick="fecharModal()" aria-label="Fechar ficha" class="btn-outline" style="position: absolute; right: 1rem; top: 1rem; height: 2.25rem; width: 2.25rem; padding: 0;">×</button>
 
-      <div class="sm:col-span-5">
-        <img id="modal-poster" src="" alt="" class="w-full rounded-2xl border border-white/10 object-cover shadow-lg" />
-      </div>
-
-      <div class="mt-5 flex flex-col justify-between sm:col-span-7 sm:mt-0">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; align-items: start;">
         <div>
-          <span id="modal-genero" class="font-label text-xs uppercase tracking-widest text-[#e62314]"></span>
-          <h3 id="modal-titulo" class="font-display mt-1 text-2xl uppercase text-white sm:text-3xl"></h3>
-          <p id="modal-resumo" class="mt-4 text-sm leading-relaxed text-white/80"></p>
-
-          <dl class="mt-5 grid grid-cols-2 gap-3 border-t border-white/10 pt-4 text-xs">
-            <div>
-              <dt class="uppercase text-white/50">Formato</dt>
-              <dd id="modal-formato" class="font-label mt-0.5 text-white"></dd>
-            </div>
-            <div>
-              <dt class="uppercase text-white/50">Classificação</dt>
-              <dd id="modal-classificacao" class="font-label mt-0.5 text-white"></dd>
-            </div>
-            <div class="col-span-2">
-              <dt class="uppercase text-white/50">Direção</dt>
-              <dd id="modal-direcao" class="font-label mt-0.5 text-white"></dd>
-            </div>
-            <div class="col-span-2">
-              <dt class="uppercase text-white/50">Locação</dt>
-              <dd id="modal-local" class="font-label mt-0.5 text-white"></dd>
-            </div>
-          </dl>
+          <img id="modal-poster" src="" alt="" style="width: 100%; border-radius: 1rem; border: 1px solid rgba(255,255,255,0.1); object-fit: cover;" />
         </div>
 
-        <a
-          id="modal-whats"
-          href="https://wa.me/5584996305371"
-          target="_blank"
-          rel="noopener"
-          class="font-display mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]"
-        >
-          Solicitar projeto com esse padrão ↗
-        </a>
+        <div style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span id="modal-genero" class="font-label text-red" style="font-size: 0.75rem; text-transform: uppercase;"></span>
+            <h3 id="modal-titulo" class="font-display" style="margin: 0.25rem 0 0 0; font-size: 1.65rem; text-transform: uppercase; color: #fff;"></h3>
+            <p id="modal-resumo" style="margin-top: 1rem; font-size: 0.875rem; color: rgba(255,255,255,0.8);"></p>
+
+            <dl style="margin: 1.25rem 0 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; font-size: 0.75rem;">
+              <div>
+                <dt style="text-transform: uppercase; color: rgba(255,255,255,0.5);">Formato</dt>
+                <dd id="modal-formato" class="font-label" style="margin: 0.2rem 0 0 0; color: #fff;"></dd>
+              </div>
+              <div>
+                <dt style="text-transform: uppercase; color: rgba(255,255,255,0.5);">Classificação</dt>
+                <dd id="modal-classificacao" class="font-label" style="margin: 0.2rem 0 0 0; color: #fff;"></dd>
+              </div>
+              <div style="grid-column: span 2;">
+                <dt style="text-transform: uppercase; color: rgba(255,255,255,0.5);">Direção</dt>
+                <dd id="modal-direcao" class="font-label" style="margin: 0.2rem 0 0 0; color: #fff;"></dd>
+              </div>
+              <div style="grid-column: span 2;">
+                <dt style="text-transform: uppercase; color: rgba(255,255,255,0.5);">Locação</dt>
+                <dd id="modal-local" class="font-label" style="margin: 0.2rem 0 0 0; color: #fff;"></dd>
+              </div>
+            </dl>
+          </div>
+
+          <a id="modal-whats" href="https://wa.me/5584996305371" target="_blank" rel="noopener" onclick="trackLead('Modal Acervo WhatsApp')" class="btn-red" style="margin-top: 1.5rem; width: 100%; padding: 0.85rem 1.25rem; font-size: 0.75rem;">
+            Solicitar projeto com esse padrão ↗
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1180,27 +1863,23 @@
       <button
         type="button"
         onclick="abrirFrente(${i})"
-        class="group relative flex flex-col justify-between rounded-2xl border p-6 text-left backdrop-blur-md transition duration-200 hover:-translate-y-1 ${
-          f.destaque
-            ? 'border-[#e62314]/70 bg-[#171111]/80 shadow-lg shadow-[#e62314]/15 hover:border-[#e62314]'
-            : 'border-white/15 bg-[#111010]/75 hover:border-[#e62314]/50'
-        }"
+        class="frente-card ${f.destaque ? 'frente-card--destaque' : 'frente-card--padrao'}"
       >
         <div>
-          <div class="mb-4 flex items-center justify-between gap-2">
-            <img src="${f.icone}" alt="" class="h-11 w-11 object-contain" />
-            <span class="font-accent rounded-full px-2.5 py-1 text-[10px] uppercase tracking-wider ${
+          <div style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
+            <img src="${f.icone}" alt="" style="height: 2.75rem; width: 2.75rem; object-fit: contain;" />
+            <span class="font-accent" style="border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.625rem; text-transform: uppercase; ${
               f.destaque
-                ? 'bg-[#e62314] text-white'
-                : 'border border-white/10 bg-white/5 text-white/75'
+                ? 'background: #e62314; color: #fff;'
+                : 'border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.75);'
             }">${f.badge}</span>
           </div>
-          <h3 class="font-display text-lg uppercase text-white group-hover:text-[#ff4b3d]">${f.titulo}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/80">${f.resumoCurto}</p>
+          <h3 class="font-display" style="margin: 0; font-size: 1.125rem; text-transform: uppercase; color: #fff;">${f.titulo}</h3>
+          <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: rgba(255,255,255,0.8);">${f.resumoCurto}</p>
         </div>
 
-        <span class="font-label mt-5 inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#e62314]">
-          Ver aplicação e retorno <span class="transition group-hover:translate-x-1">→</span>
+        <span class="font-label text-red" style="margin-top: 1.25rem; display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; text-transform: uppercase;">
+          Ver aplicação e retorno →
         </span>
       </button>
     `).join('');
@@ -1208,6 +1887,7 @@
     function abrirFrente(idx) {
       const f = FRENTES[idx];
       if (!f) return;
+      rastrearEvento('frente_modal_open', { frente_numero: f.num, frente_titulo: f.titulo });
       document.getElementById('frente-icone').src = f.icone;
       document.getElementById('frente-numero-grande').textContent = f.num;
       document.getElementById('frente-badge').textContent = `FRENTE ${f.num} · ${f.badge}`;
@@ -1216,7 +1896,7 @@
       document.getElementById('frente-aplicacao').textContent = f.aplicacao;
       document.getElementById('frente-retorno').textContent = f.retorno;
       const msg = `Olá, Chama Cine! Quero entender melhor como aplicar a frente "${f.titulo}" no meu negócio e ver o retorno prático.`;
-      document.getElementById('frente-whats').href = `https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`;
+      document.getElementById('frente-whats').href = montarUrlWhatsApp(msg);
       const modal = document.getElementById('modal-frente');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
@@ -1281,25 +1961,26 @@
       const c = CASES_DATA[idx];
       if (!c) return;
 
+      rastrearEvento('case_select', { case_index: idx, case_titulo: c.titulo });
+
       document.querySelectorAll('.case-tab').forEach((btn, i) => {
         const ativo = i === idx;
-        btn.className = ativo
-          ? 'case-tab flex w-full items-center justify-between rounded-2xl border border-[#e62314] bg-[#e62314]/10 p-4 text-left transition'
-          : 'case-tab flex w-full items-center justify-between rounded-2xl border border-neutral-200 bg-white p-4 text-left transition hover:border-neutral-400';
+        btn.className = `case-tab ${ativo ? 'case-tab--active' : 'case-tab--idle'}`;
         const tagEl = btn.querySelector('span.font-accent');
         const arrowEl = btn.lastElementChild;
-        if (tagEl) tagEl.className = `font-accent block text-[11px] uppercase tracking-widest ${ativo ? 'text-[#e62314]' : 'text-[#6b6565]'}`;
+        if (tagEl) tagEl.style.color = ativo ? '#e62314' : '#6b6565';
         if (arrowEl) {
           arrowEl.textContent = ativo ? '▶' : '→';
-          arrowEl.className = ativo ? 'text-sm font-bold text-[#e62314]' : 'text-sm text-[#6b6565]';
+          arrowEl.style.color = ativo ? '#e62314' : '#6b6565';
+          arrowEl.style.fontWeight = ativo ? '700' : '400';
         }
       });
 
       const box = document.getElementById('case-midia-box');
       if (c.tipo === 'video') {
         box.innerHTML = `
-          <div class="aspect-[9/16] w-full max-w-[250px] overflow-hidden rounded-2xl border border-neutral-200 bg-[#111010] shadow-lg">
-            <video class="h-full w-full object-cover" controls playsinline preload="metadata">
+          <div style="aspect-ratio: 9 / 16; width: 100%; max-width: 250px; overflow: hidden; border-radius: 1rem; border: 1px solid #e5e5e5; background: #111010;">
+            <video style="height: 100%; width: 100%; object-fit: cover;" controls playsinline preload="metadata">
               <source src="${c.src}" type="video/mp4" />
               Seu navegador não suporta vídeo HTML5.
             </video>
@@ -1309,12 +1990,12 @@
         const fb1 = c.fallback[0] || c.src;
         const fb2 = c.fallback[1] || c.src;
         box.innerHTML = `
-          <div class="flex aspect-[4/5] w-full max-w-[270px] items-center justify-center overflow-hidden rounded-2xl border border-neutral-200 bg-[#f4f1ea] p-2 shadow-lg">
+          <div style="display: flex; aspect-ratio: 4 / 5; width: 100%; max-width: 270px; align-items: center; justify-content: center; overflow: hidden; border-radius: 1rem; border: 1px solid #e5e5e5; background: #f4f1ea; padding: 0.5rem;">
             <img
               src="${c.src}"
               onerror="if(!this.dataset.t){this.dataset.t=1;this.src='${fb1}';}else if(this.dataset.t==1){this.dataset.t=2;this.src='${fb2}';}"
               alt="${c.alt}"
-              class="h-full w-full rounded-xl object-contain"
+              style="height: 100%; width: 100%; border-radius: 0.75rem; object-fit: contain;"
             />
           </div>
         `;
@@ -1334,12 +2015,14 @@
 
     function selecionarEstagio(estagio) {
       estagioSelecionado = estagio;
+      rastrearEvento('quiz_step_1', { estagio });
       document.getElementById('quiz-step-1').classList.add('hidden');
-      document.getElementById('quiz-step-2').classList.remove('hidden');
+      const s2 = document.getElementById('quiz-step-2');
+      s2.classList.remove('hidden');
       document.getElementById('quiz-selected-badge').textContent = 'Cenário: ' + estagio;
       document.getElementById('quiz-step-label').textContent = 'Passo 2 de 2 · Seus dados';
       document.getElementById('quiz-progress-text').textContent = '100%';
-      document.getElementById('quiz-bar').classList.replace('w-1/2', 'w-full');
+      document.getElementById('quiz-bar').style.width = '100%';
     }
 
     function voltarQuiz() {
@@ -1347,16 +2030,24 @@
       document.getElementById('quiz-step-1').classList.remove('hidden');
       document.getElementById('quiz-step-label').textContent = 'Passo 1 de 2 · Diagnóstico rápido';
       document.getElementById('quiz-progress-text').textContent = '50%';
-      document.getElementById('quiz-bar').classList.replace('w-full', 'w-1/2');
+      document.getElementById('quiz-bar').style.width = '50%';
     }
 
     function enviarQuizWhatsApp(e) {
       e.preventDefault();
       const nome = document.getElementById('quiz-nome').value.trim();
       const empresa = document.getElementById('quiz-empresa').value.trim();
+      const dadosLead = {
+        origem: 'Quiz Hero',
+        nome,
+        empresa,
+        estagio: estagioSelecionado
+      };
+      registrarLeadNoWebhook(dadosLead);
+      trackLead('Quiz Hero', { estagio: estagioSelecionado });
+
       const msg = `Olá, Chama Cine! Meu nome é ${nome} (${empresa}). Meu momento é: "${estagioSelecionado}". Quero estruturar meu negócio para vender mais.`;
-      trackLead('Quiz Hero');
-      window.open(`https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`, '_blank');
+      window.open(montarUrlWhatsApp(msg), '_blank', 'noopener');
     }
 
     function enviarFormContato(e) {
@@ -1365,9 +2056,19 @@
       const empresa = document.getElementById('form-empresa').value.trim();
       const estagio = document.getElementById('form-estagio').value;
       const objetivo = document.getElementById('form-objetivo').value.trim();
+
+      const dadosLead = {
+        origem: 'Formulario Diagnostico',
+        nome,
+        empresa,
+        estagio,
+        objetivo: objetivo || 'Estruturar vendas'
+      };
+      registrarLeadNoWebhook(dadosLead);
+      trackLead('Formulario Diagnostico', { estagio });
+
       const msg = `Olá, Chama Cine! Solicito um diagnóstico comercial.\n• Nome: ${nome}\n• Empresa: ${empresa}\n• Momento: ${estagio}\n• Objetivo: ${objetivo || 'Estruturar vendas'}`;
-      trackLead('Formulario Contato');
-      window.open(`https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`, '_blank');
+      window.open(montarUrlWhatsApp(msg), '_blank', 'noopener');
     }
 
     window.Chama = {
@@ -1384,6 +2085,7 @@
         const lista = window.PROJETOS || [];
         const p = lista[idx];
         if (!p) return;
+        rastrearEvento('acervo_ficha_open', { projeto_id: p.id, projeto_titulo: p.titulo });
         document.getElementById('modal-poster').src = `img/posters/${p.id}.jpg`;
         document.getElementById('modal-poster').alt = p.titulo;
         document.getElementById('modal-genero').textContent = p.genero;
@@ -1394,7 +2096,7 @@
         document.getElementById('modal-direcao').textContent = p.direcao;
         document.getElementById('modal-local').textContent = p.local;
         const msg = `Olá, Chama Cine! Vi o projeto "${p.titulo}" no acervo do site e quero conversar sobre uma produção com esse nível.`;
-        document.getElementById('modal-whats').href = `https://wa.me/5584996305371?text=${encodeURIComponent(msg)}`;
+        document.getElementById('modal-whats').href = montarUrlWhatsApp(msg);
         const modal = document.getElementById('modal-ficha');
         modal.classList.remove('hidden');
         modal.classList.add('flex');
@@ -1440,9 +2142,8 @@
       } catch (_) {}
       document.getElementById('banner-cookies').classList.add('hidden');
       fecharPreferenciasCookies();
-      if (payload.marketing) {
-        ativarMetaPixelSeAutorizado();
-      }
+      if (payload.analytics) ativarGa4SeAutorizado();
+      if (payload.marketing) ativarMetaPixelSeAutorizado();
     }
 
     function aceitarTodosCookies() {
@@ -1482,8 +2183,9 @@
       const salvo = obterConsentimentoCookies();
       if (!salvo) {
         document.getElementById('banner-cookies').classList.remove('hidden');
-      } else if (salvo.marketing) {
-        ativarMetaPixelSeAutorizado();
+      } else {
+        if (salvo.analytics) ativarGa4SeAutorizado();
+        if (salvo.marketing) ativarMetaPixelSeAutorizado();
       }
     })();
   </script>
