@@ -22,10 +22,24 @@
   }
   </script>
 
-  <!-- Meta Pixel -->
+  <!-- Meta Pixel (carregado apenas com consentimento explícito de cookies) -->
   <script>
     const META_PIXEL_ID = '';
-    if (META_PIXEL_ID) {
+    let metaPixelIniciado = false;
+
+    function obterConsentimentoCookies() {
+      try {
+        const raw = localStorage.getItem('chama_consentimento_cookies_v1');
+        return raw ? JSON.parse(raw) : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function ativarMetaPixelSeAutorizado() {
+      const consent = obterConsentimentoCookies();
+      if (!consent || !consent.marketing || !META_PIXEL_ID || metaPixelIniciado) return;
+
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
       n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -33,9 +47,14 @@
       document,'script','https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', META_PIXEL_ID);
       fbq('track', 'PageView');
+      metaPixelIniciado = true;
     }
+
     function trackLead(origem) {
-      if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: origem });
+      const consent = obterConsentimentoCookies();
+      if (consent && consent.marketing && typeof fbq === 'function') {
+        fbq('track', 'Lead', { content_name: origem });
+      }
     }
   </script>
 
@@ -110,11 +129,11 @@
       animation: marquee 32s linear infinite;
     }
 
-    /* Roda 3D de Pôsteres */
+    /* Roda 3D de Pôsteres — espaçamento vertical compacto */
     .s.recentes {
       position: relative;
       width: 100%;
-      min-height: 820px;
+      min-height: 760px;
       background-color: #070606;
       background-image: url('img/fundo-projetos.jpg');
       background-size: cover;
@@ -122,7 +141,7 @@
       overflow: hidden;
       display: flex;
       align-items: center;
-      padding: 3.5rem 0;
+      padding: 2.75rem 0;
     }
 
     .s.recentes::before {
@@ -153,34 +172,34 @@
       z-index: 15;
       width: 100%;
       max-width: 560px;
-      padding: 3.5rem 1.5rem 3.5rem 6%;
+      padding: 1.5rem 1.5rem 1.5rem 6%;
     }
 
     .s.recentes .tit {
       font-family: 'Stara', sans-serif;
       font-weight: 900;
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      line-height: 1.05;
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      line-height: 1.04;
       text-transform: uppercase;
       color: var(--off-white);
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     .s.recentes .dica {
       font-size: 0.85rem;
       color: rgba(244, 241, 234, 0.9);
       text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     .s.recentes .contador {
       font-family: 'StretchPro', 'Stara', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       letter-spacing: 0.14em;
       color: #ff4738;
       text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
 
     .s.recentes .tipo {
@@ -190,32 +209,32 @@
       letter-spacing: 0.14em;
       color: rgba(244, 241, 234, 0.9);
       text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
     }
 
     .s.recentes #info-titulo {
       font-family: 'Stara', sans-serif;
       font-weight: 900;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      line-height: 1.1;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      line-height: 1.08;
       color: #ffffff;
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
-      margin-bottom: 1rem;
+      margin-bottom: 0.55rem;
     }
 
     .s.recentes #info-resumo {
-      font-size: 0.98rem;
-      line-height: 1.65;
+      font-size: 0.96rem;
+      line-height: 1.55;
       color: rgba(244, 241, 234, 0.96);
       text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
-      min-height: 5.2rem;
-      margin-bottom: 1.75rem;
+      min-height: 3.4rem;
+      margin-bottom: 1.15rem;
     }
 
     .s.recentes .acoes {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.65rem;
       flex-wrap: wrap;
     }
 
@@ -297,16 +316,23 @@
       .s.recentes {
         flex-direction: column;
         min-height: auto;
-        padding: 0 0 2rem;
+        padding: 0 0 1.5rem;
       }
       .s.recentes .info {
         max-width: 100%;
-        padding: 3.5rem 1.25rem 1.5rem;
+        padding: 2.5rem 1.25rem 0.75rem;
+      }
+      .s.recentes .dica {
+        margin-bottom: 0.75rem;
+      }
+      .s.recentes #info-resumo {
+        min-height: 2.8rem;
+        margin-bottom: 0.95rem;
       }
       .s.recentes .roda {
         position: relative;
         width: 100%;
-        height: 440px;
+        height: 420px;
       }
       .s.recentes .sombra-chao {
         right: 50%;
@@ -594,7 +620,7 @@
     <div class="borda-topo" aria-hidden="true"></div>
 
     <div class="a info" id="info" aria-live="polite" style="--x:134;--y:470;--w:640">
-      <div class="font-label mb-2 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#ff4738]">
+      <div class="font-label mb-1.5 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#ff4738]">
         <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
         Acervo Cinematográfico Chama Cine
       </div>
@@ -791,10 +817,60 @@
             <textarea id="form-objetivo" rows="3" placeholder="Conte em poucas linhas o que você quer estruturar ou vender..." class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/45 focus:border-[#e62314] focus:outline-none"></textarea>
           </div>
 
+          <p class="text-[11px] leading-relaxed text-white/65">
+            Ao enviar, você concorda com o tratamento dos seus dados para retorno comercial conforme a <a href="#lgpd-privacidade" class="underline hover:text-white">LGPD (Lei nº 13.709/2018)</a>.
+          </p>
+
           <button type="submit" class="font-display w-full rounded-full bg-[#e62314] px-6 py-4 text-xs uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]">
             Enviar e Abrir WhatsApp
           </button>
         </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · AVISO LGPD E POLÍTICA DE COOKIES -->
+  <section id="lgpd-privacidade" class="border-b border-white/15 bg-[#0a0909] py-14 text-xs text-white/80">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-white/15 bg-[#111010]/90 p-6 sm:p-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div>
+            <span class="font-accent text-[10px] uppercase tracking-widest text-[#e62314]">Conformidade Legal · Brasil</span>
+            <h2 class="font-display mt-1 text-xl uppercase text-white sm:text-2xl">
+              Aviso de Privacidade (LGPD — Lei nº 13.709/2018) & Cookies
+            </h2>
+          </div>
+          <button
+            type="button"
+            onclick="abrirPreferenciasCookies()"
+            class="font-label rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs text-white transition hover:border-[#e62314] hover:bg-[#e62314]/15"
+          >
+            Gerenciar Cookies
+          </button>
+        </div>
+
+        <div class="mt-6 grid gap-6 md:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
+            <strong class="font-display block text-sm uppercase text-white">1. Finalidade e Base Legal (LGPD)</strong>
+            <p class="mt-2 leading-relaxed text-white/75">
+              Os dados informados nos formulários de diagnóstico (nome, empresa/@instagram, estágio do negócio e objetivo) são tratados exclusivamente para atendimento comercial, elaboração de propostas e retorno solicitado pelo titular, nos termos da Lei nº 13.709/2018 (LGPD).
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
+            <strong class="font-display block text-sm uppercase text-white">2. Direitos do Titular e Canal</strong>
+            <p class="mt-2 leading-relaxed text-white/75">
+              Você pode solicitar confirmação de tratamento, acesso, correção, anonimização, portabilidade, revogação de consentimento ou eliminação de dados enviando solicitação para <a href="mailto:adm@chamacine.com.br" class="text-[#ff4b3d] underline">adm@chamacine.com.br</a> (Chama Cine · Natal/RN).
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
+            <strong class="font-display block text-sm uppercase text-white">3. Uso de Cookies</strong>
+            <p class="mt-2 leading-relaxed text-white/75">
+              Utilizamos armazenamento local/cookies estritamente necessários para funcionamento e memorização das suas preferências de privacidade, e cookies de medição/marketing apenas quando expressamente autorizados por você.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -815,9 +891,81 @@
         <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="hover:text-[#e62314]">@chamacine</a>
         <a href="mailto:adm@chamacine.com.br" class="hover:text-[#e62314]">adm@chamacine.com.br</a>
         <a href="https://wa.me/5584996305371" target="_blank" rel="noopener" class="hover:text-[#e62314]">(84) 99630-5371</a>
+        <a href="#lgpd-privacidade" class="hover:text-[#e62314]">LGPD & Cookies</a>
       </div>
     </div>
   </footer>
+
+  <!-- BANNER DE CONSENTIMENTO DE COOKIES (LGPD) -->
+  <div id="banner-cookies" class="fixed inset-x-0 bottom-0 z-50 hidden p-3 sm:p-5" role="region" aria-label="Consentimento de cookies">
+    <div class="mx-auto flex max-w-5xl flex-col justify-between gap-4 rounded-2xl border border-white/20 bg-[#111010]/95 p-4 shadow-2xl backdrop-blur-md sm:flex-row sm:items-center sm:p-5">
+      <div class="max-w-2xl text-xs leading-relaxed text-white/85">
+        <strong class="font-display block text-sm uppercase text-white">Cookies & Privacidade (LGPD)</strong>
+        <span class="mt-1 block text-white/75">
+          Usamos cookies essenciais para o funcionamento do site e, mediante sua autorização, cookies opcionais de métricas e marketing. Saiba mais em <a href="#lgpd-privacidade" class="text-[#ff4b3d] underline">LGPD & Cookies</a>.
+        </span>
+      </div>
+      <div class="flex shrink-0 flex-wrap items-center gap-2">
+        <button type="button" onclick="rejeitarCookies()" class="font-label rounded-full border border-white/20 px-4 py-2 text-xs text-white/85 transition hover:border-white/40 hover:text-white">
+          Apenas essenciais
+        </button>
+        <button type="button" onclick="abrirPreferenciasCookies()" class="font-label rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs text-white transition hover:border-white/40">
+          Configurar
+        </button>
+        <button type="button" onclick="aceitarTodosCookies()" class="font-display rounded-full bg-[#e62314] px-5 py-2 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+          Aceitar todos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE PREFERÊNCIAS DE COOKIES -->
+  <div id="modal-cookies" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-cookies">
+    <div class="w-full max-w-xl rounded-3xl border border-white/15 bg-[#111010] p-6 shadow-2xl sm:p-7">
+      <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
+        <div>
+          <span class="font-accent text-[10px] uppercase tracking-widest text-[#e62314]">LGPD · Lei nº 13.709/2018</span>
+          <h3 id="titulo-modal-cookies" class="font-display mt-1 text-xl uppercase text-white">Preferências de Cookies</h3>
+        </div>
+        <button type="button" onclick="fecharPreferenciasCookies()" aria-label="Fechar preferências de cookies" class="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-base text-white hover:border-[#e62314] hover:bg-[#e62314]">×</button>
+      </div>
+
+      <div class="mt-5 space-y-3 text-xs">
+        <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/45 p-4">
+          <div>
+            <strong class="font-display block text-sm uppercase text-white">Cookies Essenciais</strong>
+            <span class="mt-0.5 block text-white/70">Necessários para navegação, segurança e registro do seu consentimento.</span>
+          </div>
+          <span class="font-accent rounded-full bg-white/10 px-3 py-1 text-[10px] uppercase text-white/80">Sempre ativo</span>
+        </div>
+
+        <label class="flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/45 p-4">
+          <div>
+            <strong class="font-display block text-sm uppercase text-white">Medição e Desempenho</strong>
+            <span class="mt-0.5 block text-white/70">Ajuda a entender estabilidade e uso das páginas e seções do site.</span>
+          </div>
+          <input type="checkbox" id="cookie-analytics" class="h-4 w-4 accent-[#e62314]" />
+        </label>
+
+        <label class="flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/45 p-4">
+          <div>
+            <strong class="font-display block text-sm uppercase text-white">Marketing e Conversão</strong>
+            <span class="mt-0.5 block text-white/70">Permite mensurar campanhas e eventos de contato (como Meta Pixel) quando habilitado.</span>
+          </div>
+          <input type="checkbox" id="cookie-marketing" class="h-4 w-4 accent-[#e62314]" />
+        </label>
+      </div>
+
+      <div class="mt-6 flex flex-wrap justify-end gap-2.5">
+        <button type="button" onclick="rejeitarCookies()" class="font-label rounded-full border border-white/20 px-4 py-2.5 text-xs text-white/85 hover:text-white">
+          Rejeitar opcionais
+        </button>
+        <button type="button" onclick="salvarPreferenciasCookies()" class="font-display rounded-full bg-[#e62314] px-5 py-2.5 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+          Salvar preferências
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL EDITORIAL COM IDENTIDADE VISUAL CHAMA CINE (8 FRENTES) -->
   <div id="modal-frente" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-md" role="dialog" aria-modal="true">
@@ -1269,6 +1417,66 @@
     document.getElementById('modal-ficha').addEventListener('click', (e) => {
       if (e.target.id === 'modal-ficha') fecharModal();
     });
+
+    /* Consentimento de Cookies e LGPD */
+    function salvarConsentimento(analytics, marketing) {
+      const payload = {
+        essenciais: true,
+        analytics: Boolean(analytics),
+        marketing: Boolean(marketing),
+        atualizadoEm: new Date().toISOString()
+      };
+      try {
+        localStorage.setItem('chama_consentimento_cookies_v1', JSON.stringify(payload));
+      } catch (_) {}
+      document.getElementById('banner-cookies').classList.add('hidden');
+      fecharPreferenciasCookies();
+      if (payload.marketing) {
+        ativarMetaPixelSeAutorizado();
+      }
+    }
+
+    function aceitarTodosCookies() {
+      salvarConsentimento(true, true);
+    }
+
+    function rejeitarCookies() {
+      salvarConsentimento(false, false);
+    }
+
+    function abrirPreferenciasCookies() {
+      const atual = obterConsentimentoCookies();
+      document.getElementById('cookie-analytics').checked = Boolean(atual && atual.analytics);
+      document.getElementById('cookie-marketing').checked = Boolean(atual && atual.marketing);
+      const modal = document.getElementById('modal-cookies');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function fecharPreferenciasCookies() {
+      const modal = document.getElementById('modal-cookies');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function salvarPreferenciasCookies() {
+      const analytics = document.getElementById('cookie-analytics').checked;
+      const marketing = document.getElementById('cookie-marketing').checked;
+      salvarConsentimento(analytics, marketing);
+    }
+
+    document.getElementById('modal-cookies').addEventListener('click', (e) => {
+      if (e.target.id === 'modal-cookies') fecharPreferenciasCookies();
+    });
+
+    (function iniciarBannerCookies() {
+      const salvo = obterConsentimentoCookies();
+      if (!salvo) {
+        document.getElementById('banner-cookies').classList.remove('hidden');
+      } else if (salvo.marketing) {
+        ativarMetaPixelSeAutorizado();
+      }
+    })();
   </script>
 
   <script src="projetos.js"></script>
