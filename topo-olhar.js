@@ -17,7 +17,6 @@ const MOV = {
   alcanceY: 0.95
 };
 
-// ---------- carregamento ----------
 const imgs = new Array(N);
 function carregar(i) {
   if (imgs[i]) return imgs[i];
@@ -33,7 +32,6 @@ const centro = POSES.reduce((m, p, i) => (Math.hypot(p[0], p[1]) < Math.hypot(PO
 carregar(centro);
 setTimeout(() => { for (let i = 0; i < N; i++) carregar(i); }, 200);
 
-// ---------- cena ----------
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, premultipliedAlpha: true });
 renderer.setClearColor(0x000000, 0);
 const cena = new THREE.Scene();
@@ -76,9 +74,7 @@ const material = new THREE.ShaderMaterial({
       vec2 uv = (p - uRet.xy) / uRet.zw;
       if (uv.x < 0.0 || uv.y < 0.0 || uv.x > 1.0 || uv.y > 1.0) return 0.0;
       uv.y = 1.0 - uv.y;
-      vec3 cAntes = texture2D(uAntes, uv).rgb;
-      vec3 cAtual = texture2D(uAtual, uv).rgb;
-      vec3 c = mix(cAntes, cAtual, uMistura);
+      vec3 c = mix(texture2D(uAntes, uv).rgb, texture2D(uAtual, uv).rgb, uMistura);
       return dot(c, vec3(0.299, 0.587, 0.114));
     }
 
@@ -92,14 +88,14 @@ const material = new THREE.ShaderMaterial({
       float r = uCel * (0.16 + 0.30 * t) * mix(0.6, 1.0, uEntrada);
       float d = distance(p, c);
       float aa = 0.7;
-      float largura = max(0.85, uCel * 0.08);
+      float largura = max(0.8, uCel * 0.075);
       float anel = 1.0 - smoothstep(largura * 0.5 - aa * 0.5, largura * 0.5 + aa * 0.5, abs(d - r));
       float dentro = 1.0 - smoothstep(r - largura * 0.5 - aa, r - largura * 0.5, d);
       float dl = distance(p, uMouse);
       float luz = uLuz * exp(-(dl * dl) / (uLuzRaio * uLuzRaio));
-      vec3 cor = mix(vec3(0.78, 0.75, 0.72), vec3(1.0, 0.24, 0.16), luz);
+      vec3 cor = mix(vec3(0.82, 0.79, 0.76), vec3(1.0, 0.24, 0.16), luz);
       float aAnel = anel * mix(0.78, 1.0, luz) * m * uEntrada;
-      float aFundo = 0.72 * m * uEntrada * (1.0 - dentro) * (1.0 - anel);
+      float aFundo = 0.55 * m * uEntrada * (1.0 - dentro) * (1.0 - anel);
       float a = aAnel + aFundo;
       gl_FragColor = vec4(cor * aAnel, a);
     }
@@ -120,14 +116,14 @@ function arrumar() {
   const aspectImg = amostra ? (amostra.naturalWidth / amostra.naturalHeight) : (16 / 9);
   const aspectBox = cw / ch;
 
-  // Enquadra o rosto centralizado e proporcional na caixa lateral
-  const escala = celular() ? 1.15 : 1.05;
+  // Cabe inteiramente dentro das margens do quadro sem cortar
+  const ajuste = celular() ? 0.82 : 0.74;
   let rw, rh;
   if (aspectBox > aspectImg) {
-    rh = ch * escala;
+    rh = ch * ajuste;
     rw = rh * aspectImg;
   } else {
-    rw = cw * escala;
+    rw = cw * ajuste;
     rh = rw / aspectImg;
   }
 
@@ -136,13 +132,12 @@ function arrumar() {
 
   material.uniforms.uRet.value.set(rx, ry, rw, rh);
   material.uniforms.uAlt.value = ch;
-  material.uniforms.uCel.value = (celular() ? 7 : 8.5) * dpr;
-  material.uniforms.uLuzRaio.value = Math.max(cw, ch) * 0.35;
+  material.uniforms.uCel.value = (celular() ? 6 : 7.5) * dpr;
+  material.uniforms.uLuzRaio.value = Math.min(cw, ch) * 0.35;
 }
 arrumar();
 addEventListener('resize', arrumar);
 
-// ---------- olhar segue o ponteiro ----------
 const alvo = { x: 0, y: 0 }, olhar = { x: 0, y: 0 };
 const luz = { x: -9999, y: -9999, f: 0, alvo: 0 };
 let ultimoMov = -1e9;
@@ -168,7 +163,6 @@ if (palco) {
   new IntersectionObserver(es => { visivel = es[0].isIntersecting; }).observe(palco);
 }
 
-// ---------- caminho em círculo ----------
 const angQuadro = POSES.map(p => Math.atan2(p[1], p[0]));
 const difAng = (a, b) => { let d = a - b; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; return d; };
 function quadroDoAngulo(a) {
@@ -223,4 +217,3 @@ function laco(agora) {
   renderer.render(cena, camera);
 }
 requestAnimationFrame(laco);
-```[cite: 32]
