@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chama Cine | Produtora Audiovisual &amp; Marketing Estratégico em Natal/RN</title>
+  <meta name="description" content="A Chama Cine une direção de cinema, posicionamento comercial, tráfego pago e design para transformar atenção em receita previsível em Natal/RN e em todo o Brasil." />
+
+  <!-- Meta Pixel (insira apenas números em META_PIXEL_ID quando ativar) -->
+  <script>
+    const META_PIXEL_ID = "";
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    if (/^\d{10,20}$/.test(META_PIXEL_ID)) {
+      fbq('init', META_PIXEL_ID);
+      fbq('track', 'PageView');
+    }
+    function trackChamaEvent(eventName, params) {
+      if (typeof fbq === 'function' && /^\d{10,20}$/.test(META_PIXEL_ID)) {
+        fbq('track', eventName, params || {});
+      }
+    }
+  </script>
+
+  <style>
+    @font-face { font-family: "StretchPro"; src: url("fonts/StretchPro.otf") format("opentype"); font-display: swap; }
+    @font-face { font-family: "Stara"; src: url("fonts/Stara-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+    @font-face { font-family: "Stara"; src: url("fonts/Stara-MediumItalic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+    @font-face { font-family: "Stara"; src: url("fonts/Stara-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    @font-face { font-family: "Stara"; src: url("fonts/Stara-Black.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+
+    :root {
+      --preto: #000000;
+      --preto-card: #0e0d0c;
+      --grafite: #1c1a18;
+      --borda: rgba(255, 247, 237, 0.14);
+      --vermelho: #EC1600;
+      --vermelho-vivo: #FF0000;
+      --creme: #FFF7ED;
+      --creme-soft: #FEF7EE;
+      --cinza-txt: #c9bfb5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--preto); color: var(--creme); }
+    body {
+      font-family: "Stara", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-weight: 500;
+      background: var(--preto);
+      color: var(--creme);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    img, video { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: min(1220px, 92vw); margin: 0 auto; }
+
+    .display-font {
+      font-family: "StretchPro", "Arial Black", Impact, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .agudo { font-style: normal; position: relative; display: inline-block; }
+    .agudo::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0.02em;
+      width: 0.34em;
+      height: 0.1em;
+      background: currentColor;
+      transform: translateX(-30%) skewX(-40deg);
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--borda);
+    }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
+    }
+    .brand-logo img { height: 38px; width: auto; }
+    .nav-links { display: flex; gap: 28px; font-weight: 600; font-size: 0.95rem; }
+    .nav-links a { color: var(--creme); transition: color .2s; }
+    .nav-links a:hover { color: var(--vermelho); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-red { background: var(--vermelho); color: var(--creme); }
+    .btn-red:hover { background: var(--creme); color: var(--preto); }
+    .btn-outline { background: transparent; color: var(--creme); border-color: rgba(255,247,237,0.35); }
+    .btn-outline:hover { border-color: var(--vermelho); color: var(--vermelho); }
+    .btn-dark { background: var(--preto); color: var(--creme); border-color: var(--preto); }
+    .btn-dark:hover { background: var(--creme); color: var(--preto); }
+
+    /* Hero + Quiz V4 style */
+    .hero {
+      position: relative;
+      padding: 64px 0 80px;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(236, 22, 0, 0.24), transparent 48%),
+        linear-gradient(180deg, rgba(0,0,0,0.78), rgba(0,0,0,0.96)),
+        url("img/_fundo-inteiro-prev.jpg") center top / cover no-repeat;
+      border-bottom: 1px solid var(--borda);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(236, 22, 0, 0.16);
+      border: 1px solid rgba(236, 22, 0, 0.5);
+      color: var(--creme);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--vermelho); }
+    .hero h1 {
+      font-size: clamp(2rem, 4.1vw, 3.35rem);
+      font-weight: 900;
+      line-height: 1.06;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--vermelho); }
+    .hero p.lead {
+      font-size: 1.12rem;
+      color: var(--cinza-txt);
+      max-width: 56ch;
+      margin-bottom: 28px;
+    }
+    .hero-bullets {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .hero-stat {
+      background: rgba(14, 13, 12, 0.88);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+    .hero-stat strong { display: block; color: var(--vermelho); font-size: 1.15rem; font-weight: 900; }
+    .hero-stat span { font-size: 0.84rem; color: var(--cinza-txt); }
+
+    /* Quiz Card */
+    .quiz-card {
+      background: var(--preto-card);
+      border: 1.5px solid rgba(236, 22, 0, 0.55);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+    }
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--vermelho);
+    }
+    .quiz-bar {
+      width: 100%;
+      height: 6px;
+      background: #23201e;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .quiz-bar-fill {
+      height: 100%;
+      width: 50%;
+      background: var(--vermelho);
+      transition: width .25s ease;
+    }
+    .quiz-card h2 {
+      font-size: 1.32rem;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .quiz-options { display: grid; gap: 10px; }
+    .quiz-opt {
+      width: 100%;
+      text-align: left;
+      background: #161413;
+      color: var(--creme);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font: 600 0.94rem/1.35 "Stara", sans-serif;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: border-color .18s, background .18s, transform .15s;
+    }
+    .quiz-opt:hover { border-color: var(--vermelho); background: #1f1918; transform: translateX(2px); }
+    .quiz-opt.highlight { border-color: rgba(236, 22, 0, 0.55); background: rgba(236, 22, 0, 0.09); }
+    .quiz-badge {
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--vermelho);
+      color: var(--creme);
+      white-space: nowrap;
+    }
+    .quiz-step-2 { display: none; }
+    .quiz-step-2.active { display: block; }
+    .quiz-step-1.hidden { display: none; }
+    .field-group { display: grid; gap: 12px; margin-bottom: 16px; }
+    .field-group input, .field-group select, .field-group textarea {
+      width: 100%;
+      background: #161413;
+      border: 1px solid rgba(255, 247, 237, 0.25);
+      border-radius: 12px;
+      padding: 13px 15px;
+      color: var(--creme);
+      font: 500 0.95rem "Stara", sans-serif;
+    }
+    .field-group input:focus, .field-group select:focus, .field-group textarea:focus {
+      outline: none;
+      border-color: var(--vermelho);
+    }
+    .quiz-actions { display: flex; gap: 10px; align-items: center; }
+
+    /* Marquee */
+    .marquee {
+      background: var(--vermelho);
+      color: var(--creme);
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 32s linear infinite;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Sections */
+    section.sec { padding: 84px 0; border-bottom: 1px solid var(--borda); }
+    .sec-head { max-width: 760px; margin-bottom: 44px; }
+    .sec-tag {
+      color: var(--vermelho);
+      font-weight: 900;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .sec-title {
+      font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .sec-desc { color: var(--cinza-txt); font-size: 1.05rem; }
+
+    /* Services 8 icons */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--preto-card);
+      border: 1px solid var(--borda);
+      border-radius: 20px;
+      padding: 24px;
+      transition: border-color .2s, transform .2s;
+    }
+    .service-card:hover { border-color: var(--vermelho); transform: translateY(-3px); }
+    .service-icon {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 18px;
+      object-fit: contain;
+    }
+    .service-card h3 {
+      font-size: 1.12rem;
+      font-weight: 900;
+      color: var(--creme-soft);
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+    .service-card p { font-size: 0.92rem; color: var(--cinza-txt); }
+
+    /* Showreel & Cases */
+    .cases-layout {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .video-box {
+      background: var(--preto-card);
+      border: 1px solid var(--borda);
+      border-radius: 22px;
+      padding: 20px;
+    }
+    .video-box video {
+      width: 100%;
+      border-radius: 14px;
+      background: #000;
+      max-height: 520px;
+      object-fit: cover;
+    }
+    .video-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: var(--cinza-txt);
+    }
+    .cases-cards { display: grid; gap: 20px; }
+    .case-item {
+      display: grid;
+      grid-template-columns: 165px 1fr;
+      gap: 20px;
+      background: var(--preto-card);
+      border: 1px solid var(--borda);
+      border-radius: 20px;
+      padding: 18px;
+      align-items: center;
+      transition: border-color .2s;
+    }
+    .case-item:hover { border-color: var(--vermelho); }
+    .case-item img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .case-item h3 { font-size: 1.2rem; font-weight: 900; margin: 6px 0 8px; }
+    .case-item p { font-size: 0.92rem; color: var(--cinza-txt); margin-bottom: 14px; }
+
+    /* Posters Section with fundo-projetos.jpg */
+    .portfolio-sec {
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.88), rgba(0,0,0,0.92)),
+        url("img/fundo-projetos.jpg") center / cover no-repeat;
+    }
+    .posters-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .poster-card {
+      background: #0d0c0b;
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s, border-color .2s;
+    }
+    .poster-card:hover { transform: translateY(-4px); border-color: var(--vermelho); }
+    .poster-thumb {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      background: #171413;
+      overflow: hidden;
+    }
+    .poster-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .poster-body { padding: 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .poster-genre { font-size: 0.72rem; font-weight: 900; color: var(--vermelho); text-transform: uppercase; letter-spacing: 0.06em; }
+    .poster-body h3 { font-size: 0.98rem; font-weight: 900; line-height: 1.2; }
+    .poster-links { margin-top: auto; display: flex; gap: 8px; padding-top: 6px; }
+    .mini-btn {
+      flex: 1;
+      text-align: center;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,247,237,0.22);
+      cursor: pointer;
+      background: transparent;
+      color: var(--creme);
+    }
+    .mini-btn:hover { background: var(--vermelho); border-color: var(--vermelho); }
+
+    /* Institutional Silhouettes */
+    .about-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+      background: var(--preto-card);
+      border: 1px solid var(--borda);
+      border-radius: 24px;
+      padding: 36px;
+    }
+    .silhuetas-wrap {
+      background: var(--creme);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Final CTA Section - Cara da Chama */
+    .cta-chama {
+      position: relative;
+      padding: 88px 0;
+      background:
+        linear-gradient(135deg, rgba(236, 22, 0, 0.93), rgba(140, 10, 0, 0.95)),
+        url("img/fundo-rodape.jpg") center / cover no-repeat;
+      color: var(--creme);
+      overflow: hidden;
+    }
+    .dino-watermark {
+      position: absolute;
+      right: -20px;
+      bottom: -10px;
+      width: min(360px, 42vw);
+      opacity: 0.16;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+    .cta-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .fogo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--preto);
+      color: var(--creme);
+      padding: 12px 18px;
+      border-radius: 18px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255,247,237,0.2);
+    }
+    .fogo-badge img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      background: var(--creme);
+      padding: 5px;
+      border-radius: 10px;
+    }
+    .cta-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.02;
+      margin-bottom: 18px;
+      color: var(--creme);
+    }
+    .cta-title span { color: var(--preto); }
+    .direct-channels {
+      display: grid;
+      gap: 12px;
+      margin: 26px 0;
+    }
+    .channel-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: var(--preto);
+      color: var(--creme);
+      font-weight: 900;
+      border: 1.5px solid var(--preto);
+      transition: transform .18s, background .18s, color .18s;
+    }
+    .channel-btn:hover { background: var(--creme); color: var(--preto); transform: translateY(-2px); }
+    .channel-btn small { display: block; font-weight: 500; opacity: 0.82; font-size: 0.82rem; }
+
+    .contact-card {
+      background: var(--preto);
+      color: var(--creme);
+      border-radius: 24px;
+      padding: 30px;
+      border: 1px solid rgba(255,247,237,0.18);
+    }
+    .contact-card h3 { font-size: 1.35rem; font-weight: 900; margin-bottom: 6px; }
+    .contact-card p { font-size: 0.92rem; color: var(--cinza-txt); margin-bottom: 18px; }
+
+    /* Footer */
+    footer {
+      background: var(--preto);
+      padding: 32px 0;
+      border-top: 1px solid var(--borda);
+      font-size: 0.9rem;
+      color: var(--cinza-txt);
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-row img { height: 28px; width: auto; }
+
+    /* Modal */
+    dialog {
+      margin: auto;
+      border: 1px solid var(--vermelho);
+      border-radius: 22px;
+      background: var(--preto-card);
+      color: var(--creme);
+      width: min(760px, 92vw);
+      padding: 0;
+    }
+    dialog::backdrop { background: rgba(0,0,0,0.8); }
+    .modal-body {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 24px;
+      padding: 28px;
+      align-items: center;
+    }
+    .modal-body img { border-radius: 14px; width: 100%; }
+    .modal-close {
+      position: absolute;
+      right: 16px;
+      top: 12px;
+      background: transparent;
+      border: 0;
+      color: var(--creme);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .cases-layout, .about-box, .cta-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .posters-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero-bullets, .services-grid { grid-template-columns: 1fr; }
+      .case-item, .modal-body { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav-bar">
+      <a href="#topo" class="brand-logo" aria-label="Chama Cine">
+        <img src="img/logo-chama.svg" alt="Chama Cine" />
+      </a>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#servicos">Soluções</a>
+        <a href="#cases">Cases &amp; Reels</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#sobre">A Produtora</a>
+        <a href="#contato">Diagnóstico</a>
+      </nav>
+      <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Chama%20Cine%20e%20quero%20um%20diagn%C3%B3stico%20comercial." target="_blank" rel="noopener noreferrer" class="btn btn-red" onclick="trackChamaEvent('Contact', {channel: 'header_whatsapp'})">
+        Falar no WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <main id="topo">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Produtora Audiovisual &amp; Marketing de Receita · Natal/RN</div>
+          <h1>Atenção sem conversão é só <span>barulho</span>. Transforme sua marca em máquina de vendas.</h1>
+          <p class="lead">
+            Unimos direção de cinema, posicionamento estratégico, tráfego pago e design de alta conversão para empresas que precisam vender mais — seja escalando uma operação ativa ou estruturando tudo do absoluto zero.
+          </p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="#contato" class="btn btn-red">Agendar Diagnóstico Gratuito</a>
+            <a href="#portfolio" class="btn btn-outline">Ver Portfólio &amp; Cases</a>
+          </div>
+          <div class="hero-bullets">
+            <div class="hero-stat">
+              <strong>360° Comercial</strong>
+              <span>Do posicionamento e roteiro ao anúncio no ar.</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Padrão Cinema</strong>
+              <span>Estética autoral aplicada para retenção e venda.</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Do Zero à Escala</strong>
+              <span>Planos para quem está começando ou acelerando.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUESTIONÁRIO INTERATIVO 2 ETAPAS -->
+        <div class="quiz-card" id="diagnostico-rapido">
+          <div class="quiz-top">
+            <span id="quiz-step-label">Etapa 1 de 2 · Diagnóstico Rápido</span>
+            <span id="quiz-percent">50%</span>
+          </div>
+          <div class="quiz-bar"><div class="quiz-bar-fill" id="quiz-bar-fill"></div></div>
+
+          <div class="quiz-step-1" id="quiz-step-1">
+            <h2>Qual é o momento atual do seu negócio hoje?</h2>
+            <div class="quiz-options">
+              <button type="button" class="quiz-opt highlight" data-momento="Começar do zero (ainda não tenho identidade, site ou anúncios)">
+                <span>Quero começar do zero (não tenho estrutura ainda)</span>
+                <span class="quiz-badge">Do Zero</span>
+              </button>
+              <button type="button" class="quiz-opt" data-momento="Já vendo, mas meu conteúdo e redes não geram demanda previsível">
+                <span>Já tenho empresa, mas minhas redes não vendem</span>
+                <span>→</span>
+              </button>
+              <button type="button" class="quiz-opt" data-momento="Invisto em tráfego pago, mas preciso de criativos e vídeos que convertam">
+                <span>Já faço anúncios e preciso de vídeos de alta conversão</span>
+                <span>→</span>
+              </button>
+              <button type="button" class="quiz-opt" data-momento="Busco filme institucional, documentário ou projeto especial">
+                <span>Quero um filme institucional, documentário ou campanha</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <form class="quiz-step-2" id="quiz-step-2">
+            <h2>Para onde enviamos seu plano de ação?</h2>
+            <div class="field-group">
+              <input type="text" id="q-nome" placeholder="Seu nome" required />
+              <input type="text" id="q-empresa" placeholder="Nome da empresa (ou 'Novo projeto')" required />
+              <input type="tel" id="q-whats" placeholder="Seu WhatsApp com DDD" required />
+            </div>
+            <div class="quiz-actions">
+              <button type="button" class="btn btn-outline" id="quiz-voltar">Voltar</button>
+              <button type="submit" class="btn btn-red" style="flex:1;">Iniciar no WhatsApp</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- LETREIRO -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        CHAMA CINE ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO &amp; PERFORMANCE ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★ CIÊNCIA PSICODÉLICA ★ MAIS QUE FUTEBOL ★ MORADA DE NEGRO ★ O CINEMA É UM SONHO ★ SEGREDO DE ABELHA ★&nbsp;
+        CHAMA CINE ★ FILMES PUBLICITÁRIOS ★ TRÁFEGO PAGO &amp; PERFORMANCE ★ ESTRUTURAÇÃO DO ZERO ★ BEM LEVE DOCES FIT ★ BUJI BBQ À BEIRA MAR ★ ALJOUR DE SENEGAL ★ AS AVENTURAS DE LUÁ ★ CACHOEIRA YAWA ★ CBDEUS ★ CIÊNCIA ANCESTRAL ★ CIÊNCIA PSICODÉLICA ★ MAIS QUE FUTEBOL ★ MORADA DE NEGRO ★ O CINEMA É UM SONHO ★ SEGREDO DE ABELHA ★&nbsp;
+      </div>
+    </div>
+
+    <!-- 8 SOLUÇÕES -->
+    <section class="sec" id="servicos">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-tag">Arquitetura Comercial &amp; Audiovisual</span>
+          <h2 class="sec-title">8 frentes integradas para tirar sua marca da invisibilidade</h2>
+          <p class="sec-desc">Da criação de marca e posicionamento do zero até filmes publicitários, Reels de retenção e gestão de tráfego pago.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <img src="img/icone-01.png" alt="" class="service-icon" />
+            <h3>Filmes Publicitários &amp; Reels</h3>
+            <p>Produção audiovisual com direção cinematográfica, ritmo de retenção e gancho comercial para anúncios e redes.</p>
+          </article>
+          <article class="service-card">
+            <img src="img/icone-02.png" alt="" class="service-icon" />
+            <h3>Conteúdo para Profissionais</h3>
+            <p>Posicionamento de autoridade para médicos, advogados, empresários e especialistas que vendem alto valor.</p>
+          </article>
+          <article class="service-card">
+            <img src="img/icone-03.png" alt="" class="service-icon" />
+            <h3>Gestão de Redes Sociais</h3>
+            <p>Planejamento editorial, direção de arte e calendário orientado à geração de oportunidades comerciais.</p>
+          </article>
+          <article class="service-card">
+            <img src="img/icone-04.png" alt="" class="service-icon" />
+            <h3>Documentários &amp; Autorais</h3>
+            <p>Narrativas profundas com estética de cinema para marcas, instituições, editais e projetos culturais.</p>
+          </article>
+          <article class="service-card">
+            <img src="img/icone-05.png" alt="" class="service-icon" />
+            <h3>Lançamento do Zero</h3>
+            <p>Estruturação completa para quem ainda não tem presença digital: posicionamento, identidade, landing page e primeiros criativos.</p>
+          </article>
+          <article class="service-card">
+            <img src="img/icone-06.png" alt="" class="service-icon" />
+            <h3>Tráfego Pago &amp; Diagnósticos</h3>
+            <p>Campanhas no Meta Ads e Google Ads orientadas a ROI, funil de conversão e leitura de métricas reais.</p>
+          </article>
+          <article class="service-card">
+            <img src="img/icone-07.png" alt="" class="service-icon" />
+            <h3>Identidade Visual &amp; Personagens</h3>
+            <p>Sistemas visuais marcantes, mascotes 3D/ilustrados e desdobramentos para campanhas promocionais.</p>
+          </article>
+          <article class="service-card">
+            <img src="img/icone-08.png" alt="" class="service-icon" />
+            <h3>Copywriting, Roteiros &amp; Imprensa</h3>
+            <p>Roteiros persuasivos, páginas de vendas e assessoria narrativa para fortalecer reputação e conversão.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASES & VÍDEO -->
+    <section class="sec" id="cases">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-tag">Operação Real &amp; Bastidores</span>
+          <h2 class="sec-title">Criativos e marcas que já rodam com a assinatura Chama</h2>
+          <p class="sec-desc">Da concepção visual aos Reels promocionais de varejo e gastronomia em Natal/RN.</p>
+        </div>
+        <div class="cases-layout">
+          <div class="video-box">
+            <video controls playsinline preload="metadata" poster="img/cases/Black-Bem-Leve_08.jpg">
+              <source src="video/bem-leve-black.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+            <div class="video-caption">
+              <span><strong>Campanha Black Bem Leve</strong> · Motion &amp; Oferta Direta</span>
+              <a href="https://www.instagram.com/bemleve_docesfit/" target="_blank" rel="noopener noreferrer" style="color:var(--vermelho); font-weight:900;">@bemleve_docesfit ↗</a>
+            </div>
+          </div>
+
+          <div class="cases-cards">
+            <article class="case-item">
+              <img src="img/cases/bem-leve-marca.jpg" alt="Case Bem Leve Doces Fit" />
+              <div>
+                <span class="sec-tag" style="margin-bottom:4px;">Branding · Personagem 3D · Campanha</span>
+                <h3>Bem Leve Doces Fit</h3>
+                <p>Construção de universo visual, personagem proprietária, peças promocionais de Black Friday e vídeos curtos focados em giro rápido.</p>
+                <a href="https://www.instagram.com/bemleve_docesfit/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver Case no Instagram ↗</a>
+              </div>
+            </article>
+
+            <article class="case-item">
+              <img src="img/cases/buji-bbq.jpg" alt="Case Buji Bar da Praia" />
+              <div>
+                <span class="sec-tag" style="margin-bottom:4px;">Direção Criativa · Gastronomia &amp; Experiência</span>
+                <h3>Buji BBQ à Beira Mar</h3>
+                <p>Do conceito ao evento: identidade visual, cobertura audiovisual, direção de arte e posicionamento digital para experiência gastronômica.</p>
+                <a href="https://www.instagram.com/bujibardapraia/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver Case no Instagram ↗</a>
+              </div>
+            </article>
+
+            <article class="case-item">
+              <img src="img/cases/Black-Bem-Leve_08.jpg" alt="Peça promocional Black Bem Leve" />
+              <div>
+                <span class="sec-tag" style="margin-bottom:4px;">Design de Conversão · Varejo</span>
+                <h3>Criativos de Alta Conversão</h3>
+                <p>Peças estáticas e animadas desenhadas com hierarquia de oferta, prova de produto e chamada direta para WhatsApp e delivery.</p>
+                <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Ver Perfil @chamacine ↗</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFÓLIO 10 PÔSTERES -->
+    <section class="sec portfolio-sec" id="portfolio">
+      <div class="container">
+        <div class="sec-head">
+          <span class="sec-tag">Acervo Cinematográfico</span>
+          <h2 class="sec-title">10 obras e projetos autorais com o DNA Chama Cine</h2>
+          <p class="sec-desc">A mesma linguagem narrativa, fotografia e direção de arte que aplicamos nas campanhas comerciais dos nossos clientes.</p>
+        </div>
+        <div class="posters-grid" id="posters-grid"></div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="sec" id="sobre">
+      <div class="container">
+        <div class="about-box">
+          <div>
+            <span class="sec-tag">Quem Somos</span>
+            <h2 class="sec-title">Cinema como linguagem, negócio como resultado</h2>
+            <p class="sec-desc" style="margin-bottom:18px;">
+              A Chama Cine nasceu da união entre realizadores audiovisuais e estrategistas comerciais em Natal/RN. Acreditamos que toda empresa tem uma história forte — mas sem direção, estética e distribuição paga, essa história não chega a quem compra.
+            </p>
+            <p class="sec-desc">
+              Por isso, operamos como parceiro completo: diagnosticamos o gargalo, estruturamos a marca (mesmo se você estiver começando do zero), produzimos os filmes e colocamos as campanhas para rodar com foco em retorno.
+            </p>
+          </div>
+          <div class="silhuetas-wrap">
+            <img src="img/silhuetas.png" alt="Equipe e criação Chama Cine" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL COM FOGO E DINOSSAURO -->
+    <section class="cta-chama" id="contato">
+      <img src="img/dinossauro.png" alt="" class="dino-watermark" aria-hidden="true" />
+      <div class="container cta-grid">
+        <div>
+          <div class="fogo-badge">
+            <img src="img/fogo.png" alt="Ícone Chama" />
+            <div>
+              <strong style="display:block; font-size:0.92rem; text-transform:uppercase; letter-spacing:0.05em;">Chama Cine · Natal/RN</strong>
+              <span style="font-size:0.82rem; color:var(--cinza-txt);">Atendimento comercial direto</span>
+            </div>
+          </div>
+
+          <h2 class="cta-title display-font">
+            V<span class="agudo">A</span>MOS PRODUZIR <span>VENDAS</span> JUNTOS?
+          </h2>
+          <p style="font-size:1.08rem; max-width:52ch; color:var(--creme);">
+            Escolha o canal mais rápido para conversar com nosso time comercial ou preencha o diagnóstico ao lado. Atendemos empresas em operação e projetos que estão começando do zero.
+          </p>
+
+          <div class="direct-channels">
+            <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20conversar%20sobre%20meu%20projeto." target="_blank" rel="noopener noreferrer" class="channel-btn" onclick="trackChamaEvent('Contact', {channel: 'footer_whatsapp'})">
+              <div>
+                <span>WhatsApp Comercial · (84) 99630-5371</span>
+                <small>Resposta rápida para orçamento, tráfego e produção</small>
+              </div>
+              <span>Abrir ↗</span>
+            </a>
+
+            <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" class="channel-btn" onclick="trackChamaEvent('Contact', {channel: 'footer_email'})">
+              <div>
+                <span>E-mail Oficial · adm@chamacine.com.br</span>
+                <small>Envie seu briefing, edital ou proposta corporativa</small>
+              </div>
+              <span>Enviar ↗</span>
+            </a>
+
+            <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener noreferrer" class="channel-btn">
+              <div>
+                <span>Instagram · @chamacine</span>
+                <small>Acompanhe bastidores, lançamentos e novos cases</small>
+              </div>
+              <span>Seguir ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Solicitar Diagnóstico Comercial</h3>
+          <p>Preencha abaixo e enviaremos sua solicitação diretamente no WhatsApp da Chama Cine.</p>
+          <form id="form-contato">
+            <div class="field-group">
+              <input type="text" id="c-nome" placeholder="Seu nome completo" required />
+              <input type="text" id="c-empresa" placeholder="Empresa ou projeto" required />
+              <select id="c-estagio" required>
+                <option value="" disabled selected>Selecione o estágio atual...</option>
+                <option value="Quero começar do zero (sem identidade, site ou anúncios)">Quero começar do zero (ainda não tenho nada)</option>
+                <option value="Preciso de filmes publicitários / Reels">Preciso de filmes publicitários / Reels</option>
+                <option value="Quero tráfego pago + gestão de redes">Quero tráfego pago + gestão de redes</option>
+                <option value="Documentário, edital ou projeto especial">Documentário, edital ou projeto especial</option>
+              </select>
+              <textarea id="c-msg" rows="3" placeholder="Conte em poucas linhas o que você deseja alcançar..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-red" style="width:100%;">Enviar e Abrir WhatsApp</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <img src="img/logo-rodape.png" alt="Chama Cine" />
+        <span>© 2026 Chama Cine · Natal, Rio Grande do Norte. Todos os direitos reservados.</span>
+      </div>
+      <div style="display:flex; gap:18px;">
+        <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener noreferrer">@chamacine</a>
+        <a href="mailto:adm@chamacine.com.br">adm@chamacine.com.br</a>
+        <a href="https://wa.me/5584996305371" target="_blank" rel="noopener noreferrer">(84) 99630-5371</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="poster-modal">
+    <div style="position:relative;">
+      <button type="button" class="modal-close" id="modal-close" aria-label="Fechar">×</button>
+      <div class="modal-body" id="modal-content"></div>
+    </div>
+  </dialog>
+
+  <script>
+    const WHATSAPP_NUM = "5584996305371";
+
+    const POSTERS = [
+      {
+        titulo: "Aljour de Senegal",
+        genero: "Documentário Internacional",
+        img: "img/posters/aljour-de-senegal.jpg",
+        sinopse: "Retrato sensorial sobre identidade, música e cotidiano no Senegal sob direção documental da Chama Cine.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "As Aventuras de Luá",
+        genero: "Animação & Fantasia",
+        img: "img/posters/as-aventuras-de-lua.jpg",
+        sinopse: "Fábula poética ilustrada com direção de arte autoral e atmosfera lúdica.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "Cachoeira Yawa",
+        genero: "Documentário Socioambiental",
+        img: "img/posters/cachoeira-yawa.jpg",
+        sinopse: "Imersão audiovisual nas águas, saberes tradicionais e preservação territorial.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "CBDEUS",
+        genero: "Documentário & Ciência",
+        img: "img/posters/cbdeus.jpg",
+        sinopse: "Investigação jornalística e científica sobre o poder terapêutico e os debates em torno do CBD.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "Ciência Ancestral",
+        genero: "Série Documental",
+        img: "img/posters/ciencia-ancestral.jpg",
+        sinopse: "O encontro entre sabedorias originárias da floresta e a neurociência contemporânea.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "Ciência Psicodélica",
+        genero: "Documentário Científico",
+        img: "img/posters/ciencia-psicodelica.jpg",
+        sinopse: "Uma viagem visual pelas pesquisas modernas sobre consciência e saúde mental.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "Mais que Futebol",
+        genero: "Esporte & Cultura",
+        img: "img/posters/mais-que-futebol.jpg",
+        sinopse: "Histórias de superação, comunidade e paixão dentro e fora das quatro linhas.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "Morada de Negro",
+        genero: "Curta Documental",
+        img: "img/posters/morada-de-negro.jpg",
+        sinopse: "As vozes de Acauã em fotografia preto e branco de alto impacto emocional.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "O Cinema é um Sonho",
+        genero: "Ensaio Audiovisual",
+        img: "img/posters/o-cinema-e-um-sonho.jpg",
+        sinopse: "Manifesto visual sobre a potência transformadora da sétima arte na formação de novos olhares.",
+        link: "https://www.instagram.com/chamacine"
+      },
+      {
+        titulo: "Segredo de Abelha",
+        genero: "Sertão & Misticismo",
+        img: "img/posters/segredo-de-abelha.jpg",
+        sinopse: "Narrativa simbólica enraizada na estética e nos mistérios do sertão nordestino.",
+        link: "https://www.instagram.com/chamacine"
+      }
+    ];
+
+    const grid = document.getElementById("posters-grid");
+    const modal = document.getElementById("poster-modal");
+    const modalContent = document.getElementById("modal-content");
+
+    POSTERS.forEach((p, idx) => {
+      const card = document.createElement("article");
+      card.className = "poster-card";
+      card.innerHTML = `
+        <div class="poster-thumb">
+          <img src="${p.img}" alt="${p.titulo}" loading="lazy" />
+        </div>
+        <div class="poster-body">
+          <span class="poster-genre">${p.genero}</span>
+          <h3>${p.titulo}</h3>
+          <div class="poster-links">
+            <button type="button" class="mini-btn" data-idx="${idx}">Ficha</button>
+            <a href="${p.link}" target="_blank" rel="noopener noreferrer" class="mini-btn">Instagram ↗</a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    grid.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-idx]");
+      if (!btn) return;
+      const item = POSTERS[Number(btn.dataset.idx)];
+      modalContent.innerHTML = `
+        <img src="${item.img}" alt="${item.titulo}" />
+        <div>
+          <span class="sec-tag">${item.genero}</span>
+          <h3 style="font-size:1.6rem; font-weight:900; margin-bottom:12px;">${item.titulo}</h3>
+          <p style="color:var(--cinza-txt); margin-bottom:20px;">${item.sinopse}</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="btn btn-red">Ver no Instagram ↗</a>
+            <a href="https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent('Olá, Chama Cine! Gostei do projeto "' + item.titulo + '" e quero conversar sobre uma produção.')}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Quero algo nesse nível</a>
+          </div>
+        </div>
+      `;
+      modal.showModal();
+    });
+
+    document.getElementById("modal-close").addEventListener("click", () => modal.close());
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.close(); });
+
+    // Quiz 2 etapas
+    let selectedMomento = "";
+    const step1 = document.getElementById("quiz-step-1");
+    const step2 = document.getElementById("quiz-step-2");
+    const stepLabel = document.getElementById("quiz-step-label");
+    const stepPercent = document.getElementById("quiz-percent");
+    const barFill = document.getElementById("quiz-bar-fill");
+
+    document.querySelectorAll(".quiz-opt").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedMomento = btn.dataset.momento;
+        step1.classList.add("hidden");
+        step2.classList.add("active");
+        stepLabel.textContent = "Etapa 2 de 2 · Seus Dados";
+        stepPercent.textContent = "100%";
+        barFill.style.width = "100%";
+      });
+    });
+
+    document.getElementById("quiz-voltar").addEventListener("click", () => {
+      step2.classList.remove("active");
+      step1.classList.remove("hidden");
+      stepLabel.textContent = "Etapa 1 de 2 · Diagnóstico Rápido";
+      stepPercent.textContent = "50%";
+      barFill.style.width = "50%";
+    });
+
+    document.getElementById("quiz-step-2").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nome = document.getElementById("q-nome").value.trim();
+      const empresa = document.getElementById("q-empresa").value.trim();
+      const whats = document.getElementById("q-whats").value.trim();
+      const texto = `Olá, Chama Cine! Vim pelo site.
+• Nome: ${nome}
+• Empresa/Projeto: ${empresa}
+• WhatsApp: ${whats}
+• Momento atual: ${selectedMomento}`;
+      trackChamaEvent("Lead", { source: "hero_quiz", stage: selectedMomento });
+      window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(texto)}`, "_blank", "noopener,noreferrer");
+    });
+
+    // Formulário final
+    document.getElementById("form-contato").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const nome = document.getElementById("c-nome").value.trim();
+      const empresa = document.getElementById("c-empresa").value.trim();
+      const estagio = document.getElementById("c-estagio").value;
+      const msg = document.getElementById("c-msg").value.trim();
+      const texto = `Olá, Chama Cine! Quero solicitar um diagnóstico comercial.
+• Nome: ${nome}
+• Empresa/Projeto: ${empresa}
+• Estágio: ${estagio}
+• Detalhes: ${msg || "Sem observações adicionais"}`;
+      trackChamaEvent("Lead", { source: "footer_form", stage: estagio });
+      window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(texto)}`, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
