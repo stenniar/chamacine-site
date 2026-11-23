@@ -116,7 +116,7 @@
       width: 100%;
       min-height: 820px;
       background-color: #070606;
-      background-image: linear-gradient(to bottom, rgba(7,6,6,0.88), rgba(7,6,6,0.94)), url('img/fundo-projetos.jpg');
+      background-image: linear-gradient(to bottom, rgba(7,6,6,0.58), rgba(7,6,6,0.74)), url('img/fundo-projetos.jpg');
       background-size: cover;
       background-position: center;
       overflow: hidden;
@@ -134,7 +134,7 @@
       background-image: url('img/borda-projetos.png');
       background-repeat: repeat-x;
       background-size: auto 100%;
-      opacity: 0.7;
+      opacity: 0.8;
       pointer-events: none;
       z-index: 20;
     }
@@ -159,7 +159,7 @@
 
     .s.recentes .dica {
       font-size: 0.85rem;
-      color: rgba(244, 241, 234, 0.65);
+      color: rgba(244, 241, 234, 0.75);
       margin-bottom: 2rem;
     }
 
@@ -176,7 +176,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: rgba(244, 241, 234, 0.7);
+      color: rgba(244, 241, 234, 0.75);
       margin-bottom: 0.5rem;
     }
 
@@ -192,7 +192,7 @@
     .s.recentes #info-resumo {
       font-size: 0.98rem;
       line-height: 1.65;
-      color: rgba(244, 241, 234, 0.82);
+      color: rgba(244, 241, 234, 0.88);
       min-height: 5.2rem;
       margin-bottom: 1.75rem;
     }
@@ -225,8 +225,8 @@
       width: 44px;
       height: 44px;
       border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(17, 16, 16, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(17, 16, 16, 0.85);
       color: var(--off-white);
       display: inline-flex;
       align-items: center;
@@ -303,13 +303,13 @@
 <body id="topo" class="antialiased selection:bg-[#e62314] selection:text-white">
 
   <!-- HEADER -->
-  <header class="sticky top-0 z-50 border-b border-white/10 bg-[#070606]/90 backdrop-blur-md">
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-[#070606]/85 backdrop-blur-md">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
       <a href="#topo" class="flex items-center gap-3">
         <img src="img/logo-chama.svg" alt="Chama Cine" class="h-9 w-auto object-contain" />
       </a>
 
-      <nav class="hidden items-center gap-7 font-label text-sm text-white/80 md:flex">
+      <nav class="hidden items-center gap-7 font-label text-sm text-white/85 md:flex">
         <a href="#servicos" class="transition hover:text-white">Soluções</a>
         <a href="#cases" class="transition hover:text-white">Operação Real</a>
         <a href="#projetos" class="transition hover:text-white">Acervo</a>
@@ -332,14 +332,14 @@
   <!-- HERO (1ª DOBRA) -->
   <section class="relative overflow-hidden border-b border-white/10 py-14 sm:py-20">
     <div
-      class="pointer-events-none absolute inset-0 opacity-20"
+      class="pointer-events-none absolute inset-0 opacity-55"
       style="background-image: url('img/_fundo-inteiro-prev.jpg'); background-size: cover; background-position: center;"
     ></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/75 via-[#070606]/90 to-[#070606]"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/55 via-[#070606]/70 to-[#070606]/90"></div>
 
     <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
       <div class="lg:col-span-7">
-        <div class="font-label mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/40 bg-[#e62314]/10 px-4 py-1.5 text-xs uppercase tracking-widest text-[#f4f1ea]">
+        <div class="font-label mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/50 bg-[#0d0b0b]/85 px-4 py-1.5 text-xs uppercase tracking-widest text-[#f4f1ea] backdrop-blur-sm">
           <span class="h-2 w-2 rounded-full bg-[#e62314]"></span>
           Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN
         </div>
@@ -348,7 +348,7 @@
           Núcleo de <span class="text-[#e62314]">Comunicação</span> e Tecnologia em Vendas.
         </h1>
 
-        <p class="mt-5 max-w-2xl text-lg font-medium leading-relaxed text-[#f4f1ea]/90 sm:text-xl">
+        <p class="mt-5 max-w-2xl text-lg font-medium leading-relaxed text-[#f4f1ea]/95 sm:text-xl">
           Estruturamos o seu negócio para vender mais — combinando direção audiovisual, posicionamento estratégico, tráfego pago e tecnologia aplicada a vendas.
         </p>
 
@@ -361,7 +361,7 @@
           </a>
           <a
             href="#projetos"
-            class="font-display rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm uppercase tracking-wider text-white transition hover:border-white/50 hover:bg-white/10"
+            class="font-display rounded-full border border-white/25 bg-[#0e0d0d]/80 px-7 py-4 text-sm uppercase tracking-wider text-white backdrop-blur-sm transition hover:border-white/50 hover:bg-white/10"
           >
             Ver Acervo & Cases
           </a>
@@ -369,32 +369,32 @@
 
         <!-- 3 Pilares em Destaque -->
         <div class="mt-10 grid gap-3.5 sm:grid-cols-3">
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#121010]/95 p-4 shadow-lg shadow-[#e62314]/10 transition hover:-translate-y-0.5 hover:border-[#e62314]">
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#100e0e]/85 p-4 shadow-lg shadow-[#e62314]/10 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#e62314]">
             <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
             <strong class="font-display block text-sm uppercase tracking-wide text-white">360° Comercial</strong>
-            <span class="mt-1 block text-xs leading-relaxed text-white/75">Da estratégia ao anúncio no ar.</span>
+            <span class="mt-1 block text-xs leading-relaxed text-white/80">Da estratégia ao anúncio no ar.</span>
           </div>
 
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#121010]/95 p-4 shadow-lg shadow-[#e62314]/10 transition hover:-translate-y-0.5 hover:border-[#e62314]">
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#100e0e]/85 p-4 shadow-lg shadow-[#e62314]/10 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#e62314]">
             <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
             <strong class="font-display block text-sm uppercase tracking-wide text-white">Padrão Cinema</strong>
-            <span class="mt-1 block text-xs leading-relaxed text-white/75">Estética autoral para retenção.</span>
+            <span class="mt-1 block text-xs leading-relaxed text-white/80">Estética autoral para retenção.</span>
           </div>
 
-          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#121010]/95 p-4 shadow-lg shadow-[#e62314]/10 transition hover:-translate-y-0.5 hover:border-[#e62314]">
+          <div class="group relative overflow-hidden rounded-2xl border border-[#e62314]/45 bg-[#100e0e]/85 p-4 shadow-lg shadow-[#e62314]/10 backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-[#e62314]">
             <span class="mb-2.5 block h-1 w-9 rounded-full bg-[#e62314]"></span>
             <strong class="font-display block text-sm uppercase tracking-wide text-white">Do Zero à Escala</strong>
-            <span class="mt-1 block text-xs leading-relaxed text-white/75">Estrutura completa de vendas.</span>
+            <span class="mt-1 block text-xs leading-relaxed text-white/80">Estrutura completa de vendas.</span>
           </div>
         </div>
       </div>
 
       <!-- QUIZ DIAGNÓSTICO LEVE E ESCANEÁVEL -->
       <div class="lg:col-span-5">
-        <div class="rounded-3xl border border-white/12 bg-gradient-to-b from-[#171616]/95 to-[#100f0f]/95 p-6 shadow-2xl backdrop-blur-md sm:p-8">
-          <div class="mb-3 flex items-center justify-between font-label text-xs text-white/60">
+        <div class="rounded-3xl border border-white/15 bg-[#121010]/90 p-6 shadow-2xl backdrop-blur-md sm:p-8">
+          <div class="mb-3 flex items-center justify-between font-label text-xs text-white/65">
             <span id="quiz-step-label">Passo 1 de 2 · Diagnóstico rápido</span>
-            <span id="quiz-progress-text" class="font-accent rounded-full bg-[#e62314]/15 px-2.5 py-0.5 text-[#e62314]">50%</span>
+            <span id="quiz-progress-text" class="font-accent rounded-full bg-[#e62314]/20 px-2.5 py-0.5 text-[#e62314]">50%</span>
           </div>
 
           <div class="mb-6 h-1 w-full overflow-hidden rounded-full bg-white/10">
@@ -405,39 +405,39 @@
             <h2 class="font-label text-xl leading-snug text-white sm:text-2xl">
               Qual é o momento do seu negócio?
             </h2>
-            <p class="mt-1 text-sm text-white/65">
+            <p class="mt-1 text-sm text-white/70">
               Escolha a opção que melhor representa o seu cenário:
             </p>
 
             <div class="mt-5 space-y-2.5">
-              <button type="button" onclick="selecionarEstagio('Começar do zero (estruturar marca e canais)')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+              <button type="button" onclick="selecionarEstagio('Começar do zero (estruturar marca e canais)')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
                 <div>
                   <span class="font-label block text-sm text-white">Começar do zero</span>
-                  <span class="block text-xs text-white/60">Ainda não tenho estrutura comercial ou digital</span>
+                  <span class="block text-xs text-white/65">Ainda não tenho estrutura comercial ou digital</span>
                 </div>
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Destravar vendas nas redes sociais')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+              <button type="button" onclick="selecionarEstagio('Destravar vendas nas redes sociais')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
                 <div>
                   <span class="font-label block text-sm text-white">Destravar vendas nas redes</span>
-                  <span class="block text-xs text-white/60">Já tenho empresa ativa, mas o perfil não converte</span>
+                  <span class="block text-xs text-white/65">Já tenho empresa ativa, mas o perfil não converte</span>
                 </div>
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Escalar anúncios, páginas e app com conversão')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+              <button type="button" onclick="selecionarEstagio('Escalar anúncios, páginas e app com conversão')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
                 <div>
                   <span class="font-label block text-sm text-white">Escalar tráfego, criativos e tecnologia</span>
-                  <span class="block text-xs text-white/60">Quero anúncios, páginas, CRM ou app que gerem receita</span>
+                  <span class="block text-xs text-white/65">Quero anúncios, páginas, CRM ou app que gerem receita</span>
                 </div>
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
 
-              <button type="button" onclick="selecionarEstagio('Produzir filme institucional, documentário ou campanha')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
+              <button type="button" onclick="selecionarEstagio('Produzir filme institucional, documentário ou campanha')" class="group flex w-full items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#e62314]/70 hover:bg-[#e62314]/10">
                 <div>
                   <span class="font-label block text-sm text-white">Filme, documentário ou campanha</span>
-                  <span class="block text-xs text-white/60">Produção audiovisual autoral de alto impacto</span>
+                  <span class="block text-xs text-white/65">Produção audiovisual autoral de alto impacto</span>
                 </div>
                 <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 text-xs text-[#e62314] transition group-hover:border-[#e62314] group-hover:bg-[#e62314] group-hover:text-white">→</span>
               </button>
@@ -447,11 +447,11 @@
           <form id="quiz-step-2" class="hidden space-y-4" onsubmit="enviarQuizWhatsApp(event)">
             <div>
               <h2 class="font-label text-xl text-white">Para onde enviamos seu plano?</h2>
-              <p class="mt-1 text-xs text-white/60">Preencha os dois campos abaixo para iniciar no WhatsApp.</p>
+              <p class="mt-1 text-xs text-white/65">Preencha os dois campos abaixo para iniciar no WhatsApp.</p>
             </div>
             <p id="quiz-selected-badge" class="rounded-xl border border-[#e62314]/30 bg-[#e62314]/10 px-3.5 py-2 text-xs font-medium text-white/90"></p>
-            <input type="text" id="quiz-nome" required placeholder="Seu nome" class="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
-            <input type="text" id="quiz-empresa" required placeholder="Nome da empresa ou @instagram" class="w-full rounded-xl border border-white/15 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
+            <input type="text" id="quiz-nome" required placeholder="Seu nome" class="w-full rounded-xl border border-white/15 bg-black/55 px-4 py-3 text-sm text-white placeholder-white/45 focus:border-[#e62314] focus:outline-none" />
+            <input type="text" id="quiz-empresa" required placeholder="Nome da empresa ou @instagram" class="w-full rounded-xl border border-white/15 bg-black/55 px-4 py-3 text-sm text-white placeholder-white/45 focus:border-[#e62314] focus:outline-none" />
             <div class="flex gap-3 pt-1">
               <button type="button" onclick="voltarQuiz()" class="font-label rounded-xl border border-white/15 px-4 py-3 text-xs text-white/75 transition hover:text-white">
                 Voltar
@@ -474,13 +474,13 @@
     </div>
   </div>
 
-  <!-- 02 · ARQUITETURA COMERCIAL & AUDIOVISUAL (FUNDO fundo-servicos.jpg + DESTAQUES REORDENADOS) -->
+  <!-- 02 · ARQUITETURA COMERCIAL & AUDIOVISUAL -->
   <section id="servicos" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
-      class="pointer-events-none absolute inset-0 opacity-30"
+      class="pointer-events-none absolute inset-0 opacity-60"
       style="background-image: url('img/fundo-servicos.jpg'); background-size: cover; background-position: center;"
     ></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/85 via-[#070606]/80 to-[#070606]/95"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/70 via-[#070606]/55 to-[#070606]/85"></div>
 
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
@@ -490,7 +490,7 @@
             8 frentes integradas para tirar sua marca da invisibilidade e gerar vendas recorrentes
           </h2>
         </div>
-        <p class="font-label text-xs uppercase tracking-wider text-white/65">
+        <p class="font-label text-xs uppercase tracking-wider text-white/75">
           Clique em qualquer frente para ver o plano de retorno e cases reais →
         </p>
       </div>
@@ -499,65 +499,71 @@
     </div>
   </section>
 
-  <!-- 03 · OPERAÇÃO REAL & BASTIDORES (CONCEITO INTEGRADOR ESTILO ACERVO) -->
-  <section id="cases" class="border-b border-white/10 bg-[#0a0909] py-20">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <!-- 03 · OPERAÇÃO REAL & BASTIDORES -->
+  <section id="cases" class="relative overflow-hidden border-b border-white/10 bg-[#0a0909] py-20">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-45"
+      style="background-image: url('img/_fundo-inteiro-prev.jpg'); background-size: cover; background-position: center;"
+    ></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/75 via-[#070606]/65 to-[#070606]/85"></div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
         <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Operação Real & Bastidores</span>
         <h2 class="font-display mt-2 text-3xl uppercase text-white sm:text-4xl">
           Criativos e marcas que já rodam com a assinatura Chama
         </h2>
-        <p class="mt-3 text-base text-white/70">
+        <p class="mt-3 text-base text-white/80">
           Selecione uma peça ao lado para inspecionar o formato real, a estratégia aplicada e o canal oficial do case.
         </p>
       </div>
 
-      <div class="mt-10 grid items-center gap-8 rounded-3xl border border-white/10 bg-[#111010] p-6 shadow-2xl lg:grid-cols-12 lg:p-8">
+      <div class="mt-10 grid items-center gap-8 rounded-3xl border border-white/15 bg-[#111010]/90 p-6 shadow-2xl backdrop-blur-md lg:grid-cols-12 lg:p-8">
         <div class="space-y-3 lg:col-span-5" id="seletor-cases">
           <button type="button" data-case="0" onclick="selecionarCase(0)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-[#e62314] bg-[#e62314]/15 p-4 text-left transition">
             <div>
               <span class="font-accent block text-[11px] uppercase tracking-widest text-[#e62314]">01 · REELS / STORY 9:16</span>
               <strong class="font-display mt-0.5 block text-base uppercase text-white">Bem Leve · Campanha Black</strong>
-              <span class="text-xs text-white/65">Vídeo vertical de oferta direta & giro rápido</span>
+              <span class="text-xs text-white/70">Vídeo vertical de oferta direta & giro rápido</span>
             </div>
             <span class="text-sm font-bold text-[#e62314]">▶</span>
           </button>
 
-          <button type="button" data-case="1" onclick="selecionarCase(1)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/40 p-4 text-left transition hover:border-white/30">
+          <button type="button" data-case="1" onclick="selecionarCase(1)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/50 p-4 text-left transition hover:border-white/30">
             <div>
-              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/50">02 · BRANDING & 3D</span>
+              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/55">02 · BRANDING & 3D</span>
               <strong class="font-display mt-0.5 block text-base uppercase text-white">Bem Leve Doces Fit</strong>
-              <span class="text-xs text-white/65">Universo visual, mascote 3D e campanha</span>
+              <span class="text-xs text-white/70">Universo visual, mascote 3D e campanha</span>
             </div>
             <span class="text-sm text-white/50">→</span>
           </button>
 
-          <button type="button" data-case="2" onclick="selecionarCase(2)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/40 p-4 text-left transition hover:border-white/30">
+          <button type="button" data-case="2" onclick="selecionarCase(2)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/50 p-4 text-left transition hover:border-white/30">
             <div>
-              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/50">03 · GASTRONOMIA & EVENTO</span>
+              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/55">03 · GASTRONOMIA & EVENTO</span>
               <strong class="font-display mt-0.5 block text-base uppercase text-white">Buji BBQ à Beira Mar</strong>
-              <span class="text-xs text-white/65">Identidade, direção de arte e cobertura</span>
+              <span class="text-xs text-white/70">Identidade, direção de arte e cobertura</span>
             </div>
             <span class="text-sm text-white/50">→</span>
           </button>
 
-          <button type="button" data-case="3" onclick="selecionarCase(3)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/40 p-4 text-left transition hover:border-white/30">
+          <button type="button" data-case="3" onclick="selecionarCase(3)" class="case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/50 p-4 text-left transition hover:border-white/30">
             <div>
-              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/50">04 · DESIGN DE CONVERSÃO · VAREJO</span>
+              <span class="font-accent block text-[11px] uppercase tracking-widest text-white/55">04 · DESIGN DE CONVERSÃO · VAREJO</span>
               <strong class="font-display mt-0.5 block text-base uppercase text-white">Clube do Livro · Instituto Damasi</strong>
-              <span class="text-xs text-white/65">Hierarquia de oferta e prova de valor</span>
+              <span class="text-xs text-white/70">Hierarquia de oferta e prova de valor</span>
             </div>
             <span class="text-sm text-white/50">→</span>
           </button>
         </div>
 
-        <div class="grid items-center gap-6 rounded-2xl border border-white/10 bg-[#080707] p-5 sm:grid-cols-12 lg:col-span-7">
+        <div class="grid items-center gap-6 rounded-2xl border border-white/10 bg-[#080707]/85 p-5 sm:grid-cols-12 lg:col-span-7">
           <div id="case-midia-box" class="flex justify-center sm:col-span-5"></div>
 
           <div class="sm:col-span-7">
             <span id="case-tag" class="font-label text-xs uppercase tracking-widest text-[#e62314]">Motion & Oferta Direta · 9:16</span>
             <h3 id="case-titulo" class="font-display mt-2 text-2xl uppercase text-white sm:text-3xl">Campanha Black Bem Leve</h3>
-            <p id="case-desc" class="mt-3 text-sm leading-relaxed text-white/80">
+            <p id="case-desc" class="mt-3 text-sm leading-relaxed text-white/85">
               Peça audiovisual vertical construída para reter no feed e Storie, apresentar a oferta com clareza e acelerar pedidos diretos.
             </p>
             <div class="mt-6 flex flex-wrap items-center gap-3">
@@ -608,10 +614,10 @@
   <!-- 05 · QUEM SOMOS -->
   <section id="sobre" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
-      class="pointer-events-none absolute inset-0 opacity-20"
+      class="pointer-events-none absolute inset-0 opacity-55"
       style="background-image: url('img/fundo-sobre.jpg'); background-size: cover; background-position: center;"
     ></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#070606] via-[#070606]/90 to-[#070606]/85"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#070606]/80 via-[#070606]/55 to-[#070606]/45"></div>
 
     <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
       <div class="lg:col-span-6">
@@ -619,20 +625,20 @@
         <h2 class="font-display mt-2 text-3xl uppercase text-white sm:text-4xl">
           Cinema como linguagem, tecnologia e venda como resultado
         </h2>
-        <p class="mt-5 text-base leading-relaxed text-white/85">
+        <p class="mt-5 text-base leading-relaxed text-white/90">
           Sediada em Natal/RN, a Chama Cine une realizadores audiovisuais e estrategistas comerciais em um único núcleo de comunicação e tecnologia em vendas.
         </p>
-        <p class="mt-4 text-base leading-relaxed text-white/85">
+        <p class="mt-4 text-base leading-relaxed text-white/90">
           Diagnosticamos o gargalo da sua operação, estruturamos sua marca e colocamos filmes, páginas, apps e campanhas para rodar com foco em retorno real.
         </p>
 
-        <div class="mt-8 flex items-center gap-4 rounded-2xl border border-white/15 bg-[#121010] p-4">
+        <div class="mt-8 flex items-center gap-4 rounded-2xl border border-white/15 bg-[#121010]/85 p-4 backdrop-blur-sm">
           <img
             src="img/dinossauro.png"
             alt="Selo criativo Chama Cine"
             class="h-16 w-16 shrink-0 rounded-xl border border-white/15 bg-[#f4f1ea] p-1.5 object-contain"
           />
-          <div class="text-xs text-white/75">
+          <div class="text-xs text-white/80">
             <strong class="font-display block text-sm uppercase text-white">Direção Artística & Estratégia Comercial</strong>
             Obras e campanhas com assinatura Chama Cine no Rio2C, TV, cinema e performance digital.
           </div>
@@ -640,28 +646,28 @@
       </div>
 
       <div class="lg:col-span-6">
-        <div class="overflow-hidden rounded-3xl border border-white/15 bg-[#141212] p-4 shadow-2xl">
+        <div class="overflow-hidden rounded-3xl border border-white/15 bg-[#141212]/85 p-4 shadow-2xl backdrop-blur-sm">
           <img
             src="img/silhuetas.png"
             alt="Equipe e criação Chama Cine"
-            class="w-full rounded-2xl bg-[#1a1818] object-contain"
+            class="w-full rounded-2xl bg-[#1a1818]/90 object-contain"
           />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 06 · DIAGNÓSTICO COMERCIAL (BACKGROUND fundo-contato.jpg + TÍTULO E ESCANEABILIDADE REFEITOS) -->
+  <!-- 06 · DIAGNÓSTICO COMERCIAL -->
   <section id="contato" class="relative overflow-hidden border-b border-white/10 py-20">
     <div
-      class="pointer-events-none absolute inset-0 opacity-30"
+      class="pointer-events-none absolute inset-0 opacity-60"
       style="background-image: url('img/fundo-contato.jpg'); background-size: cover; background-position: center;"
     ></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#070606]/90 via-[#070606]/80 to-[#070606]/95"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#070606]/75 via-[#070606]/60 to-[#070606]/80"></div>
 
     <div class="relative mx-auto grid max-w-7xl items-start gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
       <div class="lg:col-span-6">
-        <div class="font-label inline-flex items-center gap-2 rounded-full border border-[#e62314]/40 bg-[#121010]/90 px-3.5 py-1.5 text-xs uppercase tracking-wider text-white">
+        <div class="font-label inline-flex items-center gap-2 rounded-full border border-[#e62314]/50 bg-[#121010]/85 px-3.5 py-1.5 text-xs uppercase tracking-wider text-white backdrop-blur-sm">
           <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
           Chama Cine · Natal/RN
         </div>
@@ -670,50 +676,48 @@
           Diagnóstico comercial: onde sua marca pode <span class="text-[#e62314]">vender mais?</span>
         </h2>
 
-        <p class="mt-3 text-base leading-relaxed text-white/80">
+        <p class="mt-3 text-base leading-relaxed text-white/85">
           Em uma conversa objetiva, mapeamos o que está travando suas vendas e indicamos a estrutura ideal para o seu momento.
         </p>
 
-        <!-- Blocos escaneáveis do que é avaliado -->
         <ul class="mt-6 space-y-3">
-          <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
+          <li class="flex items-start gap-3 rounded-2xl border border-white/15 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
             <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">01</span>
             <div class="text-xs leading-relaxed">
               <strong class="font-display block text-sm uppercase text-white">Gargalo de Atração & Conversão</strong>
-              <span class="text-white/75">Identificamos onde o lead esfria entre o anúncio, o perfil, a página/app e o fechamento.</span>
+              <span class="text-white/80">Identificamos onde o lead esfria entre o anúncio, o perfil, a página/app e o fechamento.</span>
             </div>
           </li>
 
-          <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
+          <li class="flex items-start gap-3 rounded-2xl border border-white/15 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
             <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">02</span>
             <div class="text-xs leading-relaxed">
               <strong class="font-display block text-sm uppercase text-white">Frentes Prioritárias Sob Medida</strong>
-              <span class="text-white/75">Definimos se o foco imediato é lançar do zero, produzir filmes, rodar tráfego ou criar app/página.</span>
+              <span class="text-white/80">Definimos se o foco imediato é lançar do zero, produzir filmes, rodar tráfego ou criar app/página.</span>
             </div>
           </li>
 
-          <li class="flex items-start gap-3 rounded-2xl border border-white/10 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
+          <li class="flex items-start gap-3 rounded-2xl border border-white/15 bg-[#111010]/85 p-3.5 backdrop-blur-sm">
             <span class="font-accent mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e62314] text-[10px] text-white">03</span>
             <div class="text-xs leading-relaxed">
               <strong class="font-display block text-sm uppercase text-white">Plano Prático Sem Enrolação</strong>
-              <span class="text-white/75">Você sai com clareza de próximos passos, entregáveis e caminhos diretos para falar com o time.</span>
+              <span class="text-white/80">Você sai com clareza de próximos passos, entregáveis e caminhos diretos para falar com o time.</span>
             </div>
           </li>
         </ul>
 
-        <!-- Canais Diretos -->
         <div class="mt-6 grid gap-3 sm:grid-cols-3">
-          <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20estruturar%20meu%20neg%C3%B3cio%20para%20vender%20mais." target="_blank" rel="noopener" onclick="trackLead('Contato WhatsApp')" class="rounded-2xl border border-white/15 bg-[#111010]/90 p-3.5 transition hover:border-[#e62314]">
+          <a href="https://wa.me/5584996305371?text=Ol%C3%A1%2C%20Chama%20Cine!%20Vim%20pelo%20site%20e%20quero%20estruturar%20meu%20neg%C3%B3cio%20para%20vender%20mais." target="_blank" rel="noopener" onclick="trackLead('Contato WhatsApp')" class="rounded-2xl border border-white/15 bg-[#111010]/85 p-3.5 backdrop-blur-sm transition hover:border-[#e62314]">
             <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">WHATSAPP ↗</span>
             <strong class="font-label mt-1 block text-xs text-white">(84) 99630-5371</strong>
           </a>
 
-          <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" class="rounded-2xl border border-white/15 bg-[#111010]/90 p-3.5 transition hover:border-[#e62314]">
+          <a href="mailto:adm@chamacine.com.br?subject=Diagn%C3%B3stico%20Comercial%20-%20Chama%20Cine" class="rounded-2xl border border-white/15 bg-[#111010]/85 p-3.5 backdrop-blur-sm transition hover:border-[#e62314]">
             <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">E-MAIL ↗</span>
             <strong class="font-label mt-1 block truncate text-xs text-white">adm@chamacine.com.br</strong>
           </a>
 
-          <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="rounded-2xl border border-white/15 bg-[#111010]/90 p-3.5 transition hover:border-[#e62314]">
+          <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="rounded-2xl border border-white/15 bg-[#111010]/85 p-3.5 backdrop-blur-sm transition hover:border-[#e62314]">
             <span class="font-accent block text-[10px] uppercase tracking-wider text-[#e62314]">INSTAGRAM ↗</span>
             <strong class="font-label mt-1 block text-xs text-white">@chamacine</strong>
           </a>
@@ -722,23 +726,23 @@
 
       <!-- Formulário Comercial -->
       <div class="lg:col-span-6">
-        <form onsubmit="enviarFormContato(event)" class="space-y-4 rounded-3xl border border-white/15 bg-[#111010]/95 p-6 shadow-2xl backdrop-blur-md sm:p-8">
+        <form onsubmit="enviarFormContato(event)" class="space-y-4 rounded-3xl border border-white/15 bg-[#111010]/90 p-6 shadow-2xl backdrop-blur-md sm:p-8">
           <h3 class="font-display text-2xl uppercase text-white">Solicitar Diagnóstico Comercial</h3>
-          <p class="text-sm text-white/65">Preencha abaixo e enviaremos sua solicitação diretamente no WhatsApp da Chama Cine.</p>
+          <p class="text-sm text-white/70">Preencha abaixo e enviaremos sua solicitação diretamente no WhatsApp da Chama Cine.</p>
 
           <div>
-            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/70">Seu Nome</label>
-            <input type="text" id="form-nome" required placeholder="Ex.: João Silva" class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
+            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/75">Seu Nome</label>
+            <input type="text" id="form-nome" required placeholder="Ex.: João Silva" class="w-full rounded-xl border border-white/15 bg-black/65 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
           </div>
 
           <div>
-            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/70">Empresa ou Instagram</label>
-            <input type="text" id="form-empresa" required placeholder="Ex.: @suaempresa" class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
+            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/75">Empresa ou Instagram</label>
+            <input type="text" id="form-empresa" required placeholder="Ex.: @suaempresa" class="w-full rounded-xl border border-white/15 bg-black/65 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none" />
           </div>
 
           <div>
-            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/70">Momento do Negócio</label>
-            <select id="form-estagio" required class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white focus:border-[#e62314] focus:outline-none">
+            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/75">Momento do Negócio</label>
+            <select id="form-estagio" required class="w-full rounded-xl border border-white/15 bg-black/65 px-4 py-3 text-sm text-white focus:border-[#e62314] focus:outline-none">
               <option value="">Selecione uma opção...</option>
               <option value="Começar do zero (ainda não tenho estrutura)">Começar do zero (ainda não tenho estrutura)</option>
               <option value="Preciso de filmes publicitários / Reels">Preciso de filmes publicitários / Reels</option>
@@ -748,8 +752,8 @@
           </div>
 
           <div>
-            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/70">Resumo do Objetivo</label>
-            <textarea id="form-objetivo" rows="3" placeholder="Conte em poucas linhas o que você quer estruturar ou vender..." class="w-full rounded-xl border border-white/15 bg-black/60 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none"></textarea>
+            <label class="font-label mb-1.5 block text-xs uppercase tracking-wider text-white/75">Resumo do Objetivo</label>
+            <textarea id="form-objetivo" rows="3" placeholder="Conte em poucas linhas o que você quer estruturar ou vender..." class="w-full rounded-xl border border-white/15 bg-black/65 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[#e62314] focus:outline-none"></textarea>
           </div>
 
           <button type="submit" class="font-display w-full rounded-full bg-[#e62314] px-6 py-4 text-xs uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]">
@@ -761,17 +765,19 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="relative overflow-hidden bg-[#050505] py-12 text-xs text-white/60">
+  <footer class="relative overflow-hidden bg-[#050505] py-12 text-xs text-white/70">
     <div
-      class="pointer-events-none absolute inset-0 opacity-15"
+      class="pointer-events-none absolute inset-0 opacity-40"
       style="background-image: url('img/fundo-rodape.jpg'); background-size: cover; background-position: center;"
     ></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-[#050505]/65 to-[#050505]/75"></div>
+
     <div class="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:flex-row sm:px-6 lg:px-8">
       <div class="flex items-center gap-4">
         <img src="img/logo-rodape.png" alt="Chama Cine" class="h-10 w-auto object-contain" />
         <span class="font-label">© 2026 Chama Cine · Núcleo de Comunicação e Tecnologia em Vendas · Natal/RN.</span>
       </div>
-      <div class="font-label flex flex-wrap items-center gap-5 text-white/80">
+      <div class="font-label flex flex-wrap items-center gap-5 text-white/85">
         <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="hover:text-[#e62314]">@chamacine</a>
         <a href="mailto:adm@chamacine.com.br" class="hover:text-[#e62314]">adm@chamacine.com.br</a>
         <a href="https://wa.me/5584996305371" target="_blank" rel="noopener" class="hover:text-[#e62314]">(84) 99630-5371</a>
@@ -954,10 +960,10 @@
       <button
         type="button"
         onclick="abrirFrente(${i})"
-        class="group relative flex flex-col justify-between rounded-2xl border p-6 text-left backdrop-blur-sm transition duration-200 hover:-translate-y-1 ${
+        class="group relative flex flex-col justify-between rounded-2xl border p-6 text-left backdrop-blur-md transition duration-200 hover:-translate-y-1 ${
           f.destaque
-            ? 'border-[#e62314]/70 bg-[#171111]/95 shadow-lg shadow-[#e62314]/15 hover:border-[#e62314]'
-            : 'border-white/10 bg-[#111010]/90 hover:border-[#e62314]/50'
+            ? 'border-[#e62314]/70 bg-[#171111]/85 shadow-lg shadow-[#e62314]/15 hover:border-[#e62314]'
+            : 'border-white/15 bg-[#111010]/80 hover:border-[#e62314]/50'
         }"
       >
         <div>
@@ -966,11 +972,11 @@
             <span class="font-accent rounded-full px-2.5 py-1 text-[10px] uppercase tracking-wider ${
               f.destaque
                 ? 'bg-[#e62314] text-white'
-                : 'border border-white/10 bg-white/5 text-white/65'
+                : 'border border-white/10 bg-white/5 text-white/70'
             }">${f.badge}</span>
           </div>
           <h3 class="font-display text-lg uppercase text-white group-hover:text-[#ff4b3d]">${f.titulo}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-white/75">${f.resumoCurto}</p>
+          <p class="mt-2 text-sm leading-relaxed text-white/80">${f.resumoCurto}</p>
         </div>
 
         <span class="font-label mt-5 inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#e62314]">
@@ -1058,10 +1064,10 @@
         const ativo = i === idx;
         btn.className = ativo
           ? 'case-tab flex w-full items-center justify-between rounded-2xl border border-[#e62314] bg-[#e62314]/15 p-4 text-left transition'
-          : 'case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/40 p-4 text-left transition hover:border-white/30';
+          : 'case-tab flex w-full items-center justify-between rounded-2xl border border-white/10 bg-black/50 p-4 text-left transition hover:border-white/30';
         const tagEl = btn.querySelector('span.font-accent');
         const arrowEl = btn.lastElementChild;
-        if (tagEl) tagEl.className = `font-accent block text-[11px] uppercase tracking-widest ${ativo ? 'text-[#e62314]' : 'text-white/50'}`;
+        if (tagEl) tagEl.className = `font-accent block text-[11px] uppercase tracking-widest ${ativo ? 'text-[#e62314]' : 'text-white/55'}`;
         if (arrowEl) {
           arrowEl.textContent = ativo ? '▶' : '→';
           arrowEl.className = ativo ? 'text-sm font-bold text-[#e62314]' : 'text-sm text-white/50';
