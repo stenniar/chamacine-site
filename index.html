@@ -67,7 +67,7 @@
   <script>
     const GA4_MEASUREMENT_ID = 'G-MKRRFC6T0W';
     const META_PIXEL_ID = '2944136505950577';
-    const LEAD_WEBHOOK_URL = '';   // Opcional: URL de webhook / CRM para registrar leads antes do WhatsApp
+    const LEAD_WEBHOOK_URL = ''; // Opcional: URL de webhook / CRM (ex.: Make / Supabase) para registrar leads antes do WhatsApp
 
     let ga4Iniciado = false;
     let metaPixelIniciado = false;
@@ -111,83 +111,7 @@
 
       const s = document.createElement('script');
       s.async = true;
-      s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA4_MEASUREMENT_ID)}`;
-      document.head.appendChild(s);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){window.dataLayer.push(arguments);}
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', GA4_MEASUREMENT_ID, {
-        send_page_view: true,
-        utm_source: UTMS_ATUAIS.utm_source || undefined,
-        utm_medium: UTMS_ATUAIS.utm_medium || undefined,
-        utm_campaign: UTMS_ATUAIS.utm_campaign || undefined
-      });
-      ga4Iniciado = true;
-    }
-
-    function ativarMetaPixelSeAutorizado() {
-      const consent = obterConsentimentoCookies();
-      if (!consent || !consent.marketing || !META_PIXEL_ID || metaPixelIniciado) return;
-
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-      document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', META_PIXEL_ID);
-      fbq('track', 'PageView');
-      metaPixelIniciado = true;
-    }
-
-    function rastrearEvento(nomeEvento, parametros = {}) {
-      const consent = obterConsentimentoCookies();
-      const payload = { ...parametros, ...UTMS_ATUAIS };
-
-      if (consent && consent.analytics && typeof window.gtag === 'function') {
-        window.gtag('event', nomeEvento, payload);
-      }
-      if (consent && consent.marketing && typeof window.fbq === 'function') {
-        if (nomeEvento === 'generate_lead') {
-          window.fbq('track', 'Lead', payload);
-        } else {
-          window.fbq('trackCustom', nomeEvento, payload);
-        }
-      }
-    }
-
-    function trackLead(origem, extras = {}) {
-      rastrearEvento('generate_lead', { content_name: origem, ...extras });
-    }
-
-    function registrarLeadNoWebhook(dadosLead) {
-      if (!LEAD_WEBHOOK_URL) return;
-      const corpo = JSON.stringify({
-        ...dadosLead,
-        utms: UTMS_ATUAIS,
-        pagina: window.location.href,
-        dataHora: new Date().toISOString()
-      });
-      try {
-        if (navigator.sendBeacon) {
-          const blob = new Blob([corpo], { type: 'application/json' });
-          navigator.sendBeacon(LEAD_WEBHOOK_URL, blob);
-        } else {
-          fetch(LEAD_WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: corpo,
-            keepalive: true
-          }).catch(() => {});
-        }
-      } catch (_) {}
-    }
-
-    function montarUrlWhatsApp(mensagemBase) {
-      const utmResumo = Object.entries(UTMS_ATUAIS).map(([k, v]) => `${k}=${v}`).join(' | ');
-      const textoFinal = utmResumo ? `${mensagemBase}\n[Origem: ${utmResumo}]` : mensagemBase;
-      return `https://wa.me/5584996305371?text=${encodeURIComponent(textoFinal)}`;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA4_MEASUREMENT_ID)}`; document.head.appendChild(s);  window.dataLayer = window.dataLayer \vert{}\vert{} []; function gtag(){window.dataLayer.push(arguments);} window.gtag = gtag; gtag('js', new Date()); gtag('config', GA4_MEASUREMENT_ID, { send_page_view: true, utm_source: UTMS_ATUAIS.utm_source \vert{}\vert{} undefined, utm_medium: UTMS_ATUAIS.utm_medium \vert{}\vert{} undefined, utm_campaign: UTMS_ATUAIS.utm_campaign \vert{}\vert{} undefined }); ga4Iniciado = true; }  function ativarMetaPixelSeAutorizado() { const consent = obterConsentimentoCookies(); if (!consent \vert{}\vert{} !consent.marketing \vert{}\vert{} !META_PIXEL_ID \vert{}\vert{} metaPixelIniciado) return;  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n; n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', META_PIXEL_ID); fbq('track', 'PageView'); metaPixelIniciado = true; }  function rastrearEvento(nomeEvento, parametros = {}) { const consent = obterConsentimentoCookies(); const payload = { ...parametros, ...UTMS_ATUAIS };  if (consent && consent.analytics && typeof window.gtag === 'function') { window.gtag('event', nomeEvento, payload); } if (consent && consent.marketing && typeof window.fbq === 'function') { if (nomeEvento === 'generate_lead') { window.fbq('track', 'Lead', payload); } else { window.fbq('trackCustom', nomeEvento, payload); } } }  function trackLead(origem, extras = {}) { rastrearEvento('generate_lead', { content_name: origem, ...extras }); }  function registrarLeadNoWebhook(dadosLead) { if (!LEAD_WEBHOOK_URL) return; const corpo = JSON.stringify({ ...dadosLead, utms: UTMS_ATUAIS, pagina: window.location.href, dataHora: new Date().toISOString() }); try { if (navigator.sendBeacon) { const blob = new Blob([corpo], { type: 'application/json' }); navigator.sendBeacon(LEAD_WEBHOOK_URL, blob); } else { fetch(LEAD_WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: corpo, keepalive: true }).catch(() => {}); } } catch (_) {} }  function montarUrlWhatsApp(mensagemBase) { const utmResumo = Object.entries(UTMS_ATUAIS).map(([k, v]) => `${k}=${v}`).join(' \vert{} '); const textoFinal = utmResumo ? `${mensagemBase}\n[Origem: ${utmResumo}]` : mensagemBase; return `https://wa.me/5584996305371?text=${encodeURIComponent(textoFinal)}`;
     }
   </script>
 
@@ -1075,6 +999,9 @@
   </style>
 </head>
 <body id="topo">
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2944136505950577&ev=PageView&noscript=1"
+  /></noscript>
 
   <!-- HEADER -->
   <header class="site-header">
@@ -1868,11 +1795,7 @@
         <div>
           <div style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
             <img src="${f.icone}" alt="" style="height: 2.75rem; width: 2.75rem; object-fit: contain;" />
-            <span class="font-accent" style="border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.625rem; text-transform: uppercase; ${
-              f.destaque
-                ? 'background: #e62314; color: #fff;'
-                : 'border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.75);'
-            }">${f.badge}</span>
+            <span class="font-accent" style="border-radius: 9999px; padding: 0.25rem 0.65rem; font-size: 0.625rem; text-transform: uppercase; ${ f.destaque ? 'background: #e62314; color: #fff;' : 'border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.75);' }">${f.badge}</span>
           </div>
           <h3 class="font-display" style="margin: 0; font-size: 1.125rem; text-transform: uppercase; color: #fff;">${f.titulo}</h3>
           <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: rgba(255,255,255,0.8);">${f.resumoCurto}</p>
@@ -1890,7 +1813,7 @@
       rastrearEvento('frente_modal_open', { frente_numero: f.num, frente_titulo: f.titulo });
       document.getElementById('frente-icone').src = f.icone;
       document.getElementById('frente-numero-grande').textContent = f.num;
-      document.getElementById('frente-badge').textContent = `FRENTE ${f.num} · ${f.badge}`;
+      document.getElementById('frente-badge').textContent = `FRENTE ${f.num} ·${f.badge}`;
       document.getElementById('frente-titulo').textContent = f.titulo;
       document.getElementById('frente-resumo').textContent = f.resumoCurto;
       document.getElementById('frente-aplicacao').textContent = f.aplicacao;
@@ -2067,26 +1990,7 @@
       registrarLeadNoWebhook(dadosLead);
       trackLead('Formulario Diagnostico', { estagio });
 
-      const msg = `Olá, Chama Cine! Solicito um diagnóstico comercial.\n• Nome: ${nome}\n• Empresa: ${empresa}\n• Momento: ${estagio}\n• Objetivo: ${objetivo || 'Estruturar vendas'}`;
-      window.open(montarUrlWhatsApp(msg), '_blank', 'noopener');
-    }
-
-    window.Chama = {
-      mostrar(idx) {
-        const lista = window.PROJETOS || [];
-        const p = lista[idx];
-        if (!p) return;
-        document.getElementById('info-num').textContent = `${String(idx + 1).padStart(2, '0')} / ${String(lista.length).padStart(2, '0')}`;
-        document.getElementById('info-tipo').textContent = `${p.genero} · ${p.formato}`;
-        document.getElementById('info-titulo').textContent = p.titulo;
-        document.getElementById('info-resumo').textContent = p.resumo;
-      },
-      abrir(idx) {
-        const lista = window.PROJETOS || [];
-        const p = lista[idx];
-        if (!p) return;
-        rastrearEvento('acervo_ficha_open', { projeto_id: p.id, projeto_titulo: p.titulo });
-        document.getElementById('modal-poster').src = `img/posters/${p.id}.jpg`;
+      const msg = `Olá, Chama Cine! Solicito um diagnóstico comercial.\n• Nome: ${nome}\n• Empresa: ${empresa}\n• Momento: ${estagio}\n• Objetivo: ${objetivo \vert{}\vert{} 'Estruturar vendas'}`; window.open(montarUrlWhatsApp(msg), '_blank', 'noopener'); }  window.Chama = { mostrar(idx) { const lista = window.PROJETOS \vert{}\vert{} []; const p = lista[idx]; if (!p) return; document.getElementById('info-num').textContent = `${String(idx + 1).padStart(2, '0')} / ${String(lista.length).padStart(2, '0')}`; document.getElementById('info-tipo').textContent = `${p.genero} · ${p.formato}`; document.getElementById('info-titulo').textContent = p.titulo; document.getElementById('info-resumo').textContent = p.resumo; }, abrir(idx) { const lista = window.PROJETOS \vert{}\vert{} []; const p = lista[idx]; if (!p) return; rastrearEvento('acervo_ficha_open', { projeto_id: p.id, projeto_titulo: p.titulo }); document.getElementById('modal-poster').src = `img/posters/${p.id}.jpg`;
         document.getElementById('modal-poster').alt = p.titulo;
         document.getElementById('modal-genero').textContent = p.genero;
         document.getElementById('modal-titulo').textContent = p.titulo;

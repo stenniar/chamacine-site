@@ -1,31 +1,28 @@
 // Nossos projetos — roda de pôsteres presos num eixo brilhante (estilo "Axle Bloom", HorizonX).
-// Os cartões giram como um fichário (rolodex), param em cada pôster e, enquanto giram,
-// borram no sentido do movimento com uma franja de cor e bordas que acendem.
 import * as THREE from 'three';
 
-// ---------- Ajustes (valores do editor do Axle Bloom) ----------
 const AJ = {
-  cartoes: 6,            // cartões na roda
-  proporcao: 720 / 1023, // largura/altura dos pôsteres da Chama
-  canto: 0.035,          // raio do canto (fração da altura)
-  tamanho: 1.0,          // 100%
-  giro: -38,             // graus (vira a roda de lado)
-  inclinacao: 10,        // graus
-  distancia: 5,          // distância da câmera
+  cartoes: 6,
+  proporcao: 720 / 1023,
+  canto: 0.035,
+  tamanho: 1.0,
+  giro: -38,
+  inclinacao: 10,
+  distancia: 5,
   folgaEixo: 0.012,
   autoplay: true,
-  sentido: 1,            // 1 = para baixo
+  sentido: 1,
   segPorCartao: 1.5,
   pausa: 0.8,
   assentar: 8,
   arrasto: 1,
-  brilho: 0.5,           // sheen
-  luzEixo: 1,            // axle glow
+  brilho: 0.5,
+  luzEixo: 1,
   sombraChao: 0.5,
-  fundoTras: 0.12,       // back fade
-  borrao: 0.7,           // motion smear
-  franja: 0.6,           // colour fringe
-  clarao: 0.8            // edge flare
+  fundoTras: 0.12,
+  borrao: 0.7,
+  franja: 0.6,
+  clarao: 0.8
 };
 
 const P = Array.isArray(window.PROJETOS) && window.PROJETOS.length > 0 ? window.PROJETOS : [];
@@ -43,10 +40,10 @@ const reduzir = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (roda && canvas && N > 0) {
   roda.style.setProperty('--sombra', AJ.sombraChao);
 
-  // ---------- Cena ----------
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+
   const cena = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
   camera.position.set(0, 0, AJ.distancia);
@@ -60,7 +57,6 @@ if (roda && canvas && N > 0) {
   const H = 1, W = H * AJ.proporcao;
   const passo = (Math.PI * 2) / AJ.cartoes;
 
-  // texturas dos pôsteres
   const loader = new THREE.TextureLoader();
   const aniso = Math.min(renderer.capabilities.getMaxAnisotropy() || 1, 8);
   const texturas = P.map(p => {
@@ -152,7 +148,6 @@ if (roda && canvas && N > 0) {
     cartoes.push({ pivo, malha, mat, g: null });
   }
 
-  // eixo: um fio fino e claro, com um brilho estreito em volta
   const barra = new THREE.Mesh(
     new THREE.CylinderGeometry(0.006, 0.006, W * 1.04, 16),
     new THREE.MeshBasicMaterial({ color: 0xffffff })
@@ -195,7 +190,6 @@ if (roda && canvas && N > 0) {
   halo.renderOrder = 999;
   eixo.add(halo);
 
-  // ---------- Tamanho & Centralização ----------
   function arrumar() {
     const w = roda.clientWidth || canvas.clientWidth;
     const h = roda.clientHeight || canvas.clientHeight;
@@ -224,7 +218,6 @@ if (roda && canvas && N > 0) {
     new ResizeObserver(arrumar).observe(roda);
   }
 
-  // ---------- Movimento ----------
   let pos = 0, alvo = 0, vel = 0, ultimaInteracao = -1e9, proximoPasso = performance.now() + AJ.segPorCartao * 1000;
   const mod = (a, n) => ((a % n) + n) % n;
 
