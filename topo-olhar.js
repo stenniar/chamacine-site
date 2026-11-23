@@ -73,8 +73,8 @@ const material = new THREE.ShaderMaterial({
       float dentro = 1.0 - smoothstep(r - largura * 0.5 - aa, r - largura * 0.5, d);
       float dl = distance(p, uMouse);
       float luz = uLuz * exp(-(dl * dl) / (uLuzRaio * uLuzRaio));
-      vec3 cor = mix(vec3(0.75, 0.72, 0.70), vec3(1.0, 0.25, 0.18), luz);
-      float aAnel = anel * mix(0.72, 1.0, luz) * m * uEntrada;
+      vec3 cor = mix(vec3(0.76, 0.73, 0.71), vec3(1.0, 0.25, 0.18), luz);
+      float aAnel = anel * mix(0.75, 1.0, luz) * m * uEntrada;
       float aFundo = 0.72 * m * uEntrada * (1.0 - dentro) * (1.0 - anel);
       float a = aAnel + aFundo;
       gl_FragColor = vec4(cor * aAnel, a);
@@ -87,17 +87,34 @@ function arrumar() {
   const W = palco.clientWidth, H = palco.clientHeight;
   if (!W || !H) return;
   const dpr = Math.min(devicePixelRatio || 1, 2);
+  const cw = W * dpr, ch = H * dpr;
   renderer.setPixelRatio(dpr);
   renderer.setSize(W, H, false);
 
-  // Enquadra o rosto centralizado no quadro lateral de Quem Somos
-  const lado = Math.max(W, H) * 1.15 * dpr;
-  const rx = (W * dpr - lado) * 0.5;
-  const ry = (H * dpr - lado) * 0.45;
-  material.uniforms.uRet.value.set(rx, ry, lado, lado);
-  material.uniforms.uAlt.value = H * dpr;
+  // Mantém a proporção original do quadro (16:9) centralizada no palco
+  const im0 = imgs[centro];
+  const aspectQuadro = (im0 && im0.naturalWidth && im0.naturalHeight)
+    ? (im0.naturalWidth / im0.naturalHeight)
+    : (16 / 9);
+  const aspectCaixa = cw / ch;
+  const zoom = celular() ? 1.35 : 1.22;
+
+  let rw, rh;
+  if (aspectCaixa > aspectQuadro) {
+    rw = cw * zoom;
+    rh = rw / aspectQuadro;
+  } else {
+    rh = ch * zoom;
+    rw = rh * aspectQuadro;
+  }
+
+  const rx = (cw - rw) * 0.5;
+  const ry = (ch - rh) * 0.52;
+
+  material.uniforms.uRet.value.set(rx, ry, rw, rh);
+  material.uniforms.uAlt.value = ch;
   material.uniforms.uCel.value = (celular() ? 7.5 : 9.5) * dpr;
-  material.uniforms.uLuzRaio.value = W * 0.35 * dpr;
+  material.uniforms.uLuzRaio.value = cw * 0.35;
 }
 arrumar();
 addEventListener('resize', arrumar);
@@ -110,9 +127,9 @@ function apontar(cx, cy) {
   if (!palco) return;
   const r = palco.getBoundingClientRect();
   const hx = r.left + r.width * 0.5;
-  const hy = r.top + r.height * 0.46;
-  alvo.x = Math.max(-1, Math.min(1, (cx - hx) / (innerWidth * 0.35))) * MOV.alcanceX;
-  alvo.y = Math.max(-1, Math.min(1, -(cy - hy) / (innerHeight * 0.35))) * MOV.alcanceY;
+  const hy = r.top + r.height * 0.5;
+  alvo.x = Math.max(-1, Math.min(1, (cx - hx) / (r.width * 0.45))) * MOV.alcanceX;
+  alvo.y = Math.max(-1, Math.min(1, -(cy - hy) / (r.height * 0.45))) * MOV.alcanceY;
   const dpr = renderer.getPixelRatio();
   luz.x = (cx - r.left) * dpr;
   luz.y = (cy - r.top) * dpr;
