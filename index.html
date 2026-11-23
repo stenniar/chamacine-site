@@ -818,59 +818,13 @@
           </div>
 
           <p class="text-[11px] leading-relaxed text-white/65">
-            Ao enviar, você concorda com o tratamento dos seus dados para retorno comercial conforme a <a href="#lgpd-privacidade" class="underline hover:text-white">LGPD (Lei nº 13.709/2018)</a>.
+            Ao enviar, você concorda com o tratamento dos seus dados para retorno comercial conforme o <button type="button" onclick="abrirAvisoLgpd()" class="underline hover:text-white">Aviso de Privacidade (LGPD)</button>.
           </p>
 
           <button type="submit" class="font-display w-full rounded-full bg-[#e62314] px-6 py-4 text-xs uppercase tracking-wider text-white shadow-lg shadow-[#e62314]/25 transition hover:bg-[#ff3322]">
             Enviar e Abrir WhatsApp
           </button>
         </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- 07 · AVISO LGPD E POLÍTICA DE COOKIES -->
-  <section id="lgpd-privacidade" class="border-b border-white/15 bg-[#0a0909] py-14 text-xs text-white/80">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="rounded-3xl border border-white/15 bg-[#111010]/90 p-6 sm:p-8">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
-          <div>
-            <span class="font-accent text-[10px] uppercase tracking-widest text-[#e62314]">Conformidade Legal · Brasil</span>
-            <h2 class="font-display mt-1 text-xl uppercase text-white sm:text-2xl">
-              Aviso de Privacidade (LGPD — Lei nº 13.709/2018) & Cookies
-            </h2>
-          </div>
-          <button
-            type="button"
-            onclick="abrirPreferenciasCookies()"
-            class="font-label rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs text-white transition hover:border-[#e62314] hover:bg-[#e62314]/15"
-          >
-            Gerenciar Cookies
-          </button>
-        </div>
-
-        <div class="mt-6 grid gap-6 md:grid-cols-3">
-          <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
-            <strong class="font-display block text-sm uppercase text-white">1. Finalidade e Base Legal (LGPD)</strong>
-            <p class="mt-2 leading-relaxed text-white/75">
-              Os dados informados nos formulários de diagnóstico (nome, empresa/@instagram, estágio do negócio e objetivo) são tratados exclusivamente para atendimento comercial, elaboração de propostas e retorno solicitado pelo titular, nos termos da Lei nº 13.709/2018 (LGPD).
-            </p>
-          </div>
-
-          <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
-            <strong class="font-display block text-sm uppercase text-white">2. Direitos do Titular e Canal</strong>
-            <p class="mt-2 leading-relaxed text-white/75">
-              Você pode solicitar confirmação de tratamento, acesso, correção, anonimização, portabilidade, revogação de consentimento ou eliminação de dados enviando solicitação para <a href="mailto:adm@chamacine.com.br" class="text-[#ff4b3d] underline">adm@chamacine.com.br</a> (Chama Cine · Natal/RN).
-            </p>
-          </div>
-
-          <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
-            <strong class="font-display block text-sm uppercase text-white">3. Uso de Cookies</strong>
-            <p class="mt-2 leading-relaxed text-white/75">
-              Utilizamos armazenamento local/cookies estritamente necessários para funcionamento e memorização das suas preferências de privacidade, e cookies de medição/marketing apenas quando expressamente autorizados por você.
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -891,28 +845,74 @@
         <a href="https://www.instagram.com/chamacine" target="_blank" rel="noopener" class="hover:text-[#e62314]">@chamacine</a>
         <a href="mailto:adm@chamacine.com.br" class="hover:text-[#e62314]">adm@chamacine.com.br</a>
         <a href="https://wa.me/5584996305371" target="_blank" rel="noopener" class="hover:text-[#e62314]">(84) 99630-5371</a>
-        <a href="#lgpd-privacidade" class="hover:text-[#e62314]">LGPD & Cookies</a>
+        <button type="button" onclick="abrirAvisoLgpd()" class="hover:text-[#e62314] underline-offset-4 hover:underline">
+          Aviso de Privacidade (LGPD) & Cookies
+        </button>
       </div>
     </div>
   </footer>
 
-  <!-- BANNER DE CONSENTIMENTO DE COOKIES (LGPD) -->
-  <div id="banner-cookies" class="fixed inset-x-0 bottom-0 z-50 hidden p-3 sm:p-5" role="region" aria-label="Consentimento de cookies">
-    <div class="mx-auto flex max-w-5xl flex-col justify-between gap-4 rounded-2xl border border-white/20 bg-[#111010]/95 p-4 shadow-2xl backdrop-blur-md sm:flex-row sm:items-center sm:p-5">
-      <div class="max-w-2xl text-xs leading-relaxed text-white/85">
-        <strong class="font-display block text-sm uppercase text-white">Cookies & Privacidade (LGPD)</strong>
-        <span class="mt-1 block text-white/75">
-          Usamos cookies essenciais para o funcionamento do site e, mediante sua autorização, cookies opcionais de métricas e marketing. Saiba mais em <a href="#lgpd-privacidade" class="text-[#ff4b3d] underline">LGPD & Cookies</a>.
-        </span>
+  <!-- MODAL LGPD & COOKIES (ACESSADO PELO LINK NO RODAPÉ) -->
+  <div id="modal-lgpd" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-lgpd">
+    <div class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-white/15 bg-[#111010] p-6 shadow-2xl sm:p-8">
+      <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
+        <div>
+          <span class="font-accent text-[10px] uppercase tracking-widest text-[#e62314]">Conformidade Legal · Lei nº 13.709/2018</span>
+          <h3 id="titulo-modal-lgpd" class="font-display mt-1 text-xl uppercase text-white sm:text-2xl">
+            Aviso de Privacidade (LGPD) & Cookies
+          </h3>
+        </div>
+        <button type="button" onclick="fecharAvisoLgpd()" aria-label="Fechar aviso de privacidade" class="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-base text-white hover:border-[#e62314] hover:bg-[#e62314]">×</button>
       </div>
+
+      <div class="mt-5 space-y-4 text-xs leading-relaxed text-white/80">
+        <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
+          <strong class="font-display block text-sm uppercase text-white">1. Finalidade e Base Legal (LGPD)</strong>
+          <p class="mt-1.5">
+            Os dados informados nos formulários de diagnóstico (nome, empresa ou @instagram, momento do negócio e resumo do objetivo) são coletados e tratados exclusivamente para retorno comercial, diagnóstico e elaboração de propostas solicitadas pelo titular, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
+          <strong class="font-display block text-sm uppercase text-white">2. Direitos do Titular e Canal de Atendimento</strong>
+          <p class="mt-1.5">
+            Nos termos do art. 18 da LGPD, você pode solicitar confirmação de existência de tratamento, acesso, correção, anonimização, portabilidade, revogação de consentimento ou eliminação de dados pessoais entrando em contato com a Chama Cine (Natal/RN) pelo e-mail <a href="mailto:adm@chamacine.com.br" class="text-[#ff4b3d] underline">adm@chamacine.com.br</a>.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-white/10 bg-black/45 p-4">
+          <strong class="font-display block text-sm uppercase text-white">3. Autorização e Gestão de Cookies</strong>
+          <p class="mt-1.5">
+            Utilizamos armazenamento essencial para funcionamento e memorização das suas escolhas. Cookies ou tags opcionais de medição e marketing somente são ativados mediante o seu consentimento explícito.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
+        <button type="button" onclick="fecharAvisoLgpd(); abrirPreferenciasCookies();" class="font-label rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs text-white transition hover:border-[#e62314]">
+          Gerenciar preferências de cookies
+        </button>
+        <button type="button" onclick="fecharAvisoLgpd()" class="font-display rounded-full bg-[#e62314] px-5 py-2 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER COMPACTO DE CONSENTIMENTO DE COOKIES (LGPD) -->
+  <div id="banner-cookies" class="fixed inset-x-0 bottom-0 z-50 hidden p-3 sm:p-4" role="region" aria-label="Consentimento de cookies">
+    <div class="mx-auto flex max-w-5xl flex-col justify-between gap-3 rounded-2xl border border-white/20 bg-[#111010]/95 px-4 py-3 shadow-2xl backdrop-blur-md sm:flex-row sm:items-center">
+      <p class="text-xs leading-relaxed text-white/85">
+        <strong class="font-label text-white">Cookies e LGPD:</strong> utilizamos cookies essenciais e, com sua autorização, cookies opcionais. Veja o <button type="button" onclick="abrirAvisoLgpd()" class="text-[#ff4b3d] underline">Aviso de Privacidade (LGPD) & Cookies</button>.
+      </p>
       <div class="flex shrink-0 flex-wrap items-center gap-2">
-        <button type="button" onclick="rejeitarCookies()" class="font-label rounded-full border border-white/20 px-4 py-2 text-xs text-white/85 transition hover:border-white/40 hover:text-white">
+        <button type="button" onclick="rejeitarCookies()" class="font-label rounded-full border border-white/20 px-3.5 py-1.5 text-xs text-white/85 transition hover:border-white/40 hover:text-white">
           Apenas essenciais
         </button>
-        <button type="button" onclick="abrirPreferenciasCookies()" class="font-label rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs text-white transition hover:border-white/40">
+        <button type="button" onclick="abrirPreferenciasCookies()" class="font-label rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-xs text-white transition hover:border-white/40">
           Configurar
         </button>
-        <button type="button" onclick="aceitarTodosCookies()" class="font-display rounded-full bg-[#e62314] px-5 py-2 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
+        <button type="button" onclick="aceitarTodosCookies()" class="font-display rounded-full bg-[#e62314] px-4 py-1.5 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]">
           Aceitar todos
         </button>
       </div>
@@ -1418,7 +1418,23 @@
       if (e.target.id === 'modal-ficha') fecharModal();
     });
 
-    /* Consentimento de Cookies e LGPD */
+    /* Aviso LGPD e Consentimento de Cookies */
+    function abrirAvisoLgpd() {
+      const modal = document.getElementById('modal-lgpd');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function fecharAvisoLgpd() {
+      const modal = document.getElementById('modal-lgpd');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.getElementById('modal-lgpd').addEventListener('click', (e) => {
+      if (e.target.id === 'modal-lgpd') fecharAvisoLgpd();
+    });
+
     function salvarConsentimento(analytics, marketing) {
       const payload = {
         essenciais: true,
