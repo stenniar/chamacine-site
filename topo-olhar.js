@@ -21,7 +21,12 @@ const MOV = {
 const imgs = new Array(N);
 function carregar(i) {
   if (imgs[i]) return imgs[i];
-  const im = new Image(); im.decoding = 'async'; im.src = quadro(i); imgs[i] = im; return im;
+  const im = new Image();
+  im.decoding = 'async';
+  im.addEventListener('load', () => arrumar(), { once: true });
+  im.src = quadro(i);
+  imgs[i] = im;
+  return im;
 }
 const pronto = im => im && im.complete && im.naturalWidth > 0;
 const centro = POSES.reduce((m, p, i) => (Math.hypot(p[0], p[1]) < Math.hypot(POSES[m][0], POSES[m][1]) ? i : m), 0);
@@ -34,16 +39,30 @@ renderer.setClearColor(0x000000, 0);
 const cena = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 const texAtual = new THREE.Texture(), texAntes = new THREE.Texture();
-[texAtual, texAntes].forEach(t => { t.minFilter = THREE.LinearFilter; t.magFilter = THREE.LinearFilter; t.generateMipmaps = false; });
+[texAtual, texAntes].forEach(t => {
+  t.minFilter = THREE.LinearFilter;
+  t.magFilter = THREE.LinearFilter;
+  t.generateMipmaps = false;
+});
 
 const material = new THREE.ShaderMaterial({
-  transparent: true, depthTest: false, depthWrite: false,
-  blending: THREE.CustomBlending, blendSrc: THREE.OneFactor, blendDst: THREE.OneMinusSrcAlphaFactor,
+  transparent: true,
+  depthTest: false,
+  depthWrite: false,
+  blending: THREE.CustomBlending,
+  blendSrc: THREE.OneFactor,
+  blendDst: THREE.OneMinusSrcAlphaFactor,
   uniforms: {
-    uAtual: { value: texAtual }, uAntes: { value: texAntes }, uMistura: { value: 1 },
+    uAtual: { value: texAtual },
+    uAntes: { value: texAntes },
+    uMistura: { value: 1 },
     uRet: { value: new THREE.Vector4(0, 0, 1, 1) },
-    uAlt: { value: 1 }, uCel: { value: 10 }, uEntrada: { value: 0 },
-    uMouse: { value: new THREE.Vector2(-9999, -9999) }, uLuz: { value: 0 }, uLuzRaio: { value: 300 }
+    uAlt: { value: 1 },
+    uCel: { value: 10 },
+    uEntrada: { value: 0 },
+    uMouse: { value: new THREE.Vector2(-9999, -9999) },
+    uLuz: { value: 0 },
+    uLuzRaio: { value: 300 }
   },
   vertexShader: `void main(){ gl_Position = vec4(position.xy, 0.0, 1.0); }`,
   fragmentShader: /* glsl */`
@@ -52,33 +71,39 @@ const material = new THREE.ShaderMaterial({
     uniform float uMistura, uAlt, uCel, uEntrada, uLuz, uLuzRaio;
     uniform vec4 uRet;
     uniform vec2 uMouse;
+
     float lum(vec2 p) {
       vec2 uv = (p - uRet.xy) / uRet.zw;
       if (uv.x < 0.0 || uv.y < 0.0 || uv.x > 1.0 || uv.y > 1.0) return 0.0;
       uv.y = 1.0 - uv.y;
-      return mix(texture2D(uAntes, uv).r, texture2D(uAtual, uv).r, uMistura);
+      vec3 cAntes = texture2D(uAntes, uv).rgb;
+      vec3 cAtual = texture2D(uAtual, uv).rgb;
+      vec3 c = mix(cAntes, cAtual, uMistura);
+      return dot(c, vec3(0.299, 0.587, 0.114));
     }
+
     void main() {
       vec2 p = vec2(gl_FragCoord.x, uAlt - gl_FragCoord.y);
       vec2 c = (floor(p / uCel) + 0.5) * uCel;
       float L = lum(c);
-      float m = smoothstep(0.03, 0.09, L);
+      float m = smoothstep(0.03, 0.10, L);
       if (m <= 0.0) discard;
-      float t = min(1.0, pow(L, 1.25) * 1.2);
+      float t = min(1.0, pow(L, 1.2) * 1.25);
       float r = uCel * (0.16 + 0.30 * t) * mix(0.6, 1.0, uEntrada);
       float d = distance(p, c);
       float aa = 0.7;
-      float largura = max(0.8, uCel * 0.075);
+      float largura = max(0.85, uCel * 0.08);
       float anel = 1.0 - smoothstep(largura * 0.5 - aa * 0.5, largura * 0.5 + aa * 0.5, abs(d - r));
       float dentro = 1.0 - smoothstep(r - largura * 0.5 - aa, r - largura * 0.5, d);
       float dl = distance(p, uMouse);
       float luz = uLuz * exp(-(dl * dl) / (uLuzRaio * uLuzRaio));
-      vec3 cor = mix(vec3(0.76, 0.73, 0.71), vec3(1.0, 0.25, 0.18), luz);
-      float aAnel = anel * mix(0.75, 1.0, luz) * m * uEntrada;
+      vec3 cor = mix(vec3(0.78, 0.75, 0.72), vec3(1.0, 0.24, 0.16), luz);
+      float aAnel = anel * mix(0.78, 1.0, luz) * m * uEntrada;
       float aFundo = 0.72 * m * uEntrada * (1.0 - dentro) * (1.0 - anel);
       float a = aAnel + aFundo;
       gl_FragColor = vec4(cor * aAnel, a);
-    }`
+    }
+  `
 });
 cena.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
 
@@ -91,30 +116,28 @@ function arrumar() {
   renderer.setPixelRatio(dpr);
   renderer.setSize(W, H, false);
 
-  // Mantém a proporção original do quadro (16:9) centralizada no palco
-  const im0 = imgs[centro];
-  const aspectQuadro = (im0 && im0.naturalWidth && im0.naturalHeight)
-    ? (im0.naturalWidth / im0.naturalHeight)
-    : (16 / 9);
-  const aspectCaixa = cw / ch;
-  const zoom = celular() ? 1.35 : 1.22;
+  const amostra = pronto(imgs[centro]) ? imgs[centro] : imgs.find(pronto);
+  const aspectImg = amostra ? (amostra.naturalWidth / amostra.naturalHeight) : (16 / 9);
+  const aspectBox = cw / ch;
 
+  // Enquadra o rosto centralizado e proporcional na caixa lateral
+  const escala = celular() ? 1.15 : 1.05;
   let rw, rh;
-  if (aspectCaixa > aspectQuadro) {
-    rw = cw * zoom;
-    rh = rw / aspectQuadro;
+  if (aspectBox > aspectImg) {
+    rh = ch * escala;
+    rw = rh * aspectImg;
   } else {
-    rh = ch * zoom;
-    rw = rh * aspectQuadro;
+    rw = cw * escala;
+    rh = rw / aspectImg;
   }
 
   const rx = (cw - rw) * 0.5;
-  const ry = (ch - rh) * 0.52;
+  const ry = (ch - rh) * 0.5;
 
   material.uniforms.uRet.value.set(rx, ry, rw, rh);
   material.uniforms.uAlt.value = ch;
-  material.uniforms.uCel.value = (celular() ? 7.5 : 9.5) * dpr;
-  material.uniforms.uLuzRaio.value = cw * 0.35;
+  material.uniforms.uCel.value = (celular() ? 7 : 8.5) * dpr;
+  material.uniforms.uLuzRaio.value = Math.max(cw, ch) * 0.35;
 }
 arrumar();
 addEventListener('resize', arrumar);
@@ -200,3 +223,4 @@ function laco(agora) {
   renderer.render(cena, camera);
 }
 requestAnimationFrame(laco);
+```[cite: 32]
