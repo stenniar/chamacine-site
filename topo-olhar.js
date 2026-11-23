@@ -1,4 +1,4 @@
-// Quem Somos — composição interativa em retícula de alta definição que segue o cursor.
+// Quem Somos — composição interativa em retícula nítida que acompanha o cursor.
 const palco = document.getElementById('palco-olhar');
 const canvas = document.getElementById('rosto');
 const ctx = canvas ? canvas.getContext('2d') : null;
@@ -15,11 +15,11 @@ const quadro = i => `olhar/f_${String(i + 1).padStart(3, '0')}.jpg`;
 const celular = () => matchMedia('(max-width: 760px)').matches;
 const reduzir = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Resolução offscreen maior para preservar detalhes finos do rosto
+// Buffer offscreen em alta resolução para captar detalhes do rosto e do olhar
 const off = document.createElement('canvas');
 const offCtx = off.getContext('2d', { willReadFrequently: true });
-off.width = 320;
-off.height = 180;
+off.width = 480;
+off.height = 270;
 
 const imgs = new Array(N);
 const pixelCache = new Map();
@@ -138,9 +138,9 @@ function obterGradeLuminancia(idx) {
       const g = data[i + 1] / 255;
       const b = data[i + 2] / 255;
       const lum = 0.299 * r + 0.587 * g + 0.114 * b;
-      // Curva de contraste balanceada para nitidez sem perder sombras
-      const realcado = Math.min(1, Math.pow(lum, 0.62) * 1.65 + 0.04);
-      grid[p] = realcado;
+      // Curva nítida: preserva sombras profundas e valoriza médios/altos tons
+      const nitidez = Math.min(1, Math.max(0, (Math.pow(lum, 0.58) - 0.08) * 1.45));
+      grid[p] = nitidez;
     }
 
     pixelCache.set(idx, grid);
@@ -150,7 +150,7 @@ function obterGradeLuminancia(idx) {
   }
 }
 
-function desenharComposicao(tempoSeg) {
+function desenharComposicao() {
   if (!ctx) return;
   ctx.clearRect(0, 0, larguraCss, alturaCss);
 
@@ -164,9 +164,8 @@ function desenharComposicao(tempoSeg) {
   const gridA = obterGradeLuminancia(idxA) || obterGradeLuminancia(centro);
   const gridB = obterGradeLuminancia(idxB) || gridA;
 
-  // Grade mais fina para maior definição do rosto e das expressões
-  const passo = celular() ? 5 : 5.5;
-  const margem = 20;
+  const passo = celular() ? 4.5 : 5;
+  const margem = 18;
   const areaW = Math.max(120, larguraCss - margem * 2);
   const areaH = Math.max(120, alturaCss - margem * 2);
 
@@ -176,10 +175,10 @@ function desenharComposicao(tempoSeg) {
 
   let drawW, drawH;
   if (aspectArea > aspectImg) {
-    drawH = areaH * 0.9;
+    drawH = areaH * 0.92;
     drawW = drawH * aspectImg;
   } else {
-    drawW = areaW * 0.94;
+    drawW = areaW * 0.95;
     drawH = drawW / aspectImg;
   }
 
@@ -196,42 +195,33 @@ function desenharComposicao(tempoSeg) {
       const px = Math.min(off.width - 1, Math.max(0, Math.floor(u * off.width)));
       const pIndex = py * off.width + px;
 
-      let intensidade = 0.14;
+      let intensidade = 0.12;
       if (gridA && gridB) {
         intensidade = gridA[pIndex] * (1 - mistura) + gridB[pIndex] * mistura;
       } else {
         const dx = (u - 0.5 + olhar.x * 0.08) * 2.2;
         const dy = (v - 0.48 - olhar.y * 0.08) * 2.2;
-        const distCentro = Math.hypot(dx, dy);
-        intensidade = Math.max(0.08, 1 - distCentro * 0.72);
+        intensidade = Math.max(0.08, 1 - Math.hypot(dx, dy) * 0.72);
       }
 
-      if (intensidade < 0.1) continue;
+      if (intensidade < 0.09) continue;
 
       const distMouse = Math.hypot(x - ponteiro.x, y - ponteiro.y);
       const focoMouse = ponteiro.f * Math.exp(-(distMouse * distMouse) / (raioLuz * raioLuz));
 
-      const raioPonto = Math.max(0.85, (passo * 0.12 + passo * 0.25 * intensidade) * (1 + focoMouse * 0.28));
+      // Raio nítido proporcional ao brilho para definir contornos e traços faciais
+      const raio = Math.max(0.75, passo * (0.08 + 0.34 * intensidade) * (1 + focoMouse * 0.25));
+      const alfa = Math.min(0.98, 0.24 + intensidade * 0.74);
 
       ctx.beginPath();
-      ctx.arc(x, y, raioPonto, 0, Math.PI * 2);
+      ctx.arc(x, y, raio, 0, Math.PI * 2);
 
-      if (focoMouse > 0.16) {
-        ctx.fillStyle = `rgba(230, 35, 20, ${Math.min(0.96, 0.38 + focoMouse * 0.58)})`;
-        ctx.fill();
+      if (focoMouse > 0.14) {
+        ctx.fillStyle = `rgba(255, 58, 42, ${Math.min(0.98, 0.42 + focoMouse * 0.56)})`;
       } else {
-        const alfa = Math.min(0.95, 0.2 + intensidade * 0.68 + Math.sin(tempoSeg * 2 + x * 0.03) * 0.03);
         ctx.fillStyle = `rgba(244, 241, 234, ${alfa.toFixed(3)})`;
-        ctx.fill();
-
-        if (intensidade > 0.48) {
-          ctx.beginPath();
-          ctx.arc(x, y, raioPonto + 1.15, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(244, 241, 234, ${(alfa * 0.48).toFixed(3)})`;
-          ctx.lineWidth = 0.75;
-          ctx.stroke();
-        }
       }
+      ctx.fill();
     }
   }
 }
@@ -273,7 +263,7 @@ function laco(agora) {
     }
   }
 
-  desenharComposicao(tempoSeg);
+  desenharComposicao();
 }
 
 requestAnimationFrame(laco);
