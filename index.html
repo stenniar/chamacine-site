@@ -293,24 +293,6 @@
       display: none;
     }
 
-    /* Palco lateral do olhar interativo na seção Quem Somos */
-    #palco-olhar {
-      position: relative;
-      width: 100%;
-      height: 440px;
-      overflow: hidden;
-      background: radial-gradient(circle at 50% 44%, rgba(230, 35, 20, 0.16) 0%, rgba(24, 21, 21, 0.94) 68%, rgba(14, 12, 12, 0.98) 100%);
-    }
-
-    #rosto {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-      pointer-events: none;
-    }
-
     @media (max-width: 760px) {
       .s.recentes {
         flex-direction: column;
@@ -329,9 +311,6 @@
       .s.recentes .sombra-chao {
         right: 50%;
         transform: translateX(50%);
-      }
-      #palco-olhar {
-        height: 340px;
       }
     }
   </style>
@@ -645,49 +624,69 @@
   </section>
 
   <!-- 05 · QUEM SOMOS -->
-  <section id="sobre" class="relative overflow-hidden border-b border-white/15 py-20">
+  <section id="sobre" class="relative overflow-hidden border-b border-white/15 py-20 sm:py-24">
     <div
       class="pointer-events-none absolute inset-0"
       style="background-image: url('img/fundo-sobre.jpg'); background-size: cover; background-position: center;"
     ></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/75 via-[#070606]/65 to-[#070606]/80"></div>
 
-    <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
-      <div class="lg:col-span-6">
-        <span class="font-label text-xs uppercase tracking-widest text-[#e62314]">Quem Somos</span>
-        <h2 class="font-display mt-2 text-3xl uppercase text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-4xl lg:text-5xl">
-          Cinema como linguagem, tecnologia e venda como resultado
-        </h2>
-        <p class="mt-5 text-base leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
-          Sediada em Natal/RN, a Chama Cine une realizadores audiovisuais e estrategistas comerciais em um único núcleo de comunicação e tecnologia em vendas.
-        </p>
-        <p class="mt-4 text-base leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
-          Diagnosticamos o gargalo da sua operação, estruturamos sua marca e colocamos filmes, páginas, apps e campanhas para rodar com foco em retorno real.
-        </p>
-
-        <div class="mt-8 flex items-center gap-4 rounded-2xl border border-white/15 bg-[#121010]/85 p-4 backdrop-blur-sm">
-          <img
-            src="img/dinossauro.png"
-            alt="Selo criativo Chama Cine"
-            class="h-16 w-16 shrink-0 rounded-xl border border-white/15 bg-[#f4f1ea] p-1.5 object-contain"
-          />
-          <div class="text-xs text-white/85">
-            <strong class="font-display block text-sm uppercase text-white">Direção Artística & Estratégia Comercial</strong>
-            Obras e campanhas com assinatura Chama Cine no Rio2C, TV, cinema e performance digital.
+    <div class="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl border border-white/15 bg-[#111010]/85 p-7 shadow-2xl backdrop-blur-md sm:p-10 lg:p-12">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+          <div class="inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/50 bg-[#e62314]/15 px-4 py-1.5">
+            <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
+            <span class="font-label text-xs uppercase tracking-widest text-[#ff4b3d]">Quem Somos · Natal/RN</span>
           </div>
+          <span class="font-accent text-[11px] uppercase tracking-widest text-white/60">Comunicação & Tecnologia em Vendas</span>
         </div>
-      </div>
 
-      <div class="lg:col-span-6">
-        <div class="relative overflow-hidden rounded-3xl border border-white/20 bg-[#181515] shadow-2xl">
-          <div class="flex items-center gap-2.5 border-b border-white/15 bg-[#121010] px-4 py-3">
-            <img src="img/fogo.png" alt="" class="h-4 w-4 shrink-0 object-contain" />
-            <span class="font-accent truncate text-[10px] uppercase tracking-widest text-[#ff4738]">
-              Direção & Olhar Chama Cine
-            </span>
+        <div class="mt-8 grid items-start gap-10 lg:grid-cols-12">
+          <div class="lg:col-span-7">
+            <h2 class="font-display text-3xl uppercase leading-[1.05] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-4xl lg:text-5xl">
+              Cinema como linguagem, <span class="text-[#e62314]">tecnologia e venda</span> como resultado
+            </h2>
+
+            <div class="mt-6 space-y-4 text-base leading-relaxed text-white/90 sm:text-lg">
+              <p>
+                Sediada em Natal/RN, a Chama Cine une realizadores audiovisuais e estrategistas comerciais em um único núcleo de comunicação e tecnologia em vendas.
+              </p>
+              <p>
+                Diagnosticamos o gargalo da sua operação, estruturamos sua marca e colocamos filmes, páginas, apps e campanhas para rodar com foco em retorno real.
+              </p>
+            </div>
           </div>
 
-          <div id="palco-olhar">
-            <canvas id="rosto" aria-label="Composição interativa Chama Cine"></canvas>
+          <div class="flex flex-col justify-between gap-6 rounded-2xl border border-white/10 bg-[#0b0a0a]/80 p-6 lg:col-span-5">
+            <div class="flex items-start gap-4">
+              <img
+                src="img/dinossauro.png"
+                alt="Selo criativo Chama Cine"
+                class="h-16 w-16 shrink-0 rounded-xl border border-white/15 bg-[#f4f1ea] p-1.5 object-contain"
+              />
+              <div>
+                <span class="font-accent block text-[10px] uppercase tracking-widest text-[#e62314]">Assinatura & Repertório</span>
+                <strong class="font-display mt-1 block text-base uppercase text-white">Direção Artística & Estratégia Comercial</strong>
+                <p class="mt-1.5 text-xs leading-relaxed text-white/75">
+                  Obras e campanhas com assinatura Chama Cine no Rio2C, TV, cinema e performance digital.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
+              <a
+                href="#contato"
+                class="font-display inline-flex flex-1 items-center justify-center rounded-full bg-[#e62314] px-5 py-3 text-xs uppercase tracking-wider text-white transition hover:bg-[#ff3322]"
+              >
+                Falar com o Núcleo →
+              </a>
+              <a
+                href="#projetos"
+                class="font-label inline-flex items-center justify-center rounded-full border border-white/20 px-4 py-3 text-xs uppercase tracking-wider text-white/85 transition hover:border-white/40 hover:text-white"
+              >
+                Ver Acervo
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -1274,7 +1273,5 @@
 
   <script src="projetos.js"></script>
   <script type="module" src="roda.js"></script>
-  <script src="olhar/poses.js"></script>
-  <script src="topo-olhar.js"></script>
 </body>
 </html>
