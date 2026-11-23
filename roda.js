@@ -6,7 +6,7 @@ import * as THREE from 'three';
 // ---------- Ajustes (valores do editor do Axle Bloom) ----------
 const AJ = {
   cartoes: 6,            // cartões na roda
-  proporcao: 720 / 1023, // largura/altura dos pôsteres da Chama
+  proporcao: 720 / 1023, // largura/altura dos pôsteres da Chama (o padrão do componente é 0.8; usamos a do pôster para não cortar a arte)
   canto: 0.035,          // raio do canto (fração da altura)
   tamanho: 1.0,          // 100%
   giro: -38,             // graus (vira a roda de lado)
@@ -58,7 +58,8 @@ const loader = new THREE.TextureLoader();
 const aniso = renderer.capabilities.getMaxAnisotropy();
 const texturas = P.map(p => {
   const t = loader.load(`img/posters/${p.id}.jpg`);
-  t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = aniso;
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = aniso;
   t.minFilter = THREE.LinearMipmapLinearFilter;
   return t;
 });
@@ -75,13 +76,15 @@ const frag = /* glsl */`
   void main() {
     vec2 uv = vUv;
     if (!gl_FrontFacing) uv.x = 1.0 - uv.x;
+    // cantos arredondados
     vec2 p = (vUv - 0.5) * vec2(uAspecto, 1.0);
     float d = caixa(p, vec2(uAspecto, 1.0) * 0.5, uCanto);
     float bordaAA = fwidth(d);
     float alfa = 1.0 - smoothstep(-bordaAA, bordaAA, d);
     if (alfa <= 0.0) discard;
+    // borrão no sentido do giro (mais forte longe do eixo, que gira mais rápido) + franja de cor
     float v = clamp(uVel, -4.0, 4.0);
-    float raio = vUv.y;
+    float raio = vUv.y;                                  // 0 no eixo, 1 na ponta do cartão
     float quanto = abs(v) * uBorrao * 0.055 * (0.35 + raio);
     float fr = v * uFranja * 0.010 * (0.4 + raio);
     vec3 cor = vec3(0.0);
@@ -92,13 +95,17 @@ const frag = /* glsl */`
       cor.b += texture2D(uMapa, uv + vec2(0.0, t - fr)).b;
     }
     cor /= 13.0;
+    // luz suave: quase tudo claro, só um leve sombreado quando o cartão fica de lado
     float luz = mix(0.78, 1.0, smoothstep(0.0, 0.9, abs(uFrente)));
     if (!gl_FrontFacing) luz *= 0.9;
     cor *= luz;
+    // reflexo (sheen): faixa diagonal suave que corre com o ângulo
     float faixa = exp(-pow(vUv.x * 0.55 + vUv.y - (0.9 + uAngulo * 1.1), 2.0) * 9.0);
     cor = mix(cor, vec3(1.0), faixa * uBrilho * 0.22);
+    // bordas acendem enquanto gira (clarão)
     float borda = 1.0 - smoothstep(0.0, 0.018, -d);
     cor = mix(cor, vec3(1.0, 0.97, 0.92), borda * (0.25 + uClarao * min(1.0, abs(v) * 0.8)) * 0.8);
+    // os de trás desbotam de leve (back fade)
     cor = mix(cor, vec3(0.93), uAtras * uFundoTras);
     gl_FragColor = vec4(cor, alfa);
     #include <colorspace_fragment>
@@ -109,46 +116,79 @@ geo.translate(0, AJ.folgaEixo + H / 2, 0);
 const cartoes = [];
 for (let s = 0; s < AJ.cartoes; s++) {
   const mat = new THREE.ShaderMaterial({
-    vertexShader: vert, fragmentShader: frag, transparent: false, depthWrite: true, depthTest: true, side: THREE.DoubleSide,
+    vertexShader: vert,
+    fragmentShader: frag,
+    transparent: false,
+    depthWrite: true,
+    depthTest: true,
+    side: THREE.DoubleSide,
     alphaToCoverage: true,
     uniforms: {
-      uMapa: { value: texturas[0] }, uVel: { value: 0 }, uAspecto: { value: AJ.proporcao }, uCanto: { value: AJ.canto },
-      uBorrao: { value: AJ.borrao }, uFranja: { value: AJ.franja }, uClarao: { value: AJ.clarao }, uBrilho: { value: AJ.brilho },
-      uFrente: { value: 1 }, uAtras: { value: 0 }, uFundoTras: { value: AJ.fundoTras }, uAngulo: { value: 0 }
+      uMapa: { value: texturas[0] },
+      uVel: { value: 0 },
+      uAspecto: { value: AJ.proporcao },
+      uCanto: { value: AJ.canto },
+      uBorrao: { value: AJ.borrao },
+      uFranja: { value: AJ.franja },
+      uClarao: { value: AJ.clarao },
+      uBrilho: { value: AJ.brilho },
+      uFrente: { value: 1 },
+      uAtras: { value: 0 },
+      uFundoTras: { value: AJ.fundoTras },
+      uAngulo: { value: 0 }
     }
   });
   const pivo = new THREE.Group();
   const malha = new THREE.Mesh(geo, mat);
-  pivo.add(malha); eixo.add(pivo);
+  pivo.add(malha);
+  eixo.add(pivo);
   cartoes.push({ pivo, malha, mat, g: null });
 }
 
+// eixo: um fio fino e claro, com um brilho estreito em volta
 const barra = new THREE.Mesh(
   new THREE.CylinderGeometry(0.006, 0.006, W * 1.04, 16),
   new THREE.MeshBasicMaterial({ color: 0xffffff })
 );
 barra.rotation.z = Math.PI / 2;
 eixo.add(barra);
+
 const brilhoTex = (() => {
-  const c = document.createElement('canvas'); c.width = 512; c.height = 64;
+  const c = document.createElement('canvas');
+  c.width = 512;
+  c.height = 64;
   const x = c.getContext('2d');
   const gv = x.createLinearGradient(0, 0, 0, 64);
-  gv.addColorStop(0, 'rgba(255,255,255,0)'); gv.addColorStop(0.5, 'rgba(255,250,240,1)'); gv.addColorStop(1, 'rgba(255,255,255,0)');
-  x.fillStyle = gv; x.fillRect(0, 0, 512, 64);
+  gv.addColorStop(0, 'rgba(255,255,255,0)');
+  gv.addColorStop(0.5, 'rgba(255,250,240,1)');
+  gv.addColorStop(1, 'rgba(255,255,255,0)');
+  x.fillStyle = gv;
+  x.fillRect(0, 0, 512, 64);
   x.globalCompositeOperation = 'destination-in';
   const gh = x.createLinearGradient(0, 0, 512, 0);
-  gh.addColorStop(0, 'rgba(0,0,0,0)'); gh.addColorStop(0.12, 'rgba(0,0,0,1)'); gh.addColorStop(0.88, 'rgba(0,0,0,1)'); gh.addColorStop(1, 'rgba(0,0,0,0)');
-  x.fillStyle = gh; x.fillRect(0, 0, 512, 64);
+  gh.addColorStop(0, 'rgba(0,0,0,0)');
+  gh.addColorStop(0.12, 'rgba(0,0,0,1)');
+  gh.addColorStop(0.88, 'rgba(0,0,0,1)');
+  gh.addColorStop(1, 'rgba(0,0,0,0)');
+  x.fillStyle = gh;
+  x.fillRect(0, 0, 512, 64);
   return new THREE.CanvasTexture(c);
 })();
+
 const halo = new THREE.Mesh(
   new THREE.PlaneGeometry(W * 1.2, 0.06),
-  new THREE.MeshBasicMaterial({ map: brilhoTex, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.55 * AJ.luzEixo })
+  new THREE.MeshBasicMaterial({
+    map: brilhoTex,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    transparent: true,
+    opacity: 0.55 * AJ.luzEixo
+  })
 );
 halo.renderOrder = 999;
 eixo.add(halo);
 
-// ---------- Tamanho & Centralização dentro do container #roda ----------
+// ---------- Tamanho & Centralização ----------
 function arrumar() {
   const w = roda.clientWidth || canvas.clientWidth;
   const h = roda.clientHeight || canvas.clientHeight;
@@ -162,15 +202,16 @@ function arrumar() {
   const alturaVisivel = 2 * AJ.distancia * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
   const larguraVisivel = alturaVisivel * camera.aspect;
 
-  // Escala vertical ampla (roda em pé ocupando ~86% da altura do palco) limitada também pela largura disponível
-  const escalaVertical = (alturaVisivel * 0.86) / 1.95;
+  // Escala proporcional à altura e largura reais do container #roda
+  const escalaVertical = (alturaVisivel * 0.90) / 1.95;
   const escalaHorizontal = (larguraVisivel * 0.92) / 1.35;
-  const escala = Math.max(0.4, Math.min(escalaVertical, escalaHorizontal));
+  const escala = Math.max(0.45, Math.min(escalaVertical, escalaHorizontal));
 
   eixo.scale.setScalar(escala * AJ.tamanho);
   eixo.position.set(0, 0, 0);
   camera.updateProjectionMatrix();
 }
+
 arrumar();
 addEventListener('resize', arrumar);
 if (typeof ResizeObserver !== 'undefined') {
@@ -180,7 +221,11 @@ if (typeof ResizeObserver !== 'undefined') {
 // ---------- Movimento ----------
 let pos = 0, alvo = 0, vel = 0, ultimaInteracao = -1e9, proximoPasso = performance.now() + AJ.segPorCartao * 1000;
 const mod = (a, n) => ((a % n) + n) % n;
-function irPara(delta) { alvo = Math.round(alvo) + delta; ultimaInteracao = performance.now(); if (reduzir) pos = alvo; }
+function irPara(delta) {
+  alvo = Math.round(alvo) + delta;
+  ultimaInteracao = performance.now();
+  if (reduzir) pos = alvo;
+}
 document.getElementById('proximo').addEventListener('click', () => irPara(AJ.sentido));
 document.getElementById('anterior').addEventListener('click', () => irPara(-AJ.sentido));
 document.getElementById('ver-ficha').addEventListener('click', () => abrir(mod(Math.round(alvo), N)));
@@ -191,11 +236,20 @@ canvas.addEventListener('keydown', e => {
   if (e.key === 'Enter' || e.key === ' ') { abrir(mod(Math.round(alvo), N)); e.preventDefault(); }
 });
 
+// arrastar (para cima/baixo gira a roda) — clique sem arrastar abre a ficha
 let arrastando = false, inicioY = 0, inicioPos = 0, moveu = 0, ultY = 0, ultX = 0, ultT = 0, velArrasto = 0;
 const raio = new THREE.Raycaster(), ponteiro = new THREE.Vector2();
 canvas.addEventListener('pointerdown', e => {
-  arrastando = true; moveu = 0; inicioY = ultY = e.clientY; ultX = e.clientX; ultT = performance.now(); inicioPos = pos; velArrasto = 0;
-  canvas.setPointerCapture(e.pointerId); canvas.classList.add('arrastando'); ultimaInteracao = performance.now();
+  arrastando = true;
+  moveu = 0;
+  inicioY = ultY = e.clientY;
+  ultX = e.clientX;
+  ultT = performance.now();
+  inicioPos = pos;
+  velArrasto = 0;
+  canvas.setPointerCapture(e.pointerId);
+  canvas.classList.add('arrastando');
+  ultimaInteracao = performance.now();
 });
 canvas.addEventListener('pointermove', e => {
   if (!arrastando) return;
@@ -205,11 +259,14 @@ canvas.addEventListener('pointermove', e => {
   alvo = pos;
   const agora = performance.now();
   velArrasto = ((e.clientY - ultY) / (h * 0.42)) / Math.max(0.008, (agora - ultT) / 1000);
-  ultY = e.clientY; ultT = agora; ultimaInteracao = agora;
+  ultY = e.clientY;
+  ultT = agora;
+  ultimaInteracao = agora;
 });
 function soltar() {
   if (!arrastando) return;
-  arrastando = false; canvas.classList.remove('arrastando');
+  arrastando = false;
+  canvas.classList.remove('arrastando');
   if (moveu < 6) {
     const r = canvas.getBoundingClientRect();
     ponteiro.set(((ultX - r.left) / r.width) * 2 - 1, -((ultY - r.top) / r.height) * 2 + 1);
@@ -224,13 +281,17 @@ function soltar() {
 canvas.addEventListener('pointerup', soltar);
 canvas.addEventListener('pointercancel', soltar);
 
+// rolagem lateral (trackpad / shift + rodinha) gira a roda; a rolagem vertical continua descendo a página
 let acumulado = 0;
 canvas.addEventListener('wheel', e => {
   const dx = e.shiftKey ? e.deltaY : e.deltaX;
   if (Math.abs(dx) < Math.abs(e.deltaY) && !e.shiftKey) return;
   e.preventDefault();
   acumulado += dx;
-  if (Math.abs(acumulado) > 60) { irPara(Math.sign(acumulado)); acumulado = 0; }
+  if (Math.abs(acumulado) > 60) {
+    irPara(Math.sign(acumulado));
+    acumulado = 0;
+  }
 }, { passive: false });
 
 let naTela = false;
@@ -240,9 +301,14 @@ const camVec = new THREE.Vector3(), normal = new THREE.Vector3(), centro = new T
 let antes = performance.now(), mostradoAgora = -1;
 function quadro(agora) {
   requestAnimationFrame(quadro);
-  const dt = Math.min(0.05, (agora - antes) / 1000); antes = agora;
-  if (!naTela) { proximoPasso = agora + AJ.segPorCartao * 1000; return; }
+  const dt = Math.min(0.05, (agora - antes) / 1000);
+  antes = agora;
+  if (!naTela) {
+    proximoPasso = agora + AJ.segPorCartao * 1000;
+    return;
+  }
 
+  // autoplay: um cartão a cada 1,5 s; para 4 s depois de qualquer interação
   if (AJ.autoplay && !reduzir && !arrastando && agora - ultimaInteracao > 4000 && agora >= proximoPasso) {
     alvo = Math.round(alvo) + AJ.sentido;
     proximoPasso = agora + AJ.segPorCartao * 1000;
@@ -255,15 +321,22 @@ function quadro(agora) {
   vel += (velInst - vel) * (1 - Math.exp(-14 * dt));
 
   const atual = mod(Math.round(pos), N);
-  if (atual !== mostradoAgora) { mostradoAgora = atual; mostrar(atual); }
+  if (atual !== mostradoAgora) {
+    mostradoAgora = atual;
+    mostrar(atual);
+  }
 
+  // cada cartão "g" fica no ângulo (pos - g) × passo; os 6 lugares da roda vão trocando de pôster
   const base = Math.floor(pos);
   camera.getWorldPosition(camVec);
   for (let g = base - 2; g <= base + 3; g++) {
     const c = cartoes[mod(g, AJ.cartoes)];
     const ang = (pos - g) * passo;
     c.pivo.rotation.x = ang;
-    if (c.g !== g) { c.g = g; c.mat.uniforms.uMapa.value = texturas[mod(g, N)]; }
+    if (c.g !== g) {
+      c.g = g;
+      c.mat.uniforms.uMapa.value = texturas[mod(g, N)];
+    }
     c.malha.getWorldQuaternion(q);
     normal.set(0, 0, 1).applyQuaternion(q);
     c.malha.getWorldPosition(centro);
@@ -278,3 +351,4 @@ function quadro(agora) {
   renderer.render(cena, camera);
 }
 requestAnimationFrame(quadro);
+```[cite: 11]

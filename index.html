@@ -129,7 +129,7 @@
       animation: marquee 32s linear infinite;
     }
 
-    /* Roda 3D de Pôsteres — alinhada ao container padrão e em escala vertical ampla */
+    /* Roda 3D de Pôsteres — container padrão e proporção vertical ampla */
     .s.recentes {
       position: relative;
       width: 100%;
@@ -309,7 +309,7 @@
       grid-column: span 12 / span 12;
       position: relative;
       width: 100%;
-      height: 560px;
+      height: 580px;
       z-index: 10;
       pointer-events: auto;
     }
@@ -317,7 +317,7 @@
     @media (min-width: 1024px) {
       .s.recentes .roda {
         grid-column: span 7 / span 7;
-        height: 680px;
+        height: 700px;
       }
     }
 
@@ -379,12 +379,7 @@
   </header>
 
   <!-- HERO (1ª DOBRA) -->
-  <section class="relative overflow-hidden border-b border-white/15 py-14 sm:py-20">
-    <div
-      class="pointer-events-none absolute inset-0"
-      style="background-image: url('img/_fundo-inteiro-prev.jpg'); background-size: cover; background-position: center;"
-    ></div>
-
+  <section class="relative overflow-hidden border-b border-white/15 bg-gradient-to-br from-[#070606] via-[#120909] to-[#230908] py-14 sm:py-20">
     <div class="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
       <div class="lg:col-span-7">
         <div class="font-label mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/50 bg-[#0d0b0b]/80 px-4 py-1.5 text-xs uppercase tracking-widest text-[#f4f1ea] backdrop-blur-sm">
@@ -655,15 +650,9 @@
   </section>
 
   <!-- 05 · QUEM SOMOS -->
-  <section id="quem-somos" class="relative overflow-hidden border-b border-white/15 py-20 sm:py-24">
-    <div
-      class="pointer-events-none absolute inset-0"
-      style="background-image: url('img/fundo-sobre.jpg'); background-size: cover; background-position: center;"
-    ></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070606]/75 via-[#070606]/65 to-[#070606]/80"></div>
-
+  <section id="quem-somos" class="relative overflow-hidden border-b border-white/15 bg-gradient-to-b from-[#0b0909] via-[#120c0c] to-[#070606] py-20 sm:py-24">
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="rounded-3xl border border-white/15 bg-[#111010]/85 p-7 shadow-2xl backdrop-blur-md sm:p-10 lg:p-12">
+      <div class="rounded-3xl border border-white/15 bg-[#111010]/90 p-7 shadow-2xl sm:p-10 lg:p-12">
         <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
           <div class="inline-flex items-center gap-2.5 rounded-full border border-[#e62314]/50 bg-[#e62314]/15 px-4 py-1.5">
             <img src="img/fogo.png" alt="" class="h-4 w-4 object-contain" />
@@ -674,7 +663,7 @@
 
         <div class="mt-8 grid items-start gap-10 lg:grid-cols-12">
           <div class="lg:col-span-7">
-            <h2 class="font-display text-3xl uppercase leading-[1.05] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] sm:text-4xl lg:text-5xl">
+            <h2 class="font-display text-3xl uppercase leading-[1.05] text-white sm:text-4xl lg:text-5xl">
               Cinema como linguagem, <span class="text-[#e62314]">tecnologia e venda</span> como resultado
             </h2>
 
@@ -688,7 +677,7 @@
             </div>
           </div>
 
-          <div class="flex flex-col justify-between gap-6 rounded-2xl border border-white/10 bg-[#0b0a0a]/80 p-6 lg:col-span-5">
+          <div class="flex flex-col justify-between gap-6 rounded-2xl border border-white/10 bg-[#0b0a0a] p-6 lg:col-span-5">
             <div class="flex items-start gap-4">
               <img
                 src="img/dinossauro.png"
@@ -990,8 +979,7 @@
 
       <div class="grid md:grid-cols-12">
         <div
-          class="relative flex flex-col justify-between overflow-hidden border-b border-white/10 p-6 sm:p-8 md:col-span-5 md:border-b-0 md:border-r"
-          style="background-image: url('img/fundo-projetos.jpg'); background-size: cover; background-position: center;"
+          class="relative flex flex-col justify-between overflow-hidden border-b border-white/10 bg-gradient-to-br from-[#190908] via-[#0e0a0a] to-[#070606] p-6 sm:p-8 md:col-span-5 md:border-b-0 md:border-r"
         >
           <div>
             <div class="inline-flex items-center gap-2 rounded-full border border-[#e62314]/60 bg-black/75 px-3 py-1">
@@ -1006,8 +994,8 @@
               <span id="frente-numero-grande" class="font-accent text-4xl tracking-wider text-white/30">01</span>
             </div>
 
-            <h3 id="frente-titulo" class="font-display mt-5 text-2xl uppercase leading-tight text-[#f4f1ea] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] sm:text-3xl"></h3>
-            <p id="frente-resumo" class="mt-3 text-sm leading-relaxed text-[#f4f1ea]/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]"></p>
+            <h3 id="frente-titulo" class="font-display mt-5 text-2xl uppercase leading-tight text-[#f4f1ea] sm:text-3xl"></h3>
+            <p id="frente-resumo" class="mt-3 text-sm leading-relaxed text-[#f4f1ea]/90"></p>
           </div>
 
           <div class="mt-8 flex items-center gap-3 rounded-2xl border border-white/15 bg-black/75 p-3.5 backdrop-blur-sm">
