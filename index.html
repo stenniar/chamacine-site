@@ -129,7 +129,7 @@
       animation: marquee 32s linear infinite;
     }
 
-    /* Roda 3D de Pôsteres — proporção vertical ampla alinhada ao container */
+    /* Roda 3D de Pôsteres — alinhada ao container padrão e em escala vertical ampla */
     .s.recentes {
       position: relative;
       width: 100%;
@@ -305,23 +305,19 @@
       height: 18px;
     }
 
-    /* Altura vertical ampla para a roda 3D de pôsteres na coluna direita */
     .s.recentes .roda {
       grid-column: span 12 / span 12;
       position: relative;
       width: 100%;
-      height: 620px;
+      height: 560px;
       z-index: 10;
       pointer-events: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     @media (min-width: 1024px) {
       .s.recentes .roda {
         grid-column: span 7 / span 7;
-        height: 760px;
+        height: 680px;
       }
     }
 
@@ -340,11 +336,11 @@
     .s.recentes .sombra-chao {
       position: absolute;
       left: 50%;
-      bottom: 3%;
+      bottom: 4%;
       transform: translateX(-50%);
-      width: 360px;
+      width: 340px;
       height: 48px;
-      background: radial-gradient(ellipse at center, rgba(230, 35, 20, 0.34) 0%, rgba(0, 0, 0, 0) 72%);
+      background: radial-gradient(ellipse at center, rgba(230, 35, 20, 0.32) 0%, rgba(0, 0, 0, 0) 72%);
       pointer-events: none;
     }
 
@@ -550,7 +546,7 @@
     </div>
   </section>
 
-  <!-- 03 · OPERAÇÃO REAL & BASTIDORES (FUNDO BRANCO + ALTO CONTRASTE) -->
+  <!-- 03 · OPERAÇÃO REAL & BASTIDORES (FUNDO BRANCO + CORES DE ALTO CONTRASTE) -->
   <section id="operacao-real" class="relative overflow-hidden border-b border-neutral-200 bg-white py-20 text-[#111010]">
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
@@ -1426,33 +1422,6 @@
     document.getElementById('modal-ficha').addEventListener('click', (e) => {
       if (e.target.id === 'modal-ficha') fecharModal();
     });
-
-    /* Mantém o canvas #palco proporcional e em escala ampla na coluna vertical */
-    (function ajustarProporcaoPalco3D() {
-      const roda = document.getElementById('roda');
-      const palco = document.getElementById('palco');
-      if (!roda || !palco) return;
-
-      function sincronizarDimensoes() {
-        const rect = roda.getBoundingClientRect();
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const w = Math.max(300, Math.round(rect.width));
-        const h = Math.max(420, Math.round(rect.height));
-        palco.style.width = w + 'px';
-        palco.style.height = h + 'px';
-        if (palco.width !== w * dpr || palco.height !== h * dpr) {
-          palco.width = w * dpr;
-          palco.height = h * dpr;
-        }
-      }
-
-      sincronizarDimensoes();
-      if (typeof ResizeObserver !== 'undefined') {
-        const ro = new ResizeObserver(sincronizarDimensoes);
-        ro.observe(roda);
-      }
-      window.addEventListener('resize', sincronizarDimensoes);
-    })();
 
     /* Aviso LGPD e Consentimento de Cookies */
     function abrirAvisoLgpd() {
