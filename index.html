@@ -2215,7 +2215,7 @@ fbq('track', 'PageView');
     if (document.hidden) {
       document.title = frase.slice(pos) + frase.slice(0, pos);
       timer = setInterval(function () {
-        pos = (pos + 1) % frase.length;
+        pos = (pos + 2) % frase.length;
         document.title = frase.slice(pos) + frase.slice(0, pos);
       }, 220);
 
