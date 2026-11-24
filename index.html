@@ -2196,22 +2196,39 @@ fbq('track', 'PageView');
       }
     })();
 
-(function configurarTituloRetornoAba() {
+(function marqueeTituloAba() {
   const tituloOriginal = document.title;
-  const tituloAusencia = 'Seu diagnóstico comercial ficou pronto · Chama Cine';
+  const frase = 'SEU DIAGNÓSTICO COMERCIAL FICOU PRONTO · CHAMA CINE  —  ';
+  let pos = 0;
+  let timer = null;
+
+  function pararMarquee() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+    pos = 0;
+    document.title = tituloOriginal;
+  }
 
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
-      document.title = tituloAusencia;
+      document.title = frase.slice(pos) + frase.slice(0, pos);
+      timer = setInterval(function () {
+        pos = (pos + 1) % frase.length;
+        document.title = frase.slice(pos) + frase.slice(0, pos);
+      }, 220);
+
       if (typeof rastrearEvento === 'function') {
-        rastrearEvento('tab_blur_return_prompt');
+        rastrearEvento('tab_blur_marquee');
       }
     } else {
-      document.title = tituloOriginal;
+      pararMarquee();
     }
   });
-})();
-  </script>
+})();  
+
+</script>
 
   <script src="projetos.js"></script>
   <script type="module" src="roda.js"></script>
