@@ -2195,6 +2195,22 @@ fbq('track', 'PageView');
         if (salvo.marketing) ativarMetaPixelSeAutorizado();
       }
     })();
+
+(function configurarTituloRetornoAba() {
+  const tituloOriginal = document.title;
+  const tituloAusencia = 'Seu diagnóstico comercial ficou pronto · Chama Cine';
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = tituloAusencia;
+      if (typeof rastrearEvento === 'function') {
+        rastrearEvento('tab_blur_return_prompt');
+      }
+    } else {
+      document.title = tituloOriginal;
+    }
+  });
+})();
   </script>
 
   <script src="projetos.js"></script>
